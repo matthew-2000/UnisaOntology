@@ -1,5 +1,5 @@
 const express = require('express');
-const fetch = require('node-fetch');
+const fetch = import('node-fetch');
 
 const app = express();
 const PORT = 3000;
@@ -16,6 +16,8 @@ app.get('/sparql', async (req, res) => {
     `;
 
     try {
+        // Importa node-fetch
+        const fetch = (await import('node-fetch')).default;
         const response = await fetch(FUSEKI_URL, {
             method: 'POST',
             headers: {
