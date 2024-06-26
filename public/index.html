@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unisa SPARQL Queries</title>
+  <script>
+    async function fetchQuery(endpoint) {
+      try {
+        const response = await fetch(endpoint);
+        const data = await response.json();
+        document.getElementById('results').textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        document.getElementById('results').textContent = 'Error: ' + error.message;
+      }
+    }
+  </script>
+</head>
+<body>
+<h1>Unisa SPARQL Queries</h1>
+<button onclick="fetchQuery('/corsi-laurea-triennale')">Corsi di Laurea Triennale</button>
+<button onclick="fetchQuery('/docenti-insegnamenti')">Docenti e Insegnamenti</button>
+<button onclick="fetchQuery('/studenti-corsi')">Studenti e Corsi</button>
+<button onclick="fetchQuery('/dettagli-corsi')">Dettagli dei Corsi di Studio</button>
+<button onclick="fetchQuery('/opportunita-carriera')">Opportunità di Carriera</button>
+<pre id="results"></pre>
+</body>
+</html>
