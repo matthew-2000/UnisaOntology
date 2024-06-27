@@ -324,37 +324,53 @@
                <http://www.semanticweb.org/ontology#cognome> "Moretti" ;
                <http://www.semanticweb.org/ontology#email> "e.moretti@unisalerno.it" .
 
+:docenteRomano rdf:type <http://www.semanticweb.org/ontology#Docente> ;
+               <http://www.semanticweb.org/ontology#nome> "Simone" ;
+               <http://www.semanticweb.org/ontology#cognome> "Romano" ;
+               <http://www.semanticweb.org/ontology#email> "s.romano@unisalerno.it" .
+
+:docenteMartini rdf:type <http://www.semanticweb.org/ontology#Docente> ;
+               <http://www.semanticweb.org/ontology#nome> "Francesca" ;
+               <http://www.semanticweb.org/ontology#cognome> "Martini" ;
+               <http://www.semanticweb.org/ontology#email> "f.martini@unisalerno.it" .
+
 ### Collegamento dei Docenti agli Insegnamenti ###
+
+### Corso di Laurea Triennale in Informatica ###
 :fondamentiInformatica <http://www.semanticweb.org/ontology#tenutoDa> :docenteRossi .
 :programmazione <http://www.semanticweb.org/ontology#tenutoDa> :docenteVerdi .
 :struttureDati <http://www.semanticweb.org/ontology#tenutoDa> :docenteBianchi .
 :database <http://www.semanticweb.org/ontology#tenutoDa> :docenteNeri .
 
+### Corso di Laurea Magistrale in Informatica ###
 :intelligenzaArtificiale <http://www.semanticweb.org/ontology#tenutoDa> :docenteEsposito .
 :bigData <http://www.semanticweb.org/ontology#tenutoDa> :docenteRusso .
 :sistemiDistribuiti <http://www.semanticweb.org/ontology#tenutoDa> :docenteFerrari .
 :sicurezzaInformatica <http://www.semanticweb.org/ontology#tenutoDa> :docenteMoretti .
 
-:meccanicaClassica <http://www.semanticweb.org/ontology#tenutoDa> :docenteRossi .
-:elettromagnetismo <http://www.semanticweb.org/ontology#tenutoDa> :docenteVerdi .
-:termodinamica <http://www.semanticweb.org/ontology#tenutoDa> :docenteBianchi .
-:meccanicaQuantistica <http://www.semanticweb.org/ontology#tenutoDa> :docenteNeri .
+### Corso di Laurea Triennale in Fisica ###
+:meccanicaClassica <http://www.semanticweb.org/ontology#tenutoDa> :docenteRomano .
+:elettromagnetismo <http://www.semanticweb.org/ontology#tenutoDa> :docenteMartini .
+:termodinamica <http://www.semanticweb.org/ontology#tenutoDa> :docenteRossi .
+:meccanicaQuantistica <http://www.semanticweb.org/ontology#tenutoDa> :docenteVerdi .
 
-:fisicaQuantistica <http://www.semanticweb.org/ontology#tenutoDa> :docenteEsposito .
-:astrofisica <http://www.semanticweb.org/ontology#tenutoDa> :docenteRusso .
-:fisicaComputazionale <http://www.semanticweb.org/ontology#tenutoDa> :docenteFerrari .
-:fisicaNucleare <http://www.semanticweb.org/ontology#tenutoDa> :docenteMoretti .
+### Corso di Laurea Magistrale in Fisica ###
+:fisicaQuantistica <http://www.semanticweb.org/ontology#tenutoDa> :docenteBianchi .
+:astrofisica <http://www.semanticweb.org/ontology#tenutoDa> :docenteNeri .
+:fisicaComputazionale <http://www.semanticweb.org/ontology#tenutoDa> :docenteEsposito .
+:fisicaNucleare <http://www.semanticweb.org/ontology#tenutoDa> :docenteRusso .
 
-:fondamentiChimica <http://www.semanticweb.org/ontology#tenutoDa> :docenteRossi .
-:chimicaOrganica <http://www.semanticweb.org/ontology#tenutoDa> :docenteVerdi .
-:chimicaAnalitica <http://www.semanticweb.org/ontology#tenutoDa> :docenteBianchi .
-:chimicaFisica <http://www.semanticweb.org/ontology#tenutoDa> :docenteNeri .
+### Corso di Laurea Triennale in Chimica ###
+:fondamentiChimica <http://www.semanticweb.org/ontology#tenutoDa> :docenteFerrari .
+:chimicaOrganica <http://www.semanticweb.org/ontology#tenutoDa> :docenteMoretti .
+:chimicaAnalitica <http://www.semanticweb.org/ontology#tenutoDa> :docenteRomano .
+:chimicaFisica <http://www.semanticweb.org/ontology#tenutoDa> :docenteMartini .
 
-:chimicaAvanzata <http://www.semanticweb.org/ontology#tenutoDa> :docenteEsposito .
-:sintesiChimica <http://www.semanticweb.org/ontology#tenutoDa> :docenteRusso .
-:chimicaComputazionale <http://www.semanticweb.org/ontology#tenutoDa> :docenteFerrari .
-:chimicaIndustriale <http://www.semanticweb.org/ontology#tenutoDa> :docenteMoretti .
-
+### Corso di Laurea Magistrale in Chimica ###
+:chimicaAvanzata <http://www.semanticweb.org/ontology#tenutoDa> :docenteRossi .
+:sintesiChimica <http://www.semanticweb.org/ontology#tenutoDa> :docenteVerdi .
+:chimicaComputazionale <http://www.semanticweb.org/ontology#tenutoDa> :docenteBianchi .
+:chimicaIndustriale <http://www.semanticweb.org/ontology#tenutoDa> :docenteNeri .
 
 ### Individuo per l'Opportunità di Carriera ###
 :opportunitàInformatica rdf:type :OpportunitàDiCarriera ;
