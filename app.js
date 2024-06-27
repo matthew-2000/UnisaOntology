@@ -32,10 +32,15 @@ async function executeSparqlQuery(query) {
 // Endpoint per ottenere tutti i corsi di laurea triennale
 app.get('/corsi-laurea-triennale', async (req, res) => {
   const query = `
-        PREFIX unisa: <http://www.unisa.it/ontologie/corsi-di-studio.owl#>
-        SELECT ?corsoDiLaureaTriennale
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX : <http://www.semanticweb.org/ontology#>
+        
+        ### Query to Retrieve Names and Buildings of Departments ###
+        SELECT ?department ?name ?building
         WHERE {
-            ?corsoDiLaureaTriennale a unisa:CorsoDiLaureaTriennale .
+          ?department rdf:type :Dipartimento ;
+                      :nome ?name ;
+                      :edificio ?building .
         }
     `;
   try {
