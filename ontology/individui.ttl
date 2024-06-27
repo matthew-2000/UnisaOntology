@@ -1,0 +1,100 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix : <http://www.semanticweb.org/ontology#> .
+
+### Individuo per l'Università ###
+:universitaSalerno rdf:type :Università ;
+    :nome "Università di Salerno" ;
+    :ubicazione "Salerno, Italia" .
+
+
+
+### Individui per i Dipartimenti ###
+:informatica rdf:type :Dipartimento ;
+    :nome "Dipartimento di Informatica" ;
+    :edificio "Edificio A" .
+
+
+:chimica rdf:type :Dipartimento ;
+    :nome "Dipartimento di Chimica" ;
+    :edificio "Edificio B" .
+
+:fisica rdf:type :Dipartimento ;
+    :nome "Dipartimento di Fisica" ;
+    :edificio "Edificio C" .
+
+
+
+### Individui per i Corsi di Studio ###
+:laureaTriennaleInformatica rdf:type :CorsoDiLaureaTriennale ;
+    :nome "Corso di Laurea Triennale in Informatica" ;
+    :codice "L3INFO" ;
+    :descrizione "Corso di studi triennale in Informatica presso il Dipartimento di Informatica dell'Università di Salerno." ;
+    :durata 3 ;
+    :CFU 180 ;
+    :sitoWeb "http://www.informatica.unisa.it/laurea-triennale-informatica" ;
+    :offreOpportunità :opportunitàInformatica .
+
+:laureaMagistraleInformatica rdf:type :CorsoDiLaureaMagistrale ;
+    :nome "Corso di Laurea Magistrale in Informatica" ;
+    :codice "LMINFO" ;
+    :descrizione "Corso di studi magistrale in Informatica presso il Dipartimento di Informatica dell'Università di Salerno." ;
+    :durata 2 ;
+    :CFU 120 ;
+    :sitoWeb "http://www.informatica.unisa.it/laurea-magistrale-informatica" ;
+    :offreOpportunità :opportunitàInformatica .
+
+:laureaTriennaleChimica rdf:type :CorsoDiLaureaTriennale ;
+    :nome "Corso di Laurea Triennale in Chimica" ;
+    :codice "L3CHIM" ;
+    :descrizione "Corso di studi triennale in Chimica presso il Dipartimento di Chimica dell'Università di Salerno." ;
+    :durata 3 ;
+    :CFU 180 ;
+    :sitoWeb "http://www.chimica.unisa.it/laurea-triennale-chimica" ;
+    :offreOpportunità :opportunitàChimica .
+
+:laureaMagistraleChimica rdf:type :CorsoDiLaureaMagistrale ;
+    :nome "Corso di Laurea Magistrale in Chimica" ;
+    :codice "LMCHIM" ;
+    :descrizione "Corso di studi magistrale in Chimica presso il Dipartimento di Chimica dell'Università di Salerno." ;
+    :durata 2 ;
+    :CFU 120 ;
+    :sitoWeb "http://www.chimica.unisa.it/laurea-magistrale-chimica" ;
+    :offreOpportunità :opportunitàChimica .
+
+:laureaTriennaleFisica rdf:type :CorsoDiLaureaTriennale ;
+    :nome "Corso di Laurea Triennale in Fisica" ;
+    :codice "L3FISI" ;
+    :descrizione "Corso di studi triennale in Fisica presso il Dipartimento di Fisica dell'Università di Salerno." ;
+    :durata 3 ;
+    :CFU 180 ;
+    :sitoWeb "http://www.fisica.unisa.it/laurea-triennale-fisica" ;
+    :offreOpportunità :opportunitàFisica .
+
+:laureaMagistraleFisica rdf:type :CorsoDiLaureaMagistrale ;
+    :nome "Corso di Laurea Magistrale in Fisica" ;
+    :codice "LMFISI" ;
+    :descrizione "Corso di studi magistrale in Fisica presso il Dipartimento di Fisica dell'Università di Salerno." ;
+    :durata 2 ;
+    :CFU 120 ;
+    :sitoWeb "http://www.fisica.unisa.it/laurea-magistrale-fisica" ;
+    :offreOpportunità :opportunitàFisica .
+
+
+
+### Individuo per l'Opportunità di Carriera ###
+:opportunitàInformatica rdf:type :OpportunitàDiCarriera ;
+    :nome "Opportunità di Carriera in Informatica" ;
+    :settore "Informatica" ;
+    :descrizione "Opportunità di carriera nel settore dell'Informatica." .
+
+:opportunitàChimica rdf:type :OpportunitàDiCarriera ;
+    :nome "Opportunità di Carriera in Chimica" ;
+    :settore "Chimica" ;
+    :descrizione "Opportunità di carriera nel settore della Chimica." .
+
+:opportunitàFisica rdf:type :OpportunitàDiCarriera ;
+    :nome "Opportunità di Carriera in Fisica" ;
+    :settore "Fisica" ;
+    :descrizione "Opportunità di carriera nel settore della Fisica." .

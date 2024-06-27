@@ -33,16 +33,20 @@ async function executeSparqlQuery(query) {
 app.get('/corsi-laurea-triennale', async (req, res) => {
   const query = `
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX : <http://www.semanticweb.org/ontology#>
         
-        ### Query to Retrieve Names and Buildings of Departments ###
-        SELECT ?department ?name ?building
+        SELECT ?corsoDiStudio ?nome ?tipoCorso ?durata ?CFU ?sitoWeb
         WHERE {
-          ?department rdf:type :Dipartimento ;
-                      :nome ?name ;
-                      :edificio ?building .
+          ?corsoDiStudio rdf:type ?tipoCorso ;
+                         :nome ?nome ;
+                         :durata ?durata ;
+                         :CFU ?CFU ;
+                         :sitoWeb ?sitoWeb .
+          FILTER (?tipoCorso = :CorsoDiLaureaTriennale || ?tipoCorso = :CorsoDiLaureaMagistrale)
         }
-    `;
+      `;
   try {
     const data = await executeSparqlQuery(query);
     res.json(data);
