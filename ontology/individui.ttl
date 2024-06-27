@@ -362,7 +362,7 @@
 
 ### Corso di Laurea Triennale in Chimica ###
 :fondamentiChimica <http://www.semanticweb.org/ontology#tenutoDa> :docenteFerrari .
-:chimicaOrganica <http://www.semanticweb.org/ontology#tenutoDa> :docenteMoretti .
+:chimicaOrganica <http://www.semanticweb.org/on  tology#tenutoDa> :docenteMoretti .
 :chimicaAnalitica <http://www.semanticweb.org/ontology#tenutoDa> :docenteRomano .
 :chimicaFisica <http://www.semanticweb.org/ontology#tenutoDa> :docenteMartini .
 
