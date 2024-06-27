@@ -112,6 +112,36 @@
           :CFU 9 ;
           :annoDiCorso 2 .
 
+ ### Insegnamenti per il Corso di Laurea Triennale in Fisica ###
+:meccanicaClassica rdf:type :Insegnamento ;
+                   :nome "Meccanica Classica" ;
+                   :codice "FIS101" ;
+                   :descrizione "Studio dei principi fondamentali della meccanica classica." ;
+                   :CFU 9 ;
+                   :annoDiCorso 1 .
+
+:elettromagnetismo rdf:type :Insegnamento ;
+                   :nome "Elettromagnetismo" ;
+                   :codice "FIS102" ;
+                   :descrizione "Introduzione ai campi elettrici e magnetici e alla loro interazione con la materia." ;
+                   :CFU 9 ;
+                   :annoDiCorso 1 .
+
+:termodinamica rdf:type :Insegnamento ;
+               :nome "Termodinamica" ;
+               :codice "FIS201" ;
+               :descrizione "Studio delle leggi fondamentali della termodinamica e delle loro applicazioni." ;
+               :CFU 9 ;
+               :annoDiCorso 2 .
+
+:meccanicaQuantistica rdf:type :Insegnamento ;
+                      :nome "Meccanica Quantistica" ;
+                      :codice "FIS202" ;
+                      :descrizione "Introduzione ai principi della meccanica quantistica e alle sue applicazioni." ;
+                      :CFU 9 ;
+                      :annoDiCorso 2 .
+
+
 ### Collegamento degli Insegnamenti al Corso di Laurea Triennale in Informatica ###
 :laureaTriennaleInformatica :comprende :fondamentiInformatica, :programmazione, :struttureDati, :database .
 
