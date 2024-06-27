@@ -82,6 +82,31 @@
     :offreOpportunità :opportunitàFisica .
 
 
+### Aggiunta degli insegnamenti per il Corso di Studio in Fisica ###
+:CorsoDiStudioFisica rdf:type :CorsoDiLaureaTriennale ;
+    rdfs:label "Corso di Studio in Fisica" ;
+    :comprende :InsegnamentoFisica1, :InsegnamentoFisica2, :InsegnamentoFisica3 .
+
+:InsegnamentoFisica1 rdf:type :Insegnamento ;
+    rdfs:label "Fisica I" ;
+    :codice "FIS101" ;
+    :descrizione "Introduzione alla fisica classica" ;
+    :CFU 8 ;
+    :annoDiCorso 1 .
+
+:InsegnamentoFisica2 rdf:type :Insegnamento ;
+    rdfs:label "Fisica II" ;
+    :codice "FIS102" ;
+    :descrizione "Elettromagnetismo e onde" ;
+    :CFU 8 ;
+    :annoDiCorso 2 .
+
+:InsegnamentoFisica3 rdf:type :Insegnamento ;
+    rdfs:label "Fisica III" ;
+    :codice "FIS103" ;
+    :descrizione "Meccanica quantistica" ;
+    :CFU 8 ;
+    :annoDiCorso 3 .
 
 ### Individuo per l'Opportunità di Carriera ###
 :opportunitàInformatica rdf:type :OpportunitàDiCarriera ;
