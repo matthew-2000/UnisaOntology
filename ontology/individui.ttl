@@ -283,6 +283,77 @@
 ### Collegamento degli Insegnamenti al Corso di Laurea Magistrale in Chimica ###
 :laureaMagistraleChimica :comprende :chimicaAvanzata, :sintesiChimica, :chimicaComputazionale, :chimicaIndustriale .
 
+### Aggiunta dei Docenti ###
+:docenteRossi rdf:type <http://www.semanticweb.org/ontology#Docente> ;
+             <http://www.semanticweb.org/ontology#nome> "Mario" ;
+             <http://www.semanticweb.org/ontology#cognome> "Rossi" ;
+             <http://www.semanticweb.org/ontology#email> "m.rossi@unisalerno.it" .
+
+:docenteVerdi rdf:type <http://www.semanticweb.org/ontology#Docente> ;
+             <http://www.semanticweb.org/ontology#nome> "Luca" ;
+             <http://www.semanticweb.org/ontology#cognome> "Verdi" ;
+             <http://www.semanticweb.org/ontology#email> "l.verdi@unisalerno.it" .
+
+:docenteBianchi rdf:type <http://www.semanticweb.org/ontology#Docente> ;
+               <http://www.semanticweb.org/ontology#nome> "Giovanni" ;
+               <http://www.semanticweb.org/ontology#cognome> "Bianchi" ;
+               <http://www.semanticweb.org/ontology#email> "g.bianchi@unisalerno.it" .
+
+:docenteNeri rdf:type <http://www.semanticweb.org/ontology#Docente> ;
+            <http://www.semanticweb.org/ontology#nome> "Alessandra" ;
+            <http://www.semanticweb.org/ontology#cognome> "Neri" ;
+            <http://www.semanticweb.org/ontology#email> "a.neri@unisalerno.it" .
+
+:docenteEsposito rdf:type <http://www.semanticweb.org/ontology#Docente> ;
+                <http://www.semanticweb.org/ontology#nome> "Carlo" ;
+                <http://www.semanticweb.org/ontology#cognome> "Esposito" ;
+                <http://www.semanticweb.org/ontology#email> "c.esposito@unisalerno.it" .
+
+:docenteRusso rdf:type <http://www.semanticweb.org/ontology#Docente> ;
+             <http://www.semanticweb.org/ontology#nome> "Angela" ;
+             <http://www.semanticweb.org/ontology#cognome> "Russo" ;
+             <http://www.semanticweb.org/ontology#email> "a.russo@unisalerno.it" .
+
+:docenteFerrari rdf:type <http://www.semanticweb.org/ontology#Docente> ;
+               <http://www.semanticweb.org/ontology#nome> "Paolo" ;
+               <http://www.semanticweb.org/ontology#cognome> "Ferrari" ;
+               <http://www.semanticweb.org/ontology#email> "p.ferrari@unisalerno.it" .
+
+:docenteMoretti rdf:type <http://www.semanticweb.org/ontology#Docente> ;
+               <http://www.semanticweb.org/ontology#nome> "Elena" ;
+               <http://www.semanticweb.org/ontology#cognome> "Moretti" ;
+               <http://www.semanticweb.org/ontology#email> "e.moretti@unisalerno.it" .
+
+### Collegamento dei Docenti agli Insegnamenti ###
+:fondamentiInformatica <http://www.semanticweb.org/ontology#tenutoDa> :docenteRossi .
+:programmazione <http://www.semanticweb.org/ontology#tenutoDa> :docenteVerdi .
+:struttureDati <http://www.semanticweb.org/ontology#tenutoDa> :docenteBianchi .
+:database <http://www.semanticweb.org/ontology#tenutoDa> :docenteNeri .
+
+:intelligenzaArtificiale <http://www.semanticweb.org/ontology#tenutoDa> :docenteEsposito .
+:bigData <http://www.semanticweb.org/ontology#tenutoDa> :docenteRusso .
+:sistemiDistribuiti <http://www.semanticweb.org/ontology#tenutoDa> :docenteFerrari .
+:sicurezzaInformatica <http://www.semanticweb.org/ontology#tenutoDa> :docenteMoretti .
+
+:meccanicaClassica <http://www.semanticweb.org/ontology#tenutoDa> :docenteRossi .
+:elettromagnetismo <http://www.semanticweb.org/ontology#tenutoDa> :docenteVerdi .
+:termodinamica <http://www.semanticweb.org/ontology#tenutoDa> :docenteBianchi .
+:meccanicaQuantistica <http://www.semanticweb.org/ontology#tenutoDa> :docenteNeri .
+
+:fisicaQuantistica <http://www.semanticweb.org/ontology#tenutoDa> :docenteEsposito .
+:astrofisica <http://www.semanticweb.org/ontology#tenutoDa> :docenteRusso .
+:fisicaComputazionale <http://www.semanticweb.org/ontology#tenutoDa> :docenteFerrari .
+:fisicaNucleare <http://www.semanticweb.org/ontology#tenutoDa> :docenteMoretti .
+
+:fondamentiChimica <http://www.semanticweb.org/ontology#tenutoDa> :docenteRossi .
+:chimicaOrganica <http://www.semanticweb.org/ontology#tenutoDa> :docenteVerdi .
+:chimicaAnalitica <http://www.semanticweb.org/ontology#tenutoDa> :docenteBianchi .
+:chimicaFisica <http://www.semanticweb.org/ontology#tenutoDa> :docenteNeri .
+
+:chimicaAvanzata <http://www.semanticweb.org/ontology#tenutoDa> :docenteEsposito .
+:sintesiChimica <http://www.semanticweb.org/ontology#tenutoDa> :docenteRusso .
+:chimicaComputazionale <http://www.semanticweb.org/ontology#tenutoDa> :docenteFerrari .
+:chimicaIndustriale <http://www.semanticweb.org/ontology#tenutoDa> :docenteMoretti .
 
 
 ### Individuo per l'Opportunità di Carriera ###
