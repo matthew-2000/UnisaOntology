@@ -82,31 +82,40 @@
     :offreOpportunità :opportunitàFisica .
 
 
-### Aggiunta degli insegnamenti per il Corso di Studio in Fisica ###
-:CorsoDiStudioFisica rdf:type :CorsoDiLaureaTriennale ;
-    rdfs:label "Corso di Studio in Fisica" ;
-    :comprende :InsegnamentoFisica1, :InsegnamentoFisica2, :InsegnamentoFisica3 .
 
-:InsegnamentoFisica1 rdf:type :Insegnamento ;
-    rdfs:label "Fisica I" ;
-    :codice "FIS101" ;
-    :descrizione "Introduzione alla fisica classica" ;
-    :CFU 8 ;
-    :annoDiCorso 1 .
+### Insegnamenti per il Corso di Laurea Triennale in Informatica ###
+:fondamentiInformatica rdf:type :Insegnamento ;
+                       :nome "Fondamenti di Informatica" ;
+                       :codice "INF101" ;
+                       :descrizione "Introduzione ai fondamenti teorici e pratici dell'informatica." ;
+                       :CFU 9 ;
+                       :annoDiCorso 1 .
 
-:InsegnamentoFisica2 rdf:type :Insegnamento ;
-    rdfs:label "Fisica II" ;
-    :codice "FIS102" ;
-    :descrizione "Elettromagnetismo e onde" ;
-    :CFU 8 ;
-    :annoDiCorso 2 .
+:programmazione rdf:type :Insegnamento ;
+                :nome "Programmazione" ;
+                :codice "INF102" ;
+                :descrizione "Introduzione alla programmazione con un linguaggio di alto livello." ;
+                :CFU 9 ;
+                :annoDiCorso 1 .
 
-:InsegnamentoFisica3 rdf:type :Insegnamento ;
-    rdfs:label "Fisica III" ;
-    :codice "FIS103" ;
-    :descrizione "Meccanica quantistica" ;
-    :CFU 8 ;
-    :annoDiCorso 3 .
+:struttureDati rdf:type :Insegnamento ;
+               :nome "Strutture Dati e Algoritmi" ;
+               :codice "INF201" ;
+               :descrizione "Studio delle strutture dati e degli algoritmi fondamentali." ;
+               :CFU 9 ;
+               :annoDiCorso 2 .
+
+:database rdf:type :Insegnamento ;
+          :nome "Basi di Dati" ;
+          :codice "INF202" ;
+          :descrizione "Introduzione alle basi di dati relazionali e non relazionali." ;
+          :CFU 9 ;
+          :annoDiCorso 2 .
+
+### Collegamento degli Insegnamenti al Corso di Laurea Triennale in Informatica ###
+:laureaTriennaleInformatica :comprende :fondamentiInformatica, :programmazione, :struttureDati, :database .
+
+
 
 ### Individuo per l'Opportunità di Carriera ###
 :opportunitàInformatica rdf:type :OpportunitàDiCarriera ;
