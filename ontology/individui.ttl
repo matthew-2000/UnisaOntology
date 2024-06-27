@@ -111,6 +111,44 @@
           :descrizione "Introduzione alle basi di dati relazionali e non relazionali." ;
           :CFU 9 ;
           :annoDiCorso 2 .
+### Collegamento degli Insegnamenti al Corso di Laurea Triennale in Informatica ###
+:laureaTriennaleInformatica :comprende :fondamentiInformatica, :programmazione, :struttureDati, :database .
+
+
+
+### Insegnamenti per il Corso di Laurea Magistrale in Informatica ###
+:intelligenzaArtificiale rdf:type :Insegnamento ;
+                         :nome "Intelligenza Artificiale" ;
+                         :codice "INFO501" ;
+                         :descrizione "Studio delle tecniche e degli algoritmi dell'intelligenza artificiale." ;
+                         :CFU 9 ;
+                         :annoDiCorso 1 .
+
+:bigData rdf:type :Insegnamento ;
+         :nome "Big Data" ;
+         :codice "INFO502" ;
+         :descrizione "Gestione, analisi e applicazioni dei Big Data." ;
+         :CFU 9 ;
+         :annoDiCorso 1 .
+
+:sistemiDistribuiti rdf:type :Insegnamento ;
+                    :nome "Sistemi Distribuiti" ;
+                    :codice "INFO601" ;
+                    :descrizione "Studio dei principi e delle tecniche dei sistemi distribuiti." ;
+                    :CFU 9 ;
+                    :annoDiCorso 2 .
+
+:sicurezzaInformatica rdf:type :Insegnamento ;
+                      :nome "Sicurezza Informatica" ;
+                      :codice "INFO602" ;
+                      :descrizione "Aspetti teorici e pratici della sicurezza informatica." ;
+                      :CFU 9 ;
+                      :annoDiCorso 2 .
+
+### Collegamento degli Insegnamenti al Corso di Laurea Magistrale in Informatica ###
+:laureaMagistraleInformatica :comprende :intelligenzaArtificiale, :bigData, :sistemiDistribuiti, :sicurezzaInformatica .
+
+
 
  ### Insegnamenti per il Corso di Laurea Triennale in Fisica ###
 :meccanicaClassica rdf:type :Insegnamento ;
@@ -140,10 +178,110 @@
                       :descrizione "Introduzione ai principi della meccanica quantistica e alle sue applicazioni." ;
                       :CFU 9 ;
                       :annoDiCorso 2 .
+### Collegamento degli Insegnamenti al Corso di Laurea Triennale in Fisica ###
+:laureaTriennaleFisica :comprende :meccanicaClassica, :elettromagnetismo, :termodinamica, :meccanicaQuantistica .
 
 
-### Collegamento degli Insegnamenti al Corso di Laurea Triennale in Informatica ###
-:laureaTriennaleInformatica :comprende :fondamentiInformatica, :programmazione, :struttureDati, :database .
+
+### Insegnamenti per il Corso di Laurea Magistrale in Fisica ###
+:fisicaQuantistica rdf:type :Insegnamento ;
+                   :nome "Fisica Quantistica" ;
+                   :codice "FISI501" ;
+                   :descrizione "Studio dei principi della fisica quantistica e delle sue applicazioni." ;
+                   :CFU 9 ;
+                   :annoDiCorso 1 .
+
+:astrofisica rdf:type :Insegnamento ;
+             :nome "Astrofisica" ;
+             :codice "FISI502" ;
+             :descrizione "Studio dei fenomeni astrofisici e delle loro teorie." ;
+             :CFU 9 ;
+             :annoDiCorso 1 .
+
+:fisicaComputazionale rdf:type :Insegnamento ;
+                      :nome "Fisica Computazionale" ;
+                      :codice "FISI601" ;
+                      :descrizione "Applicazioni dei metodi computazionali alla fisica teorica e sperimentale." ;
+                      :CFU 9 ;
+                      :annoDiCorso 2 .
+
+:fisicaNucleare rdf:type :Insegnamento ;
+                :nome "Fisica Nucleare" ;
+                :codice "FISI602" ;
+                :descrizione "Studio delle proprietà dei nuclei atomici e delle loro interazioni." ;
+                :CFU 9 ;
+                :annoDiCorso 2 .
+
+### Collegamento degli Insegnamenti al Corso di Laurea Magistrale in Fisica ###
+:laureaMagistraleFisica :comprende :fisicaQuantistica, :astrofisica, :fisicaComputazionale, :fisicaNucleare .
+
+
+
+### Insegnamenti per il Corso di Laurea Triennale in Chimica ###
+:fondamentiChimica rdf:type :Insegnamento ;
+                   :nome "Fondamenti di Chimica" ;
+                   :codice "CHIM101" ;
+                   :descrizione "Introduzione ai fondamenti teorici e pratici della chimica." ;
+                   :CFU 9 ;
+                   :annoDiCorso 1 .
+
+:chimicaOrganica rdf:type :Insegnamento ;
+                 :nome "Chimica Organica" ;
+                 :codice "CHIM102" ;
+                 :descrizione "Studio della chimica degli idrocarburi e dei loro derivati." ;
+                 :CFU 9 ;
+                 :annoDiCorso 1 .
+
+:chimicaAnalitica rdf:type :Insegnamento ;
+                  :nome "Chimica Analitica" ;
+                  :codice "CHIM201" ;
+                  :descrizione "Metodi analitici per l'identificazione e la quantificazione delle sostanze chimiche." ;
+                  :CFU 9 ;
+                  :annoDiCorso 2 .
+
+:chimicaFisica rdf:type :Insegnamento ;
+               :nome "Chimica Fisica" ;
+               :codice "CHIM202" ;
+               :descrizione "Studio delle proprietà fisiche della materia e delle reazioni chimiche." ;
+               :CFU 9 ;
+               :annoDiCorso 2 .
+
+### Collegamento degli Insegnamenti al Corso di Laurea Triennale in Chimica ###
+:laureaTriennaleChimica :comprende :fondamentiChimica, :chimicaOrganica, :chimicaAnalitica, :chimicaFisica .
+
+
+
+### Insegnamenti per il Corso di Laurea Magistrale in Chimica ###
+:chimicaAvanzata rdf:type :Insegnamento ;
+                 :nome "Chimica Avanzata" ;
+                 :codice "CHIM301" ;
+                 :descrizione "Studio avanzato della chimica con un focus su argomenti specializzati." ;
+                 :CFU 9 ;
+                 :annoDiCorso 1 .
+
+:sintesiChimica rdf:type :Insegnamento ;
+                :nome "Sintesi Chimica" ;
+                :codice "CHIM302" ;
+                :descrizione "Metodi e tecniche per la sintesi di composti chimici." ;
+                :CFU 9 ;
+                :annoDiCorso 1 .
+
+:chimicaComputazionale rdf:type :Insegnamento ;
+                       :nome "Chimica Computazionale" ;
+                       :codice "CHIM401" ;
+                       :descrizione "Applicazioni dei metodi computazionali alla chimica teorica e computazionale." ;
+                       :CFU 9 ;
+                       :annoDiCorso 2 .
+
+:chimicaIndustriale rdf:type :Insegnamento ;
+                    :nome "Chimica Industriale" ;
+                    :codice "CHIM402" ;
+                    :descrizione "Applicazioni della chimica nell'industria e processi industriali." ;
+                    :CFU 9 ;
+                    :annoDiCorso 2 .
+
+### Collegamento degli Insegnamenti al Corso di Laurea Magistrale in Chimica ###
+:laureaMagistraleChimica :comprende :chimicaAvanzata, :sintesiChimica, :chimicaComputazionale, :chimicaIndustriale .
 
 
 
