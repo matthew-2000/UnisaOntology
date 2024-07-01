@@ -6,139 +6,141 @@
 
 ### Classi ###
 
+### Definizione delle classi principali ###
 ### Università ###
-:Università
+<http://www.semanticweb.org/ontology#Università>
   rdf:type owl:Class ;
   rdfs:comment "Classe che rappresenta un'Università." ;
   rdfs:label "Università" .
 
 ### Dipartimento ###
-:Dipartimento
+<http://www.semanticweb.org/ontology#Dipartimento>
   rdf:type owl:Class ;
   rdfs:comment "Classe che rappresenta un Dipartimento all'interno dell'Università." ;
   rdfs:label "Dipartimento" .
 
 ### Corso di Studio ###
-:CorsoDiStudio
+<http://www.semanticweb.org/ontology#CorsoDiStudio>
   rdf:type owl:Class ;
   rdfs:comment "Classe che rappresenta un Corso di Studio offerto dall'Università." ;
   rdfs:label "CorsoDiStudio" .
 
 ### Corso di Laurea Triennale ###
-:CorsoDiLaureaTriennale
+<http://www.semanticweb.org/ontology#CorsoDiLaureaTriennale>
   rdf:type owl:Class ;
   rdfs:comment "Sottoclasse di CorsoDiStudio, rappresenta un Corso di Laurea Triennale." ;
   rdfs:label "CorsoDiLaureaTriennale" ;
-  rdfs:subClassOf :CorsoDiStudio .
+  rdfs:subClassOf <http://www.semanticweb.org/ontology#CorsoDiStudio> .
 
 ### Corso di Laurea Magistrale ###
-:CorsoDiLaureaMagistrale
+<http://www.semanticweb.org/ontology#CorsoDiLaureaMagistrale>
   rdf:type owl:Class ;
   rdfs:comment "Sottoclasse di CorsoDiStudio, rappresenta un Corso di Laurea Magistrale." ;
   rdfs:label "CorsoDiLaureaMagistrale" ;
-  rdfs:subClassOf :CorsoDiStudio .
+  rdfs:subClassOf <http://www.semanticweb.org/ontology#CorsoDiStudio> .
 
 ### Insegnamento ###
-:Insegnamento
+<http://www.semanticweb.org/ontology#Insegnamento>
   rdf:type owl:Class ;
   rdfs:comment "Classe che rappresenta un Insegnamento all'interno di un Corso di Studio." ;
   rdfs:label "Insegnamento" .
 
 ### Docente ###
-:Docente
+<http://www.semanticweb.org/ontology#Docente>
   rdf:type owl:Class ;
   rdfs:comment "Classe che rappresenta un Docente dell'Università." ;
   rdfs:label "Docente" .
 
 ### Opportunità di Carriera ###
-:OpportunitàDiCarriera
+<http://www.semanticweb.org/ontology#OpportunitàDiCarriera>
   rdf:type owl:Class ;
   rdfs:comment "Classe che rappresenta un'Opportunità di Carriera associata a un Corso di Studio." ;
   rdfs:label "OpportunitàDiCarriera" .
 
 ### Futuro Studente ###
-:FuturoStudente
+<http://www.semanticweb.org/ontology#FuturoStudente>
   rdf:type owl:Class ;
   rdfs:comment "Classe che rappresenta un potenziale Futuro Studente dell'Università." ;
   rdfs:label "FuturoStudente" .
 
 ### Interesse ###
-:Interesse
+<http://www.semanticweb.org/ontology#Interesse>
   rdf:type owl:Class ;
   rdfs:comment "Classe che rappresenta un Interesse accademico di un Futuro Studente." ;
   rdfs:label "Interesse" .
 
 ### Studente ###
-:Studente
+<http://www.semanticweb.org/ontology#Studente>
   rdf:type owl:Class ;
   rdfs:comment "Classe che rappresenta uno Studente iscritto a un Corso di Studio." ;
   rdfs:label "Studente" .
+
 
 ### Proprietà ###
 
 ### Proprietà degli oggetti ###
 
 ### Comprende (Università → Dipartimento) ###
-:comprende
+<http://www.semanticweb.org/ontology#comprende>
   rdf:type owl:ObjectProperty ;
-  rdfs:domain :Università ;
-  rdfs:range :Dipartimento ;
+  rdfs:domain <http://www.semanticweb.org/ontology#Università> ;
+  rdfs:range <http://www.semanticweb.org/ontology#Dipartimento> ;
   rdfs:comment "Relazione che collega un'Università ai suoi Dipartimenti." ;
   rdfs:label "comprende" .
 
 ### Propone (Dipartimento → CorsoDiStudio) ###
-:propone
+<http://www.semanticweb.org/ontology#propone>
   rdf:type owl:ObjectProperty ;
-  rdfs:domain :Dipartimento ;
-  rdfs:range :CorsoDiStudio ;
+  rdfs:domain <http://www.semanticweb.org/ontology#Dipartimento> ;
+  rdfs:range <http://www.semanticweb.org/ontology#CorsoDiStudio> ;
   rdfs:comment "Relazione che collega un Dipartimento ai Corsi di Studio che propone." ;
   rdfs:label "propone" .
 
 ### Comprende (CorsoDiStudio → Insegnamento) ###
-:comprendeInsegnamento
+<http://www.semanticweb.org/ontology#comprendeInsegnamento>
   rdf:type owl:ObjectProperty ;
-  rdfs:domain :CorsoDiStudio ;
-  rdfs:range :Insegnamento ;
+  rdfs:domain <http://www.semanticweb.org/ontology#CorsoDiStudio> ;
+  rdfs:range <http://www.semanticweb.org/ontology#Insegnamento> ;
   rdfs:comment "Relazione che collega un Corso di Studio agli Insegnamenti che comprende." ;
   rdfs:label "comprendeInsegnamento" .
 
 ### TenutoDa (Insegnamento → Docente) ###
-:tenutoDa
+<http://www.semanticweb.org/ontology#tenutoDa>
   rdf:type owl:ObjectProperty ;
-  rdfs:domain :Insegnamento ;
-  rdfs:range :Docente ;
+  rdfs:domain <http://www.semanticweb.org/ontology#Insegnamento> ;
+  rdfs:range <http://www.semanticweb.org/ontology#Docente> ;
   rdfs:comment "Relazione che collega un Insegnamento al Docente che lo tiene." ;
   rdfs:label "tenutoDa" .
 
 ### OffreOpportunità (CorsoDiStudio → OpportunitàDiCarriera) ###
-:offreOpportunità
+<http://www.semanticweb.org/ontology#offreOpportunità>
   rdf:type owl:ObjectProperty ;
-  rdfs:domain :CorsoDiStudio ;
-  rdfs:range :OpportunitàDiCarriera ;
+  rdfs:domain <http://www.semanticweb.org/ontology#CorsoDiStudio> ;
+  rdfs:range <http://www.semanticweb.org/ontology#OpportunitàDiCarriera> ;
   rdfs:comment "Relazione che collega un Corso di Studio alle Opportunità di Carriera offerte." ;
   rdfs:label "offreOpportunità" .
 
 ### HaInteresse (FuturoStudente → Interesse) ###
-:haInteresse
+<http://www.semanticweb.org/ontology#haInteresse>
   rdf:type owl:ObjectProperty ;
-  rdfs:domain :FuturoStudente ;
-  rdfs:range :Interesse ;
+  rdfs:domain <http://www.semanticweb.org/ontology#FuturoStudente> ;
+  rdfs:range <http://www.semanticweb.org/ontology#Interesse> ;
   rdfs:comment "Relazione che collega un Futuro Studente ai suoi Interessi accademici." ;
   rdfs:label "haInteresse" .
 
 ### LegatoA (Interesse → CorsoDiStudio) ###
-:legatoA
+<http://www.semanticweb.org/ontology#legatoA>
   rdf:type owl:ObjectProperty ;
-  rdfs:domain :Interesse ;
-  rdfs:range :CorsoDiStudio ;
+  rdfs:domain <http://www.semanticweb.org/ontology#Interesse> ;
+  rdfs:range <http://www.semanticweb.org/ontology#CorsoDiStudio> ;
   rdfs:comment "Relazione che collega un Interesse a un Corso di Studio correlato." ;
   rdfs:label "legatoA" .
 
 ### IscrittoA (Studente → CorsoDiStudio) ###
-:iscrittoA
+<http://www.semanticweb.org/ontology#iscrittoA>
   rdf:type owl:ObjectProperty ;
-  rdfs:domain :Studente ;
-  rdfs:range :CorsoDiStudio ;
+  rdfs:domain <http://www.semanticweb.org/ontology#Studente> ;
+  rdfs:range <http://www.semanticweb.org/ontology#CorsoDiStudio> ;
   rdfs:comment "Relazione che collega uno Studente al Corso di Studio a cui è iscritto." ;
   rdfs:label "iscrittoA" .
 
@@ -146,218 +148,150 @@
 ### Proprietà dei dati ###
 
 ### Proprietà dei dati per Università ###
-:nome
+<http://www.semanticweb.org/ontology#nomeUniversità>
   rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Università ;
+  rdfs:domain <http://www.semanticweb.org/ontology#Università> ;
   rdfs:range xsd:string ;
   rdfs:comment "Nome dell'Università." ;
-  rdfs:label "nome" .
+  rdfs:label "nomeUniversità" .
 
-:ubicazione
+<http://www.semanticweb.org/ontology#ubicazione>
   rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Università ;
+  rdfs:domain <http://www.semanticweb.org/ontology#Università> ;
   rdfs:range xsd:string ;
   rdfs:comment "Ubicazione dell'Università." ;
   rdfs:label "ubicazione" .
 
 
 ### Proprietà dei dati per Dipartimento ###
-:nomeDipartimento
+<http://www.semanticweb.org/ontology#nomeDipartimento>
   rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Dipartimento ;
+  rdfs:domain <http://www.semanticweb.org/ontology#Dipartimento> ;
   rdfs:range xsd:string ;
   rdfs:comment "Nome del Dipartimento." ;
   rdfs:label "nomeDipartimento" .
 
-:edificio
+<http://www.semanticweb.org/ontology#codiceDipartimento>
   rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Dipartimento ;
+  rdfs:domain <http://www.semanticweb.org/ontology#Dipartimento> ;
   rdfs:range xsd:string ;
-  rdfs:comment "Edificio in cui si trova il Dipartimento." ;
-  rdfs:label "edificio" .
+  rdfs:comment "Codice identificativo del Dipartimento." ;
+  rdfs:label "codiceDipartimento" .
 
 
 ### Proprietà dei dati per Corso di Studio ###
-:nomeCorso
+<http://www.semanticweb.org/ontology#nomeCorsoDiStudio>
   rdf:type owl:DatatypeProperty ;
-  rdfs:domain :CorsoDiStudio ;
+  rdfs:domain <http://www.semanticweb.org/ontology#CorsoDiStudio> ;
   rdfs:range xsd:string ;
   rdfs:comment "Nome del Corso di Studio." ;
-  rdfs:label "nomeCorso" .
+  rdfs:label "nomeCorsoDiStudio" .
 
-:codiceCorso
+<http://www.semanticweb.org/ontology#CFU>
   rdf:type owl:DatatypeProperty ;
-  rdfs:domain :CorsoDiStudio ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Codice identificativo del Corso di Studio." ;
-  rdfs:label "codiceCorso" .
-
-:descrizioneCorso
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain :CorsoDiStudio ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Descrizione del Corso di Studio." ;
-  rdfs:label "descrizioneCorso" .
-
-:durata
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain :CorsoDiStudio ;
+  rdfs:domain <http://www.semanticweb.org/ontology#CorsoDiStudio> ;
   rdfs:range xsd:int ;
-  rdfs:comment "Durata del Corso di Studio in anni." ;
-  rdfs:label "durata" .
-
-:cfu
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain :CorsoDiStudio ;
-  rdfs:range xsd:int ;
-  rdfs:comment "Crediti Formativi Universitari (CFU) del Corso di Studio." ;
+  rdfs:comment "Numero di Crediti Formativi Universitari (CFU) del Corso di Studio." ;
   rdfs:label "CFU" .
 
 
 ### Proprietà dei dati per Insegnamento ###
-:nomeInsegnamento
+<http://www.semanticweb.org/ontology#nomeInsegnamento>
   rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Insegnamento ;
+  rdfs:domain <http://www.semanticweb.org/ontology#Insegnamento> ;
   rdfs:range xsd:string ;
   rdfs:comment "Nome dell'Insegnamento." ;
   rdfs:label "nomeInsegnamento" .
 
-:codiceInsegnamento
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Insegnamento ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Codice identificativo dell'Insegnamento." ;
-  rdfs:label "codiceInsegnamento" .
-
-:descrizioneInsegnamento
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Insegnamento ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Descrizione dell'Insegnamento." ;
-  rdfs:label "descrizioneInsegnamento" .
-
 
 ### Proprietà dei dati per Docente ###
-:nomeDocente
+<http://www.semanticweb.org/ontology#nomeDocente>
   rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Docente ;
+  rdfs:domain <http://www.semanticweb.org/ontology#Docente> ;
   rdfs:range xsd:string ;
   rdfs:comment "Nome del Docente." ;
   rdfs:label "nomeDocente" .
 
-:cognomeDocente
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Docente ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Cognome del Docente." ;
-  rdfs:label "cognomeDocente" .
-
-:emailDocente
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Docente ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Email del Docente." ;
-  rdfs:label "emailDocente" .
-
 
 ### Proprietà dei dati per Opportunità di Carriera ###
-:descrizioneOpportunità
+<http://www.semanticweb.org/ontology#descrizioneOpportunità>
   rdf:type owl:DatatypeProperty ;
-  rdfs:domain :OpportunitàDiCarriera ;
+  rdfs:domain <http://www.semanticweb.org/ontology#OpportunitàDiCarriera> ;
   rdfs:range xsd:string ;
   rdfs:comment "Descrizione dell'Opportunità di Carriera." ;
   rdfs:label "descrizioneOpportunità" .
 
 
 ### Proprietà dei dati per Futuro Studente ###
-:nomeFuturoStudente
+<http://www.semanticweb.org/ontology#nomeFuturoStudente>
   rdf:type owl:DatatypeProperty ;
-  rdfs:domain :FuturoStudente ;
+  rdfs:domain <http://www.semanticweb.org/ontology#FuturoStudente> ;
   rdfs:range xsd:string ;
   rdfs:comment "Nome del Futuro Studente." ;
   rdfs:label "nomeFuturoStudente" .
 
-:cognomeFuturoStudente
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain :FuturoStudente ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Cognome del Futuro Studente." ;
-  rdfs:label "cognomeFuturoStudente" .
-
-:emailFuturoStudente
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain :FuturoStudente ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Email del Futuro Studente." ;
-  rdfs:label "emailFuturoStudente" .
-
 
 ### Proprietà dei dati per Interesse ###
-:descrizioneInteresse
+<http://www.semanticweb.org/ontology#nomeInteresse>
   rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Interesse ;
+  rdfs:domain <http://www.semanticweb.org/ontology#Interesse> ;
   rdfs:range xsd:string ;
-  rdfs:comment "Descrizione dell'Interesse accademico." ;
-  rdfs:label "descrizioneInteresse" .
+  rdfs:comment "Nome dell'Interesse accademico." ;
+  rdfs:label "nomeInteresse" .
 
 
 ### Proprietà dei dati per Studente ###
-:nomeStudente
+<http://www.semanticweb.org/ontology#nomeStudente>
   rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Studente ;
+  rdfs:domain <http://www.semanticweb.org/ontology#Studente> ;
   rdfs:range xsd:string ;
   rdfs:comment "Nome dello Studente." ;
   rdfs:label "nomeStudente" .
 
-:cognomeStudente
+<http://www.semanticweb.org/ontology#matricolaStudente>
   rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Studente ;
+  rdfs:domain <http://www.semanticweb.org/ontology#Studente> ;
   rdfs:range xsd:string ;
-  rdfs:comment "Cognome dello Studente." ;
-  rdfs:label "cognomeStudente" .
+  rdfs:comment "Matricola dello Studente." ;
+  rdfs:label "matricolaStudente" .
 
-:emailStudente
+<http://www.semanticweb.org/ontology#emailStudente>
   rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Studente ;
+  rdfs:domain <http://www.semanticweb.org/ontology#Studente> ;
   rdfs:range xsd:string ;
   rdfs:comment "Email dello Studente." ;
   rdfs:label "emailStudente" .
 
-:matricola
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Studente ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Matricola dello Studente." ;
-  rdfs:label "matricola" .
 
-:annoIscrizione
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Studente ;
-  rdfs:range xsd:int ;
-  rdfs:comment "Anno di iscrizione dello Studente." ;
-  rdfs:label "annoIscrizione" .
+### Vincoli aggiuntivi ###
 
+### Vincolo 5: Ogni Docente tiene almeno un Insegnamento ###
+:Docente rdf:type owl:Restriction ;
+         owl:onProperty :tenutoDa ;
+         owl:minCardinality "1"^^xsd:nonNegativeInteger .
 
-### Vincoli ###
-
-### Vincolo 1: Ogni Università ha almeno un Dipartimento ###
-:Università rdf:type owl:Restriction ;
-            owl:onProperty :comprende ;
-            owl:someValuesFrom :Dipartimento .
-
-### Vincolo 2: Ogni Dipartimento propone almeno un Corso di Studio ###
-:Dipartimento rdf:type owl:Restriction ;
-              owl:onProperty :propone ;
-              owl:someValuesFrom :CorsoDiStudio .
-
-### Vincolo 3: Ogni Corso di Studio comprende almeno un Insegnamento ###
+### Vincolo 6: Ogni Corso di Studio ha un numero minimo di CFU ###
 :CorsoDiStudio rdf:type owl:Restriction ;
-               owl:onProperty :comprendeInsegnamento ;
-               owl:someValuesFrom :Insegnamento .
+               owl:onProperty :CFU ;
+               owl:minCardinality "120"^^xsd:int ;
+               owl:onClass xsd:int .
 
-### Vincolo 4: Ogni Insegnamento è tenuto da almeno un Docente ###
+### Vincolo 7: Ogni Studente è iscritto a un solo Corso di Studio alla volta ###
+:Studente rdf:type owl:Restriction ;
+          owl:onProperty :iscrittoA ;
+          owl:maxCardinality "1"^^xsd:nonNegativeInteger .
+
+### Vincolo 8: Ogni Insegnamento deve essere parte di almeno un Corso di Studio ###
 :Insegnamento rdf:type owl:Restriction ;
-              owl:onProperty :tenutoDa ;
-              owl:someValuesFrom :Docente .
+              owl:onProperty :comprendeInsegnamento ;
+              owl:minCardinality "1"^^xsd:nonNegativeInteger .
 
-### Fine Ontologia ###
+### Vincolo 9: Ogni Futuro Studente ha almeno un Interesse accademico ###
+:FuturoStudente rdf:type owl:Restriction ;
+                owl:onProperty :haInteresse ;
+                owl:minCardinality "1"^^xsd:nonNegativeInteger .
+
+### Vincolo 10: Ogni Interesse è collegato a almeno un Corso di Studio ###
+:Interesse rdf:type owl:Restriction ;
+           owl:onProperty :legatoA ;
+           owl:minCardinality "1"^^xsd:nonNegativeInteger .
