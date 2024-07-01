@@ -563,3 +563,67 @@
                               :nome "Opportunità di Architetto dei Sistemi" ;
                               :settore "Ingegneria Informatica" ;
                               :descrizione "Opportunità di carriera come architetto dei sistemi informatici, progettando soluzioni e infrastrutture complesse." .
+
+### Interesse: Informatica ###
+:interesseInformatica rdf:type :Interesse ;
+                      :nomeInteresse "Informatica" ;
+                      :legatoA :laureaTriennaleInformatica,
+                      :laureaMagistraleInformatica .
+
+:interesseSviluppoWeb rdf:type :Interesse ;
+                      :nomeInteresse "Sviluppo Web" ;
+                      :legatoA :laureaTriennaleInformatica,
+                      :laureaMagistraleInformatica .
+
+:interesseDataScience rdf:type :Interesse ;
+                      :nomeInteresse "Data Science" ;
+                      :legatoA :laureaMagistraleInformatica .
+
+:interesseSicurezzaInformatica rdf:type :Interesse ;
+                               :nomeInteresse "Sicurezza Informatica" ;
+                               :legatoA :laureaTriennaleInformatica,
+                               :laureaMagistraleInformatica .
+
+### Interesse: Ingegneria Informatica ###
+:interesseIngegneriaInformatica rdf:type :Interesse ;
+                                :nomeInteresse "Ingegneria Informatica" ;
+                                :legatoA :laureaTriennaleIngegneriaInformatica,
+                                :laureaMagistraleIgnegneriaInformatica .
+
+:interesseRobotica rdf:type :Interesse ;
+                   :nomeInteresse "Robotica" ;
+                   :legatoA :laureaTriennaleIngegneriaInformatica,
+                   :laureaMagistraleIgnegneriaInformatica .
+
+:interesseInternetOfThings rdf:type :Interesse ;
+                           :nomeInteresse "Internet of Things" ;
+                           :legatoA :laureaMagistraleIgnegneriaInformatica .
+
+### Interesse: Fisica ###
+:interesseFisica rdf:type :Interesse ;
+                 :nomeInteresse "Fisica" ;
+                 :legatoA :laureaTriennaleFisica,
+                 :laureaMagistraleFisica .
+
+:interesseAstrofisica rdf:type :Interesse ;
+                      :nomeInteresse "Astrofisica" ;
+                      :legatoA :laureaMagistraleFisica .
+
+:interesseFisicaComputazionale rdf:type :Interesse ;
+                               :nomeInteresse "Fisica Computazionale" ;
+                               :legatoA :laureaMagistraleFisica .
+
+### Interesse: Chimica ###
+:interesseChimica rdf:type :Interesse ;
+                  :nomeInteresse "Chimica" ;
+                  :legatoA :laureaTriennaleChimica,
+                  :laureaMagistraleChimica .
+
+:interesseChimicaOrganica rdf:type :Interesse ;
+                          :nomeInteresse "Chimica Organica" ;
+                          :legatoA :laureaTriennaleChimica,
+                          :laureaMagistraleChimica .
+
+:interesseChimicaIndustriale rdf:type :Interesse ;
+                             :nomeInteresse "Chimica Industriale" ;
+                             :legatoA :laureaMagistraleChimica .
