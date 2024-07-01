@@ -284,93 +284,93 @@
 :laureaMagistraleChimica :comprende :chimicaAvanzata, :sintesiChimica, :chimicaComputazionale, :chimicaIndustriale .
 
 ### Aggiunta dei Docenti ###
-:docenteRossi rdf:type <http://www.semanticweb.org/ontology#Docente> ;
-             <http://www.semanticweb.org/ontology#nome> "Mario" ;
-             <http://www.semanticweb.org/ontology#cognome> "Rossi" ;
-             <http://www.semanticweb.org/ontology#email> "m.rossi@unisalerno.it" .
+:docenteRossi rdf:type :Docente ;
+             :nome "Mario" ;
+             :cognome "Rossi" ;
+             :email "m.rossi@unisalerno.it" .
 
-:docenteVerdi rdf:type <http://www.semanticweb.org/ontology#Docente> ;
-             <http://www.semanticweb.org/ontology#nome> "Luca" ;
-             <http://www.semanticweb.org/ontology#cognome> "Verdi" ;
-             <http://www.semanticweb.org/ontology#email> "l.verdi@unisalerno.it" .
+:docenteVerdi rdf:type :Docente ;
+             :nome "Luca" ;
+             :cognome "Verdi" ;
+             :email "l.verdi@unisalerno.it" .
 
-:docenteBianchi rdf:type <http://www.semanticweb.org/ontology#Docente> ;
-               <http://www.semanticweb.org/ontology#nome> "Giovanni" ;
-               <http://www.semanticweb.org/ontology#cognome> "Bianchi" ;
-               <http://www.semanticweb.org/ontology#email> "g.bianchi@unisalerno.it" .
+:docenteBianchi rdf:type :Docente ;
+               :nome "Giovanni" ;
+               :cognome "Bianchi" ;
+               :email "g.bianchi@unisalerno.it" .
 
-:docenteNeri rdf:type <http://www.semanticweb.org/ontology#Docente> ;
-            <http://www.semanticweb.org/ontology#nome> "Alessandra" ;
-            <http://www.semanticweb.org/ontology#cognome> "Neri" ;
-            <http://www.semanticweb.org/ontology#email> "a.neri@unisalerno.it" .
+:docenteNeri rdf:type :Docente ;
+            :nome "Alessandra" ;
+            :cognome "Neri" ;
+            :email "a.neri@unisalerno.it" .
 
-:docenteEsposito rdf:type <http://www.semanticweb.org/ontology#Docente> ;
-                <http://www.semanticweb.org/ontology#nome> "Carlo" ;
-                <http://www.semanticweb.org/ontology#cognome> "Esposito" ;
-                <http://www.semanticweb.org/ontology#email> "c.esposito@unisalerno.it" .
+:docenteEsposito rdf:type :Docente ;
+                :nome "Carlo" ;
+                :cognome "Esposito" ;
+                :email "c.esposito@unisalerno.it" .
 
-:docenteRusso rdf:type <http://www.semanticweb.org/ontology#Docente> ;
-             <http://www.semanticweb.org/ontology#nome> "Angela" ;
-             <http://www.semanticweb.org/ontology#cognome> "Russo" ;
-             <http://www.semanticweb.org/ontology#email> "a.russo@unisalerno.it" .
+:docenteRusso rdf:type :Docente ;
+             :nome "Angela" ;
+             :cognome "Russo" ;
+             :email "a.russo@unisalerno.it" .
 
-:docenteFerrari rdf:type <http://www.semanticweb.org/ontology#Docente> ;
-               <http://www.semanticweb.org/ontology#nome> "Paolo" ;
-               <http://www.semanticweb.org/ontology#cognome> "Ferrari" ;
-               <http://www.semanticweb.org/ontology#email> "p.ferrari@unisalerno.it" .
+:docenteFerrari rdf:type :Docente ;
+               :nome "Paolo" ;
+               :cognome "Ferrari" ;
+               :email "p.ferrari@unisalerno.it" .
 
-:docenteMoretti rdf:type <http://www.semanticweb.org/ontology#Docente> ;
-               <http://www.semanticweb.org/ontology#nome> "Elena" ;
-               <http://www.semanticweb.org/ontology#cognome> "Moretti" ;
-               <http://www.semanticweb.org/ontology#email> "e.moretti@unisalerno.it" .
+:docenteMoretti rdf:type :Docente ;
+               :nome "Elena" ;
+               :cognome "Moretti" ;
+               :email "e.moretti@unisalerno.it" .
 
-:docenteRomano rdf:type <http://www.semanticweb.org/ontology#Docente> ;
-               <http://www.semanticweb.org/ontology#nome> "Simone" ;
-               <http://www.semanticweb.org/ontology#cognome> "Romano" ;
-               <http://www.semanticweb.org/ontology#email> "s.romano@unisalerno.it" .
+:docenteRomano rdf:type :Docente ;
+               :nome "Simone" ;
+               :cognome "Romano" ;
+               :email "s.romano@unisalerno.it" .
 
-:docenteMartini rdf:type <http://www.semanticweb.org/ontology#Docente> ;
-               <http://www.semanticweb.org/ontology#nome> "Francesca" ;
-               <http://www.semanticweb.org/ontology#cognome> "Martini" ;
-               <http://www.semanticweb.org/ontology#email> "f.martini@unisalerno.it" .
+:docenteMartini rdf:type :Docente ;
+               :nome "Francesca" ;
+               :cognome "Martini" ;
+               :email "f.martini@unisalerno.it" .
 
 ### Collegamento dei Docenti agli Insegnamenti ###
 
 ### Corso di Laurea Triennale in Informatica ###
-:fondamentiInformatica <http://www.semanticweb.org/ontology#tenutoDa> :docenteRossi .
-:programmazione <http://www.semanticweb.org/ontology#tenutoDa> :docenteVerdi .
-:struttureDati <http://www.semanticweb.org/ontology#tenutoDa> :docenteBianchi .
-:database <http://www.semanticweb.org/ontology#tenutoDa> :docenteNeri .
+:fondamentiInformatica :tenutoDa :docenteRossi .
+:programmazione :tenutoDa :docenteVerdi .
+:struttureDati :tenutoDa :docenteBianchi .
+:database :tenutoDa :docenteNeri .
 
 ### Corso di Laurea Magistrale in Informatica ###
-:intelligenzaArtificiale <http://www.semanticweb.org/ontology#tenutoDa> :docenteEsposito .
-:bigData <http://www.semanticweb.org/ontology#tenutoDa> :docenteRusso .
-:sistemiDistribuiti <http://www.semanticweb.org/ontology#tenutoDa> :docenteFerrari .
-:sicurezzaInformatica <http://www.semanticweb.org/ontology#tenutoDa> :docenteMoretti .
+:intelligenzaArtificiale :tenutoDa :docenteEsposito .
+:bigData :tenutoDa :docenteRusso .
+:sistemiDistribuiti :tenutoDa :docenteFerrari .
+:sicurezzaInformatica :tenutoDa :docenteMoretti .
 
 ### Corso di Laurea Triennale in Fisica ###
-:meccanicaClassica <http://www.semanticweb.org/ontology#tenutoDa> :docenteRomano .
-:elettromagnetismo <http://www.semanticweb.org/ontology#tenutoDa> :docenteMartini .
-:termodinamica <http://www.semanticweb.org/ontology#tenutoDa> :docenteRossi .
-:meccanicaQuantistica <http://www.semanticweb.org/ontology#tenutoDa> :docenteVerdi .
+:meccanicaClassica :tenutoDa :docenteRomano .
+:elettromagnetismo :tenutoDa :docenteMartini .
+:termodinamica :tenutoDa :docenteRossi .
+:meccanicaQuantistica :tenutoDa :docenteVerdi .
 
 ### Corso di Laurea Magistrale in Fisica ###
-:fisicaQuantistica <http://www.semanticweb.org/ontology#tenutoDa> :docenteBianchi .
-:astrofisica <http://www.semanticweb.org/ontology#tenutoDa> :docenteNeri .
-:fisicaComputazionale <http://www.semanticweb.org/ontology#tenutoDa> :docenteEsposito .
-:fisicaNucleare <http://www.semanticweb.org/ontology#tenutoDa> :docenteRusso .
+:fisicaQuantistica :tenutoDa :docenteBianchi .
+:astrofisica :tenutoDa :docenteNeri .
+:fisicaComputazionale :tenutoDa :docenteEsposito .
+:fisicaNucleare :tenutoDa :docenteRusso .
 
 ### Corso di Laurea Triennale in Chimica ###
-:fondamentiChimica <http://www.semanticweb.org/ontology#tenutoDa> :docenteFerrari .
-:chimicaOrganica <http://www.semanticweb.org/on  tology#tenutoDa> :docenteMoretti .
-:chimicaAnalitica <http://www.semanticweb.org/ontology#tenutoDa> :docenteRomano .
-:chimicaFisica <http://www.semanticweb.org/ontology#tenutoDa> :docenteMartini .
+:fondamentiChimica :tenutoDa :docenteFerrari .
+:chimicaOrganica :tenutoDa :docenteMoretti .
+:chimicaAnalitica :tenutoDa :docenteRomano .
+:chimicaFisica :tenutoDa :docenteMartini .
 
 ### Corso di Laurea Magistrale in Chimica ###
-:chimicaAvanzata <http://www.semanticweb.org/ontology#tenutoDa> :docenteRossi .
-:sintesiChimica <http://www.semanticweb.org/ontology#tenutoDa> :docenteVerdi .
-:chimicaComputazionale <http://www.semanticweb.org/ontology#tenutoDa> :docenteBianchi .
-:chimicaIndustriale <http://www.semanticweb.org/ontology#tenutoDa> :docenteNeri .
+:chimicaAvanzata :tenutoDa :docenteRossi .
+:sintesiChimica :tenutoDa :docenteVerdi .
+:chimicaComputazionale :tenutoDa :docenteBianchi .
+:chimicaIndustriale :tenutoDa :docenteNeri .
 
 ### Individuo per l'Opportunità di Carriera ###
 :opportunitàInformatica rdf:type :OpportunitàDiCarriera ;
