@@ -69,13 +69,6 @@
   rdfs:comment "Classe che rappresenta un Interesse accademico di un Futuro Studente." ;
   rdfs:label "Interesse" .
 
-### Studente ###
-<http://www.semanticweb.org/ontology#Studente>
-  rdf:type owl:Class ;
-  rdfs:comment "Classe che rappresenta uno Studente iscritto a un Corso di Studio." ;
-  rdfs:label "Studente" .
-
-
 ### Proprietà ###
 
 ### Proprietà degli oggetti ###
@@ -238,29 +231,6 @@
   rdfs:range xsd:string ;
   rdfs:comment "Nome dell'Interesse accademico." ;
   rdfs:label "nomeInteresse" .
-
-
-### Proprietà dei dati per Studente ###
-<http://www.semanticweb.org/ontology#nomeStudente>
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#Studente> ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Nome dello Studente." ;
-  rdfs:label "nomeStudente" .
-
-<http://www.semanticweb.org/ontology#matricolaStudente>
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#Studente> ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Matricola dello Studente." ;
-  rdfs:label "matricolaStudente" .
-
-<http://www.semanticweb.org/ontology#emailStudente>
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#Studente> ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Email dello Studente." ;
-  rdfs:label "emailStudente" .
 
 ### Vincoli ###
 
