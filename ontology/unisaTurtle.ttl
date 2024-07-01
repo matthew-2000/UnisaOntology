@@ -262,8 +262,28 @@
   rdfs:comment "Email dello Studente." ;
   rdfs:label "emailStudente" .
 
+### Vincoli ###
 
-### Vincoli aggiuntivi ###
+### Vincolo 1: Ogni Università ha almeno un Dipartimento ###
+:Università rdf:type owl:Restriction ;
+            owl:onProperty :comprende ;
+            owl:someValuesFrom :Dipartimento .
+
+### Vincolo 2: Ogni Dipartimento propone almeno un Corso di Studio ###
+:Dipartimento rdf:type owl:Restriction ;
+              owl:onProperty :propone ;
+              owl:someValuesFrom :CorsoDiStudio .
+
+### Vincolo 3: Ogni Corso di Studio comprende almeno un Insegnamento ###
+:CorsoDiStudio rdf:type owl:Restriction ;
+               owl:onProperty :comprendeInsegnamento ;
+               owl:someValuesFrom :Insegnamento .
+
+### Vincolo 4: Ogni Insegnamento è tenuto da almeno un Docente ###
+:Insegnamento rdf:type owl:Restriction ;
+              owl:onProperty :tenutoDa ;
+              owl:someValuesFrom :Docente .
+
 
 ### Vincolo 5: Ogni Docente tiene almeno un Insegnamento ###
 :Docente rdf:type owl:Restriction ;
