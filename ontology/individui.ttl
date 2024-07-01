@@ -41,7 +41,7 @@
     :codice "LMINFO" ;
     :descrizione "Corso di studi magistrale in Informatica presso il Dipartimento di Informatica dell'Università di Salerno." ;
     :durata 2 ;
-    :CFU 120 ;
+    :CFU 90;
     :sitoWeb "http://www.informatica.unisa.it/laurea-magistrale-informatica" ;
     :offreOpportunità :opportunitàInformatica .
 
