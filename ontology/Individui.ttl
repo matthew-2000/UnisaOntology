@@ -5,24 +5,24 @@
 
 ### Individuo per l'Università ###
 :universitaSalerno rdf:type :Università ;
-    :nome "Università di Salerno" ;
-    :ubicazione "Salerno, Italia" .
+    :nome "Università degli Studi di Salerno" ;
+    :ubicazione "Fisciano, Salerno, Italia" .
 
 
 
 ### Individui per i Dipartimenti ###
 :informatica rdf:type :Dipartimento ;
     :nome "Dipartimento di Informatica" ;
-    :edificio "Edificio A" .
+    :edificio "Edificio F2" .
 
 
 :chimica rdf:type :Dipartimento ;
     :nome "Dipartimento di Chimica" ;
-    :edificio "Edificio B" .
+    :edificio "Edificio F1" .
 
 :fisica rdf:type :Dipartimento ;
     :nome "Dipartimento di Fisica" ;
-    :edificio "Edificio C" .
+    :edificio "Edificio F" .
 
 
 
