@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SPARQL Query Interface</title>
   <style>
@@ -34,7 +35,91 @@
     <button onclick="getInsegnamentiCorso()">Cerca</button>
     <div id="insegnamentiCorsoResult"></div>
   </div>
+  <div>
+    <h2>Trova Corsi di Studio</h2>
+    <input type="text" id="interests" name="interests" readonly>
+    <button id="toggle-interests" type="button">&#x25BC; Mostra tutti gli interessi</button>
+    <ul id="interests-list" style="display: none;">
+      <!-- Lista completa di interessi verrà popolata dinamicamente -->
+    </ul>
+  </div>
 
+
+
+  <h2>Corsi di Studio Correlati:</h2>
+  <ul id="courses-list"></ul>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Gestisce il caricamento degli interessi disponibili
+      $.ajax({
+        url: '/interessi',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+          const interestsList = $('#interests-list');
+          data.interests.forEach(interest => {
+            interestsList.append(`<li>${interest}</li>`);
+          });
+        },
+        error: function(err) {
+          console.error('Errore nel recupero degli interessi:', err);
+        }
+      });
+
+      // Gestisce l'espansione e contrazione della lista di tutti gli interessi
+      let interestsExpanded = false;
+      $('#toggle-interests').on('click', function() {
+        const interestsList = $('#interests-list');
+        if (interestsExpanded) {
+          interestsList.hide();
+          $('#toggle-interests').html('&#x25BC; Mostra tutti gli interessi');
+        } else {
+          interestsList.show();
+          $('#toggle-interests').html('&#x25B2; Nascondi interessi');
+        }
+        interestsExpanded = !interestsExpanded;
+      });
+
+      // Gestisce il click su un interesse nella lista completa
+      $(document).on('click', '#interests-list li', function() {
+        const interest = $(this).text().trim();
+        const currentInterests = $('#interests').val() || '';
+
+        if (!currentInterests.includes(interest)) {
+          const updatedInterests = currentInterests.length > 0 ? `${currentInterests}, ${interest}` : interest;
+          $('#interests').val(updatedInterests);
+        }
+      });
+
+      // Gestisce l'invio del form per trovare i corsi
+      $('#interest-form').on('submit', function(event) {
+        event.preventDefault();
+        const interests = $('#interests').val();
+
+        $.ajax({
+          url: '/find-courses',
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify({ interests: interests }),
+          success: function(data) {
+            $('#courses-list').empty();
+            data.courses.forEach(course => {
+              $('#courses-list').append(`<li>${course}</li>`);
+            });
+          },
+          error: function(err) {
+            console.error('Error:', err);
+          }
+        });
+      });
+    });
+  </script>
+
+
+
+</div>
   <div>
     <h2>Corsi di Studio e Insegnamenti</h2>
     <button onclick="getCorsiLaureaMagistrale()">Mostra Corsi di Laurea Magistrale</button>

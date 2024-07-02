@@ -206,6 +206,27 @@ app.get('/dettagli-professore', async (req, res) => {
   }
 });
 
+app.get('/interessi', async (req, res) => {
+  const query = `
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX : <http://www.semanticweb.org/ontology#>
+
+    SELECT ?interest
+    WHERE {
+      ?interest rdf:type :Interesse .
+    }
+  `;
+  try {
+    const data = await executeSparqlQuery(query);
+    const interests = data.results.bindings.map(binding => binding.interest.value);
+    res.json({ interests });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Avvia il server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
