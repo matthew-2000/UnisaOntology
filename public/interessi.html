@@ -22,6 +22,15 @@
         .result-table th {
             background-color: #f2f2f2;
         }
+        .interesse-item {
+            cursor: pointer;
+            margin-right: 10px;
+            display: inline-block;
+            background-color: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -31,7 +40,9 @@
     <div>
         <h2>Mostra interessi</h2>
         <button onclick="getInteressi()">Mostra gli interessi</button>
+        <div id="listaInteressi"></div>
         <div id="interessiResult"></div>
+
     </div>
 
     <div>
@@ -52,17 +63,15 @@
                 throw new Error('Errore nella richiesta al server');
             }
             const data = await response.json();
-            displayResult(data, 'interessiResult');
+            console.log('Dati ricevuti:', data); // Log dei dati ricevuti per debug
+            displayInteressi(data, 'interessiResult');
         } catch (error) {
             console.error('Errore:', error);
             document.getElementById('interessiResult').textContent = 'Errore durante la richiesta.';
         }
     }
 
-    async function getCorsiPerInteresse() {
-        const interesse = document.getElementById('interesseInput').value.trim();
-        if (interesse === '') return;
-
+    async function getCorsiPerInteresse(interesse) {
         try {
             const response = await fetch(`/corsi-per-interesse?interesse=${encodeURIComponent(interesse)}`);
             if (!response.ok) {
@@ -74,6 +83,29 @@
             console.error('Errore:', error);
             document.getElementById('corsiInteresseResult').textContent = 'Errore durante la richiesta.' + error;
         }
+    }
+
+    function displayInteressi(data) {
+        const listaInteressiDiv = document.getElementById('listaInteressi');
+        listaInteressiDiv.innerHTML = '';
+
+        if (!data.results || !data.results.bindings || data.results.bindings.length === 0) {
+            listaInteressiDiv.textContent = 'Nessun interesse trovato.';
+            return;
+        }
+
+        const interessi = data.results.bindings.map(item => item.nome.value);
+
+        interessi.forEach(interesse => {
+            const interesseItem = document.createElement('div');
+            interesseItem.textContent = interesse;
+            interesseItem.className = 'interesse-item';
+            interesseItem.addEventListener('click', () => {
+                document.getElementById('interesseInput').value = interesse;
+                getCorsiPerInteresse(interesse);
+            });
+            listaInteressiDiv.appendChild(interesseItem);
+        });
     }
 
     function displayResult(data, elementId) {
@@ -111,6 +143,7 @@
             resultDiv.textContent = 'Nessun risultato trovato.';
         }
     }
+
 </script>
 </body>
 </html>
