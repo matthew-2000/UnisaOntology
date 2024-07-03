@@ -29,17 +29,23 @@
   <h1>SPARQL Query Interface</h1>
 
   <div>
+    <h2>Corsi di Studio</h2>
+    <button onclick="getCorsi()">Mostra tutti i corsi</button>
+    <div id="corsiResult"></div>
+  </div>
+
+  <div>
+    <h2>Corsi di Studio Magistrali e Triennali</h2>
+    <button onclick="getCorsiLaureaMagistrale()">Mostra Corsi di Laurea Magistrale</button>
+    <button onclick="getCorsiLaureaTriennale()">Mostra Corsi di Laurea Triennale</button>
+    <div id="corsiInsegnamentiResult"></div>
+  </div>
+
+  <div>
     <h2>Insegnamenti di un Corso di Studio</h2>
     <input type="text" id="corsoInput" placeholder="Nome del corso di studio">
     <button onclick="getInsegnamentiCorso()">Cerca</button>
     <div id="insegnamentiCorsoResult"></div>
-  </div>
-
-  <div>
-    <h2>Corsi di Studio e Insegnamenti</h2>
-    <button onclick="getCorsiLaureaMagistrale()">Mostra Corsi di Laurea Magistrale</button>
-    <button onclick="getCorsiLaureaTriennale()">Mostra Corsi di Laurea Triennale</button>
-    <div id="corsiInsegnamentiResult"></div>
   </div>
 
   <div>
@@ -49,12 +55,6 @@
     <div id="dettagliInsegnamentoResult"></div>
   </div>
 
-  <div>
-    <h2>Università e Corsi di Studio</h2>
-    <button onclick="getUniversitaCorsi()">Cerca</button>
-    <div id="universitaCorsiResult"></div>
-  </div>
-
   <!-- Aggiungi il bottone per il link ad interessi.html -->
   <div>
     <a href="/interessi.html" class="button">Vai a Interessi</a>
@@ -62,6 +62,21 @@
 </div>
 
 <script>
+
+  async function getCorsi() {
+    try {
+      const response = await fetch(`/corsi-di-studio`);
+      if (!response.ok) {
+        throw new Error('Errore nella richiesta al server');
+      }
+      const data = await response.json();
+      displayResult(data, 'corsiResult');
+    } catch (error) {
+      console.error('Errore:', error);
+      document.getElementById('corsiResult').textContent = 'Errore durante la richiesta.';
+    }
+  }
+
   async function getInsegnamentiCorso() {
     const corso = document.getElementById('corsoInput').value.trim();
     if (corso === '') return;
@@ -121,20 +136,6 @@
     } catch (error) {
       console.error('Errore:', error);
       document.getElementById('dettagliInsegnamentoResult').textContent = 'Errore durante la richiesta.';
-    }
-  }
-
-  async function getUniversitaCorsi() {
-    try {
-      const response = await fetch('/corsi-di-studio');
-      if (!response.ok) {
-        throw new Error('Errore nella richiesta al server');
-      }
-      const data = await response.json();
-      displayResult(data, 'universitaCorsiResult');
-    } catch (error) {
-      console.error('Errore:', error);
-      document.getElementById('universitaCorsiResult').textContent = 'Errore durante la richiesta.';
     }
   }
 

@@ -39,9 +39,15 @@ app.get('/corsi-di-studio', async (req, res) => {
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX : <http://www.semanticweb.org/ontology#>
     
-    SELECT ?corsoDiStudio
+    SELECT ?nome ?codice ?descrizione ?durata ?CFU ?sitoWeb
     WHERE {
-      ?corsoDiStudio rdf:type :CorsoDiStudio .
+      ?corso rdf:type/rdfs:subClassOf* :CorsoDiStudio ;
+             :nome ?nome ;
+             :codice ?codice ;
+             :descrizione ?descrizione ;
+             :durata ?durata ;
+             :CFU ?CFU ;
+             :sitoWeb ?sitoWeb .
     }
   `;
   try {
@@ -217,6 +223,37 @@ app.get('/interessi', async (req, res) => {
     WHERE {
       ?interest rdf:type :Interesse .
     }
+  `;
+  try {
+    const data = await executeSparqlQuery(query);
+    const interests = data.results.bindings.map(binding => binding.interest.value);
+    res.json({ interests });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/corsi-per-interesse', async (req, res) => {
+  const query = `
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX : <http://www.semanticweb.org/ontology#>
+    
+SELECT ?corsoDiStudio ?nomeCorso ?descrizioneCorso ?sitoWeb
+WHERE {
+  ?interesse rdf:type :Interesse ;
+             :nomeInteresse "Chimica" .
+  
+  ?interesse :legatoA ?corsoDiStudio .
+  
+  ?corsoDiStudio rdf:type ?tipoCorso ;
+                 :nome ?nomeCorso ;
+                 :descrizione ?descrizioneCorso ;
+                 :sitoWeb ?sitoWeb .
+  
+  FILTER ( ?tipoCorso IN (:CorsoDiLaureaTriennale, :CorsoDiLaureaMagistrale) )
+}
   `;
   try {
     const data = await executeSparqlQuery(query);

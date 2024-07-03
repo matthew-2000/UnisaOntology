@@ -89,7 +89,7 @@
             const interests = $('#interests').val();
 
             $.ajax({
-                url: '/find-courses',
+                url: '/corsi-per-interesse',
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({interests: interests}),
