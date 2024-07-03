@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,13 +28,13 @@
     <h1>Interessi Disponibili</h1>
     <div>
         <h2>Trova Corsi di Studio</h2>
-        <input type="text" id="interests" name="interests" readonly>
+        <input type="text" id="interests" name="interests" placeholder="Inserisci i tuoi interessi separati da virgola">
         <button id="toggle-interests" type="button">&#x25BC; Mostra tutti gli interessi</button>
         <ul id="interests-list" style="display: none;">
             <!-- Lista completa di interessi verrà popolata dinamicamente -->
         </ul>
+        <button type="submit" id="submit-interests">Trova Corsi</button>
     </div>
-
 
     <h2>Corsi di Studio Correlati:</h2>
     <ul id="courses-list"></ul>
@@ -84,28 +84,30 @@
         });
 
         // Gestisce l'invio del form per trovare i corsi
-        $('#interest-form').on('submit', function (event) {
+        $('#submit-interests').on('click', function (event) {
             event.preventDefault();
-            const interests = $('#interests').val();
+            const interests = $('#interests').val().split(',').map(interest => interest.trim());
 
+            // Costruzione dell'URL GET con parametri
+            const queryParams = interests.map(interest => `interests=${encodeURIComponent(interest)}`).join('&');
+            const url = `/corsi-per-interesse?${queryParams}`;
+            console.log(url);
             $.ajax({
-                url: '/corsi-per-interesse',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({interests: interests}),
+                url: url,
+                type: 'GET',
+                dataType: 'json',
                 success: function (data) {
                     $('#courses-list').empty();
                     data.courses.forEach(course => {
-                        $('#courses-list').append(`<li>${course}</li>`);
+                        $('#courses-list').append(`<li><a href="${course}">${course}</a></li>`); // Link diretto all'URI del corso
                     });
                 },
                 error: function (err) {
-                    console.error('Error:', err);
+                    console.error('Errore nel recupero dei corsi:', err);
                 }
             });
         });
     });
 </script>
-
 </body>
 </html>
