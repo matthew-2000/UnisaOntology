@@ -31,6 +31,15 @@
             border-radius: 5px;
             margin-bottom: 10px;
         }
+        .selected-interesse {
+            cursor: pointer;
+            margin-right: 10px;
+            display: inline-block;
+            background-color: #d1ecf1;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -42,19 +51,19 @@
         <button onclick="getInteressi()">Mostra gli interessi</button>
         <div id="listaInteressi"></div>
         <div id="interessiResult"></div>
-
     </div>
 
     <div>
         <h2>Corsi di Studio per Interesse</h2>
-        <input type="text" id="interesseInput" placeholder="Interesse">
-        <button onclick="getCorsiPerInteresse()">Cerca</button>
+        <div id="selectedInteressi"></div>
+        <button onclick="getCorsiPerInteressi()">Cerca</button>
         <div id="corsiInteresseResult"></div>
     </div>
 
 </div>
 
 <script>
+    let selectedInteressi = [];
 
     async function getInteressi() {
         try {
@@ -71,9 +80,10 @@
         }
     }
 
-    async function getCorsiPerInteresse(interesse) {
+    async function getCorsiPerInteressi() {
         try {
-            const response = await fetch(`/corsi-per-interesse?interesse=${encodeURIComponent(interesse)}`);
+            const interessi = selectedInteressi.join('_');
+            const response = await fetch(`/corsi-per-interesse?interessi=${encodeURIComponent(interessi)}`);
             if (!response.ok) {
                 throw new Error('Errore nella richiesta al server');
             }
@@ -101,10 +111,28 @@
             interesseItem.textContent = interesse;
             interesseItem.className = 'interesse-item';
             interesseItem.addEventListener('click', () => {
-                document.getElementById('interesseInput').value = interesse;
-                getCorsiPerInteresse(interesse);
+                if (!selectedInteressi.includes(interesse)) {
+                    selectedInteressi.push(interesse);
+                    updateSelectedInteressi();
+                }
             });
             listaInteressiDiv.appendChild(interesseItem);
+        });
+    }
+
+    function updateSelectedInteressi() {
+        const selectedInteressiDiv = document.getElementById('selectedInteressi');
+        selectedInteressiDiv.innerHTML = '';
+
+        selectedInteressi.forEach(interesse => {
+            const interesseItem = document.createElement('div');
+            interesseItem.textContent = interesse;
+            interesseItem.className = 'selected-interesse';
+            interesseItem.addEventListener('click', () => {
+                selectedInteressi = selectedInteressi.filter(i => i !== interesse);
+                updateSelectedInteressi();
+            });
+            selectedInteressiDiv.appendChild(interesseItem);
         });
     }
 
@@ -143,7 +171,6 @@
             resultDiv.textContent = 'Nessun risultato trovato.';
         }
     }
-
 </script>
 </body>
 </html>

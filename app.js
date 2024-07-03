@@ -234,28 +234,44 @@ app.get('/interessi', async (req, res) => {
 });
 
 app.get('/corsi-per-interesse', async (req, res) => {
-  const interesse = req.query.interesse;
+  let interessi = req.query.interessi;
+
+  // Assicurati che gli interessi siano una stringa e suddividili in un array
+  if (typeof interessi === 'string') {
+    interessi = interessi.split('_'); // Suddividi la stringa per il carattere di underscore
+  }
+
+  if (!interessi || !Array.isArray(interessi) || interessi.length === 0) {
+    return res.status(400).json({ error: "Interessi non forniti o non validi" });
+  }
+
+  // Creazione dinamica della parte VALUES della query
+  const valoriInteressi = interessi.map(interesse => `"${interesse}"`).join(' ');
+
   const query = `
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX owl: <http://www.w3.org/2002/07/owl#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX : <http://www.semanticweb.org/ontology#>
     
-SELECT ?nomeCorso ?descrizioneCorso ?sitoWeb
-WHERE {
-  ?interesse rdf:type :Interesse ;
-             :nomeInteresse "${interesse}" . 
-  
-  ?interesse :legatoA ?corsoDiStudio .
-  
-  ?corsoDiStudio rdf:type ?tipoCorso ;
-                 :nome ?nomeCorso ;
-                 :descrizione ?descrizioneCorso ;
-                 :sitoWeb ?sitoWeb .
-  
-  FILTER ( ?tipoCorso IN (:CorsoDiLaureaTriennale, :CorsoDiLaureaMagistrale) )
-}
+    SELECT DISTINCT ?nomeInteresse ?nomeCorso ?descrizioneCorso ?sitoWeb
+    WHERE {
+      ?interesse rdf:type :Interesse ;
+                 :nomeInteresse ?nomeInteresse .
+      
+      VALUES ?nomeInteresse { ${valoriInteressi} }
+      
+      ?interesse :legatoA ?corsoDiStudio .
+      
+      ?corsoDiStudio rdf:type ?tipoCorso ;
+                     :nome ?nomeCorso ;
+                     :descrizione ?descrizioneCorso ;
+                     :sitoWeb ?sitoWeb .
+      
+      FILTER ( ?tipoCorso IN (:CorsoDiLaureaTriennale, :CorsoDiLaureaMagistrale) )
+    }
   `;
+
   try {
     const data = await executeSparqlQuery(query);
     res.json(data);
@@ -264,52 +280,6 @@ WHERE {
   }
 });
 
-
-/*// Esempio di endpoint per restituire i corsi correlati agli interessi
-app.get('/corsi-per-interesse', async (req, res) => {
-  const { interests } = req.query; // Array di interessi forniti come parametri di query
-
-  // Costruisci la parte della query SPARQL per filtrare per gli interessi forniti
-  const interestsFilter = interests.map((interest, index) => `
-        ?corsoDiStudio${index} rdf:type :CorsoDiStudio ;
-                             :legatoA <${interest}> ;
-                             :nome ?nomeCorso${index} ;
-                             :descrizione ?descrizioneCorso${index} ;
-                             :sitoWeb ?sitoWeb${index} .
-    `).join('\n');
-
-  // Query SPARQL completa
-  const query = `
-        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-        PREFIX owl: <http://www.w3.org/2002/07/owl#>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX : <http://www.semanticweb.org/ontology#>
-
-        SELECT ?corsoDiStudio ?nomeCorso ?descrizioneCorso ?sitoWeb
-        WHERE {
-            ${interestsFilter}
-        }
-    `;
-
-  try {
-    // Esegui la query SPARQL e ottieni i risultati
-    const data = await executeSparqlQuery(query);
-
-    // Formatta i dati per la risposta JSON
-    const courses = data.results.bindings.map(binding => ({
-      corsoDiStudio: binding.corsoDiStudio.value,
-      nomeCorso: binding.nomeCorso.value,
-      descrizioneCorso: binding.descrizioneCorso.value,
-      sitoWeb: binding.sitoWeb.value
-    }));
-
-    // Invia la risposta JSON con i corsi correlati agli interessi
-    res.json({ courses });
-  } catch (error) {
-    // Gestisci gli errori
-    res.status(500).json({ error: error.message });
-  }
-});*/
 
 // Avvia il server
 app.listen(PORT, () => {
