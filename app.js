@@ -219,31 +219,32 @@ app.get('/interessi', async (req, res) => {
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX : <http://www.semanticweb.org/ontology#>
 
-    SELECT ?interest
+    SELECT ?nome
     WHERE {
-      ?interest rdf:type :Interesse .
+      ?interest rdf:type :Interesse ;
+                :nomeInteresse ?nome .
     }
   `;
   try {
     const data = await executeSparqlQuery(query);
-    const interests = data.results.bindings.map(binding => binding.interest.value);
-    res.json({ interests });
+    res.json(data);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
-/*
+
 app.get('/corsi-per-interesse', async (req, res) => {
+  const interesse = req.query.interesse;
   const query = `
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX owl: <http://www.w3.org/2002/07/owl#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX : <http://www.semanticweb.org/ontology#>
     
-SELECT ?corsoDiStudio ?nomeCorso ?descrizioneCorso ?sitoWeb
+SELECT ?nomeCorso ?descrizioneCorso ?sitoWeb
 WHERE {
   ?interesse rdf:type :Interesse ;
-             :nomeInteresse "Chimica" .
+             :nomeInteresse "${interesse}" . 
   
   ?interesse :legatoA ?corsoDiStudio .
   
@@ -257,15 +258,14 @@ WHERE {
   `;
   try {
     const data = await executeSparqlQuery(query);
-    const interests = data.results.bindings.map(binding => binding.interest.value);
-    res.json({ interests });
+    res.json(data);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
-*/
 
-// Esempio di endpoint per restituire i corsi correlati agli interessi
+
+/*// Esempio di endpoint per restituire i corsi correlati agli interessi
 app.get('/corsi-per-interesse', async (req, res) => {
   const { interests } = req.query; // Array di interessi forniti come parametri di query
 
@@ -309,7 +309,8 @@ app.get('/corsi-per-interesse', async (req, res) => {
     // Gestisci gli errori
     res.status(500).json({ error: error.message });
   }
-});
+});*/
+
 // Avvia il server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Interessi</title>
     <style>
         body {
@@ -12,102 +11,106 @@
         .container {
             margin: 20px;
         }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
         }
-
-        li {
-            padding: 5px 0;
+        .result-table th, .result-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .result-table th {
+            background-color: #f2f2f2;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>Interessi Disponibili</h1>
+    <h1>Interessi</h1>
+
     <div>
-        <h2>Trova Corsi di Studio</h2>
-        <input type="text" id="interests" name="interests" placeholder="Inserisci i tuoi interessi separati da virgola">
-        <button id="toggle-interests" type="button">&#x25BC; Mostra tutti gli interessi</button>
-        <ul id="interests-list" style="display: none;">
-            <!-- Lista completa di interessi verrà popolata dinamicamente -->
-        </ul>
-        <button type="submit" id="submit-interests">Trova Corsi</button>
+        <h2>Mostra interessi</h2>
+        <button onclick="getInteressi()">Mostra gli interessi</button>
+        <div id="interessiResult"></div>
     </div>
 
-    <h2>Corsi di Studio Correlati:</h2>
-    <ul id="courses-list"></ul>
+    <div>
+        <h2>Corsi di Studio per Interesse</h2>
+        <input type="text" id="interesseInput" placeholder="Interesse">
+        <button onclick="getCorsiPerInteresse()">Cerca</button>
+        <div id="corsiInteresseResult"></div>
+    </div>
+
 </div>
 
 <script>
-    $(document).ready(function () {
-        // Gestisce il caricamento degli interessi disponibili
-        $.ajax({
-            url: '/interessi',
-            type: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                const interestsList = $('#interests-list');
-                data.interests.forEach(interest => {
-                    interestsList.append(`<li>${interest}</li>`);
-                });
-            },
-            error: function (err) {
-                console.error('Errore nel recupero degli interessi:', err);
+
+    async function getInteressi() {
+        try {
+            const response = await fetch(`/interessi`);
+            if (!response.ok) {
+                throw new Error('Errore nella richiesta al server');
             }
-        });
+            const data = await response.json();
+            displayResult(data, 'interessiResult');
+        } catch (error) {
+            console.error('Errore:', error);
+            document.getElementById('interessiResult').textContent = 'Errore durante la richiesta.';
+        }
+    }
 
-        // Gestisce l'espansione e contrazione della lista di tutti gli interessi
-        let interestsExpanded = false;
-        $('#toggle-interests').on('click', function () {
-            const interestsList = $('#interests-list');
-            if (interestsExpanded) {
-                interestsList.hide();
-                $('#toggle-interests').html('&#x25BC; Mostra tutti gli interessi');
-            } else {
-                interestsList.show();
-                $('#toggle-interests').html('&#x25B2; Nascondi interessi');
+    async function getCorsiPerInteresse() {
+        const interesse = document.getElementById('interesseInput').value.trim();
+        if (interesse === '') return;
+
+        try {
+            const response = await fetch(`/corsi-per-interesse?interesse=${encodeURIComponent(interesse)}`);
+            if (!response.ok) {
+                throw new Error('Errore nella richiesta al server');
             }
-            interestsExpanded = !interestsExpanded;
-        });
+            const data = await response.json();
+            displayResult(data, 'corsiInteresseResult');
+        } catch (error) {
+            console.error('Errore:', error);
+            document.getElementById('corsiInteresseResult').textContent = 'Errore durante la richiesta.' + error;
+        }
+    }
 
-        // Gestisce il click su un interesse nella lista completa
-        $(document).on('click', '#interests-list li', function () {
-            const interest = $(this).text().trim();
-            const currentInterests = $('#interests').val() || '';
+    function displayResult(data, elementId) {
+        const resultDiv = document.getElementById(elementId);
+        resultDiv.innerHTML = '';
 
-            if (!currentInterests.includes(interest)) {
-                const updatedInterests = currentInterests.length > 0 ? `${currentInterests}, ${interest}` : interest;
-                $('#interests').val(updatedInterests);
-            }
-        });
+        if (data.results.bindings.length > 0) {
+            const table = document.createElement('table');
+            table.className = 'result-table';
+            const thead = document.createElement('thead');
+            const tbody = document.createElement('tbody');
 
-        // Gestisce l'invio del form per trovare i corsi
-        $('#submit-interests').on('click', function (event) {
-            event.preventDefault();
-            const interests = $('#interests').val().split(',').map(interest => interest.trim());
-
-            // Costruzione dell'URL GET con parametri
-            const queryParams = interests.map(interest => `interests=${encodeURIComponent(interest)}`).join('&');
-            const url = `/corsi-per-interesse?${queryParams}`;
-            console.log(url);
-            $.ajax({
-                url: url,
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    $('#courses-list').empty();
-                    data.courses.forEach(course => {
-                        $('#courses-list').append(`<li><a href="${course}">${course}</a></li>`); // Link diretto all'URI del corso
-                    });
-                },
-                error: function (err) {
-                    console.error('Errore nel recupero dei corsi:', err);
-                }
+            const headerRow = document.createElement('tr');
+            Object.keys(data.results.bindings[0]).forEach(key => {
+                const th = document.createElement('th');
+                th.textContent = key;
+                headerRow.appendChild(th);
             });
-        });
-    });
+            thead.appendChild(headerRow);
+
+            data.results.bindings.forEach(row => {
+                const tr = document.createElement('tr');
+                Object.values(row).forEach(value => {
+                    const td = document.createElement('td');
+                    td.textContent = value.value;
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+
+            table.appendChild(thead);
+            table.appendChild(tbody);
+            resultDiv.appendChild(table);
+        } else {
+            resultDiv.textContent = 'Nessun risultato trovato.';
+        }
+    }
 </script>
 </body>
 </html>
