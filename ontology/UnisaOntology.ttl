@@ -231,6 +231,7 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 
 ###  http://www.semanticweb.org/ontology#Dipartimento
 :Dipartimento rdf:type owl:Class ;
+              owl:disjointWith :Università ;
               rdfs:comment "Classe che rappresenta un Dipartimento all'interno dell'Università." ;
               rdfs:label "Dipartimento" .
 
@@ -278,10 +279,6 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
           :nome "Algebra I" .
 
 
-###  http://www.semanticweb.org/ontology#algebraII
-:algebraII rdf:type owl:NamedIndividual .
-
-
 ###  http://www.semanticweb.org/ontology#algebraIII
 :algebraIII rdf:type owl:NamedIndividual ,
                      :Insegnamento ;
@@ -289,6 +286,26 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
             :annoDiCorso 2 ;
             :descrizione "Approfondimenti di algebra, inclusi teoremi avanzati e loro applicazioni." ;
             :nome "Algebra III" .
+
+
+###  http://www.semanticweb.org/ontology#algoritmiEStruttureDati
+:algoritmiEStruttureDati rdf:type owl:NamedIndividual ,
+                                  :Insegnamento ;
+                         :CFU 9 ;
+                         :annoDiCorso 2 ;
+                         :codice "ING-INF/05" ;
+                         :descrizione "Algoritmi e strutture dati." ;
+                         :nome "Algoritmi e Strutture Dati" .
+
+
+###  http://www.semanticweb.org/ontology#analisiDeiSegnali
+:analisiDeiSegnali rdf:type owl:NamedIndividual ,
+                            :Insegnamento ;
+                   :CFU 9 ;
+                   :annoDiCorso 2 ;
+                   :codice "ING-INF/03" ;
+                   :descrizione "Analisi dei segnali." ;
+                   :nome "Analisi dei Segnali" .
 
 
 ###  http://www.semanticweb.org/ontology#analisiMatematica
@@ -301,6 +318,26 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                    :nome "Analisi Matematica" .
 
 
+###  http://www.semanticweb.org/ontology#analisiMatematica1
+:analisiMatematica1 rdf:type owl:NamedIndividual ,
+                             :Insegnamento ;
+                    :CFU 9 ;
+                    :annoDiCorso 1 ;
+                    :codice "MAT/05" ;
+                    :descrizione "Fondamenti di analisi matematica." ;
+                    :nome "Analisi Matematica 1" .
+
+
+###  http://www.semanticweb.org/ontology#analisiMatematica2
+:analisiMatematica2 rdf:type owl:NamedIndividual ,
+                             :Insegnamento ;
+                    :CFU 6 ;
+                    :annoDiCorso 1 ;
+                    :codice "MAT/05" ;
+                    :descrizione "Approfondimenti di analisi matematica." ;
+                    :nome "Analisi Matematica 2" .
+
+
 ###  http://www.semanticweb.org/ontology#analisiMatematicaI
 :analisiMatematicaI rdf:type owl:NamedIndividual ,
                              :Insegnamento ;
@@ -310,10 +347,6 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                     :nome "Analisi Matematica I e II" .
 
 
-###  http://www.semanticweb.org/ontology#analisiMatematicaII
-:analisiMatematicaII rdf:type owl:NamedIndividual .
-
-
 ###  http://www.semanticweb.org/ontology#analisiMatematicaIII
 :analisiMatematicaIII rdf:type owl:NamedIndividual ,
                                :Insegnamento ;
@@ -321,10 +354,6 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                       :annoDiCorso 2 ;
                       :descrizione "Analisi complessa e metodi avanzati di integrazione." ;
                       :nome "Analisi Matematica III e IV" .
-
-
-###  http://www.semanticweb.org/ontology#analisiMatematicaIV
-:analisiMatematicaIV rdf:type owl:NamedIndividual .
 
 
 ###  http://www.semanticweb.org/ontology#architetturaDegliElaboratori
@@ -341,9 +370,12 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 :basiDiDati rdf:type owl:NamedIndividual ,
                      :Insegnamento ;
             :CFU 9 ;
-            :annoDiCorso 2 ;
-            :codice "INF206" ;
-            :descrizione "Progettazione e gestione di basi di dati." ;
+            :annoDiCorso 2 ,
+                         3 ;
+            :codice "INF206" ,
+                    "ING-INF/05" ;
+            :descrizione "Basi di dati." ,
+                         "Progettazione e gestione di basi di dati." ;
             :nome "Basi di Dati" .
 
 
@@ -351,6 +383,16 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 :basiDiDatiII rdf:type owl:NamedIndividual ,
                        :Insegnamento ;
               :nome "Basi di Dati II" .
+
+
+###  http://www.semanticweb.org/ontology#calcolatoriElettronici
+:calcolatoriElettronici rdf:type owl:NamedIndividual ,
+                                 :Insegnamento ;
+                        :CFU 9 ;
+                        :annoDiCorso 1 ;
+                        :codice "ING-INF/05" ;
+                        :descrizione "Fondamenti di calcolatori elettronici." ;
+                        :nome "Calcolatori Elettronici" .
 
 
 ###  http://www.semanticweb.org/ontology#calcoloDelleProbabilitaEStatisticaMatematica
@@ -382,6 +424,16 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                     :nome "Calcolo Scientifico" .
 
 
+###  http://www.semanticweb.org/ontology#circuitiESistemiDigitali
+:circuitiESistemiDigitali rdf:type owl:NamedIndividual ,
+                                   :Insegnamento ;
+                          :CFU 6 ;
+                          :annoDiCorso 2 ;
+                          :codice "ING-INF/01" ;
+                          :descrizione "Circuiti e sistemi digitali." ;
+                          :nome "Circuiti e Sistemi Digitali" .
+
+
 ###  http://www.semanticweb.org/ontology#cloudComputing
 :cloudComputing rdf:type owl:NamedIndividual ,
                          :Insegnamento ;
@@ -391,12 +443,17 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 ###  http://www.semanticweb.org/ontology#compilatori
 :compilatori rdf:type owl:NamedIndividual ,
                       :Insegnamento ;
-             :legatoA :corsoLaureaMagistraleInformatica ;
              :nome "Compilatori" .
 
 
-###  http://www.semanticweb.org/ontology#corsoLaureaMagistraleInformatica
-:corsoLaureaMagistraleInformatica rdf:type owl:NamedIndividual .
+###  http://www.semanticweb.org/ontology#controlliAutomatici
+:controlliAutomatici rdf:type owl:NamedIndividual ,
+                              :Insegnamento ;
+                     :CFU 9 ;
+                     :annoDiCorso 2 ;
+                     :codice "ING-INF/04" ;
+                     :descrizione "Controlli automatici." ;
+                     :nome "Controlli Automatici" .
 
 
 ###  http://www.semanticweb.org/ontology#didatticaInformatica
@@ -413,6 +470,16 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                                    :codice "INF306" ;
                                    :descrizione "Elementi di base della teoria della computazione." ;
                                    :nome "Elementi di Teoria della Computazione" .
+
+
+###  http://www.semanticweb.org/ontology#elettrotecnica
+:elettrotecnica rdf:type owl:NamedIndividual ,
+                         :Insegnamento ;
+                :CFU 9 ;
+                :annoDiCorso 2 ;
+                :codice "ING-IND/31" ;
+                :descrizione "Fondamenti di elettrotecnica." ;
+                :nome "Elettrotecnica" .
 
 
 ###  http://www.semanticweb.org/ontology#embeddedSystems
@@ -436,6 +503,16 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                         :nome "Equazioni Differenziali" .
 
 
+###  http://www.semanticweb.org/ontology#estensioneTirocinioAziendale
+:estensioneTirocinioAziendale rdf:type owl:NamedIndividual ,
+                                       :Insegnamento ;
+                              :CFU 6 ;
+                              :annoDiCorso 3 ;
+                              :codice "-" ;
+                              :descrizione "Estensione tirocinio aziendale." ;
+                              :nome "Estensione Tirocinio Aziendale" .
+
+
 ###  http://www.semanticweb.org/ontology#fisica
 :fisica rdf:type owl:NamedIndividual ,
                  :Insegnamento ;
@@ -444,6 +521,26 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
         :codice "FIS101" ;
         :descrizione "Fondamenti di fisica." ;
         :nome "Fisica" .
+
+
+###  http://www.semanticweb.org/ontology#fisica1
+:fisica1 rdf:type owl:NamedIndividual ,
+                  :Insegnamento ;
+         :CFU 6 ;
+         :annoDiCorso 1 ;
+         :codice "FIS/01" ;
+         :descrizione "Fondamenti di fisica." ;
+         :nome "Fisica 1" .
+
+
+###  http://www.semanticweb.org/ontology#fisica2
+:fisica2 rdf:type owl:NamedIndividual ,
+                  :Insegnamento ;
+         :CFU 6 ;
+         :annoDiCorso 1 ;
+         :codice "FIS/01" ;
+         :descrizione "Approfondimenti di fisica." ;
+         :nome "Fisica 2" .
 
 
 ###  http://www.semanticweb.org/ontology#fisicaConEsercitazioni
@@ -461,6 +558,16 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                                       :nome "Fondamenti di Data Science e Machine Learning" .
 
 
+###  http://www.semanticweb.org/ontology#fondamentiDiProgrammazione
+:fondamentiDiProgrammazione rdf:type owl:NamedIndividual ,
+                                     :Insegnamento ;
+                            :CFU 9 ;
+                            :annoDiCorso 1 ;
+                            :codice "ING-INF/05" ;
+                            :descrizione "Fondamenti di programmazione." ;
+                            :nome "Fondamenti di Programmazione" .
+
+
 ###  http://www.semanticweb.org/ontology#fondamentiInformatica
 :fondamentiInformatica rdf:type owl:NamedIndividual ,
                                 :Insegnamento ;
@@ -474,6 +581,16 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 :geographicalInformationSystems rdf:type owl:NamedIndividual ,
                                          :Insegnamento ;
                                 :nome "Geographical Information Systems" .
+
+
+###  http://www.semanticweb.org/ontology#geometriaAlgebraELogica
+:geometriaAlgebraELogica rdf:type owl:NamedIndividual ,
+                                  :Insegnamento ;
+                         :CFU 9 ;
+                         :annoDiCorso 1 ;
+                         :codice "MAT/03" ;
+                         :descrizione "Fondamenti di geometria, algebra e logica." ;
+                         :nome "Geometria, Algebra e Logica" .
 
 
 ###  http://www.semanticweb.org/ontology#geometriaI
@@ -522,21 +639,17 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
              :edificio "Edificio F2" ;
              :nome "Dipartimento di Informatica" .
 
-###  http://www.semanticweb.org/ontology#informatica
-:ingegneriainformatica rdf:type owl:NamedIndividual ,
-                      :Dipartimento ;
-             :propone :laureaTriennaleIngegneriaInformatica ;
-             :edificio "Edificio E1" ;
-             :nome "Dipartimento di Ingegneria Informatica" .
 
 ###  http://www.semanticweb.org/ontology#ingegneriaDelSoftware
 :ingegneriaDelSoftware rdf:type owl:NamedIndividual ,
                                 :Insegnamento ;
-                       :CFU 6 ;
+                       :CFU 6 ,
+                            9 ;
                        :annoDiCorso 1 ,
                                     3 ;
                        :codice "INF201" ,
-                               "INF304" ;
+                               "INF304" ,
+                               "ING-INF/05" ;
                        :descrizione "Principi e metodologie dell'ingegneria del software." ;
                        :nome "Ingegneria del Software" .
 
@@ -547,13 +660,24 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                                       :nome "Ingegneria, Gestione ed Evoluzione del Software" .
 
 
+###  http://www.semanticweb.org/ontology#ingegneriainformatica
+:ingegneriainformatica rdf:type owl:NamedIndividual ,
+                                :Dipartimento ;
+                       :propone :laureaTriennaleIngegneriaInformatica ;
+                       :edificio "Edificio E1" ;
+                       :nome "Dipartimento di Ingegneria Informatica" .
+
+
 ###  http://www.semanticweb.org/ontology#inglese
 :inglese rdf:type owl:NamedIndividual ,
                   :Insegnamento ;
-         :CFU 6 ;
+         :CFU 3 ,
+              6 ;
          :annoDiCorso 2 ;
-         :codice "LIN203" ;
-         :descrizione "Insegnamento della lingua inglese per scopi specifici." ;
+         :codice "-" ,
+                 "LIN203" ;
+         :descrizione "Conoscenza della lingua inglese." ,
+                      "Insegnamento della lingua inglese per scopi specifici." ;
          :nome "Inglese" .
 
 
@@ -568,8 +692,10 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                                   :Insegnamento ;
                          :CFU 6 ;
                          :annoDiCorso 3 ;
-                         :codice "INF308" ;
-                         :descrizione "Principi e tecniche dell'intelligenza artificiale." ;
+                         :codice "INF308" ,
+                                 "ING-INF/05" ;
+                         :descrizione "Metodi ed applicazioni dell'intelligenza artificiale." ,
+                                      "Principi e tecniche dell'intelligenza artificiale." ;
                          :nome "Intelligenza Artificiale" .
 
 
@@ -692,6 +818,10 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 ###  http://www.semanticweb.org/ontology#internetOfThings
 :internetOfThings rdf:type owl:NamedIndividual ,
                            :Insegnamento ;
+                  :CFU 9 ;
+                  :annoDiCorso 3 ;
+                  :codice "ING-INF/05" ;
+                  :descrizione "Internet delle cose." ;
                   :nome "Internet of Things" .
 
 
@@ -746,12 +876,9 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 :laureaTriennaleInMatematica rdf:type owl:NamedIndividual ,
                                       :CorsoDiLaureaTriennale ;
                              :comprendeInsegnamento :algebraI ,
-                                                    :algebraII ,
                                                     :algebraIII ,
                                                     :analisiMatematicaI ,
-                                                    :analisiMatematicaII ,
                                                     :analisiMatematicaIII ,
-                                                    :analisiMatematicaIV ,
                                                     :calcoloNumericoI ,
                                                     :equazioniDifferenziali ,
                                                     :fisicaConEsercitazioni ,
@@ -779,46 +906,6 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                              :nome "Corso di Laurea Triennale in Matematica" ;
                              :sitoWeb "http://www.matematica.unisa.it/laurea-triennale-in-matematica" .
 
-### http://www.semanticweb.org/ontology#laureaTriennaleIngegneriaInformatica
-:laureaTriennaleIngegneriaInformatica rdf:type owl:NamedIndividual ,
-                                               :CorsoDiLaureaTriennale ;
-                                      :comprendeInsegnamento :analisiMatematica1 ,
-                                      :analisiMatematica2 ,
-                                      :fondamentiDiProgrammazione ,
-                                      :calcolatoriElettronici ,
-                                      :algoritmiEStruttureDati ,
-                                      :sistemiOperativi ,
-                                      :fisica1 ,
-                                      :fisica2 ,
-                                      :geometriaAlgebraELogica ,
-                                      :analisiDeiSegnali ,
-                                      :elettrotecnica ,
-                                      :circuitiESistemiDigitali ,
-                                      :controlliAutomatici ,
-                                      :retiDiCalcolatori ,
-                                      :basiDiDati ,
-                                      :ingegneriaDelSoftware ,
-                                      :programmazioneAdOggetti ,
-                                      :5GNetworks ,
-                                      :networkManagementAndSecurity ,
-                                      :tecnologieWeb ,
-                                      :mobileProgramming ,
-                                      :internetOfThings ,
-                                      :tecnologieInformaticheDeiSistemiDiControllo ,
-                                      :intelligenzaArtificiale ,
-                                      :progettazioneImpiantiDiRete ,
-                                      :programmazioneJavaAvanzata ,
-                                      :statisticaApplicata ,
-                                      :tecnologieElettriche ,
-                                      :estensioneTirocinioAziendale ,
-                                      :inglese ;
-                                      :offreOpportunità :opportunitàSviluppatoreSoftware ;
-                                      <http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> 180 ;
-                                      :codice "L3INF" ;
-                                      :descrizione "Corso di studi triennale in Ingegneria Informatica presso il Dipartimento di Ingegneria Informatica." ;
-                                      :durata 3 ;
-                                      :nome "Corso di Laurea Triennale in Ingegneria Informatica" ;
-                                      :sitoWeb "http://www.informatica.unisa.it/laurea-triennale-ingegneria-informatica" .
 
 ###  http://www.semanticweb.org/ontology#laureaTriennaleInformatica
 :laureaTriennaleInformatica rdf:type owl:NamedIndividual ,
@@ -859,6 +946,47 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                             :durata 3 ;
                             :nome "Corso di Laurea Triennale in Informatica" ;
                             :sitoWeb "http://www.informatica.unisa.it/laurea-triennale-informatica" .
+
+
+###  http://www.semanticweb.org/ontology#laureaTriennaleIngegneriaInformatica
+:laureaTriennaleIngegneriaInformatica rdf:type owl:NamedIndividual ,
+                                               :CorsoDiLaureaTriennale ;
+                                      :comprendeInsegnamento :algoritmiEStruttureDati ,
+                                                             :analisiDeiSegnali ,
+                                                             :analisiMatematica1 ,
+                                                             :analisiMatematica2 ,
+                                                             :basiDiDati ,
+                                                             :calcolatoriElettronici ,
+                                                             :circuitiESistemiDigitali ,
+                                                             :controlliAutomatici ,
+                                                             :elettrotecnica ,
+                                                             :estensioneTirocinioAziendale ,
+                                                             :fisica1 ,
+                                                             :fisica2 ,
+                                                             :fondamentiDiProgrammazione ,
+                                                             :geometriaAlgebraELogica ,
+                                                             :ingegneriaDelSoftware ,
+                                                             :inglese ,
+                                                             :intelligenzaArtificiale ,
+                                                             :internetOfThings ,
+                                                             :mobileProgramming ,
+                                                             :networkManagementAndSecurity ,
+                                                             :progettazioneImpiantiDiRete ,
+                                                             :programmazioneAdOggetti ,
+                                                             :programmazioneJavaAvanzata ,
+                                                             :retiDiCalcolatori ,
+                                                             :sistemiOperativi ,
+                                                             :statisticaApplicata ,
+                                                             :tecnologieElettriche ,
+                                                             :tecnologieInformaticheDeiSistemiDiControllo ,
+                                                             :tecnologieWeb ,
+                                                             <http://www.semanticweb.org/ontology#5GNetworks> ;
+                                      <http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> 180 ;
+                                      :codice "L3INF" ;
+                                      :descrizione "Corso di studi triennale in Ingegneria Informatica presso il Dipartimento di Ingegneria Informatica." ;
+                                      :durata 3 ;
+                                      :nome "Corso di Laurea Triennale in Ingegneria Informatica" ;
+                                      :sitoWeb "http://www.informatica.unisa.it/laurea-triennale-ingegneria-informatica" .
 
 
 ###  http://www.semanticweb.org/ontology#logicaMatematica
@@ -942,8 +1070,10 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                             :Insegnamento ;
                    :CFU 6 ;
                    :annoDiCorso 3 ;
-                   :codice "INF311" ;
-                   :descrizione "Programmazione per dispositivi mobili." ;
+                   :codice "INF/01" ,
+                           "INF311" ;
+                   :descrizione "Programmazione mobile." ,
+                                "Programmazione per dispositivi mobili." ;
                    :nome "Mobile Programming" .
 
 
@@ -951,6 +1081,16 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 :naturalLanguageProcessing rdf:type owl:NamedIndividual ,
                                     :Insegnamento ;
                            :nome "Natural Language Processing" .
+
+
+###  http://www.semanticweb.org/ontology#networkManagementAndSecurity
+:networkManagementAndSecurity rdf:type owl:NamedIndividual ,
+                                       :Insegnamento ;
+                              :CFU 6 ;
+                              :annoDiCorso 3 ;
+                              :codice "ING-INF/05" ;
+                              :descrizione "Gestione e sicurezza delle reti." ;
+                              :nome "Network Management and Security" .
 
 
 ###  http://www.semanticweb.org/ontology#opportunitàSviluppatoreWeb
@@ -984,6 +1124,26 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                           :codice "INF208" ;
                           :descrizione "Tecniche di progettazione di algoritmi." ;
                           :nome "Progettazione di Algoritmi" .
+
+
+###  http://www.semanticweb.org/ontology#progettazioneImpiantiDiRete
+:progettazioneImpiantiDiRete rdf:type owl:NamedIndividual ,
+                                      :Insegnamento ;
+                             :CFU 6 ;
+                             :annoDiCorso 3 ;
+                             :codice "ING-INF/02" ;
+                             :descrizione "Progettazione impianti di rete cablati e wireless." ;
+                             :nome "Progettazione Impianti di Rete" .
+
+
+###  http://www.semanticweb.org/ontology#programmazioneAdOggetti
+:programmazioneAdOggetti rdf:type owl:NamedIndividual ,
+                                  :Insegnamento ;
+                         :CFU 9 ;
+                         :annoDiCorso 3 ;
+                         :codice "ING-INF/05" ;
+                         :descrizione "Programmazione ad oggetti." ;
+                         :nome "Programmazione ad Oggetti" .
 
 
 ###  http://www.semanticweb.org/ontology#programmazioneAvanzata
@@ -1020,6 +1180,17 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                  :codice "INF103" ;
                  :descrizione "Introduzione alla programmazione e alle strutture dati." ;
                  :nome "Programmazione I" .
+
+
+###  http://www.semanticweb.org/ontology#programmazioneJavaAvanzata
+:programmazioneJavaAvanzata rdf:type owl:NamedIndividual ,
+                                     :Insegnamento ;
+                            :CFU 6 ;
+                            :annoDiCorso 3 ;
+                            :codice "ING-INF/05" ;
+                            :descrizione "Programmazione Java avanzata." ;
+                            :nome "Programmazione Java Avanzata" .
+
 
 ###  http://www.semanticweb.org/ontology#programmazioneOO
 :programmazioneOO rdf:type owl:NamedIndividual ,
@@ -1061,9 +1232,12 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 :retiDiCalcolatori rdf:type owl:NamedIndividual ,
                             :Insegnamento ;
                    :CFU 9 ;
-                   :annoDiCorso 3 ;
-                   :codice "INF301" ;
-                   :descrizione "Struttura e gestione delle reti di calcolatori." ;
+                   :annoDiCorso 2 ,
+                                3 ;
+                   :codice "INF/01" ,
+                           "INF301" ;
+                   :descrizione "Reti di calcolatori." ,
+                                "Struttura e gestione delle reti di calcolatori." ;
                    :nome "Reti di Calcolatori" .
 
 
@@ -1078,6 +1252,7 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                   :descrizione "Metodi e modelli di ricerca operativa." ,
                                "Modelli matematici per la ricerca operativa e teoria delle decisioni." ;
                   :nome "Ricerca Operativa" .
+
 
 ###  http://www.semanticweb.org/ontology#semigruppiLiberiTeoriaDeiCodici
 :semigruppiLiberiTeoriaDeiCodici rdf:type owl:NamedIndividual ,
@@ -1117,10 +1292,13 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 ###  http://www.semanticweb.org/ontology#sistemiOperativi
 :sistemiOperativi rdf:type owl:NamedIndividual ,
                            :Insegnamento ;
-                  :CFU 9 ;
+                  :CFU 6 ,
+                       9 ;
                   :annoDiCorso 2 ;
-                  :codice "INF204" ;
-                  :descrizione "Struttura e gestione dei sistemi operativi." ;
+                  :codice "INF204" ,
+                          "ING-INF/05" ;
+                  :descrizione "Sistemi operativi." ,
+                               "Struttura e gestione dei sistemi operativi." ;
                   :nome "Sistemi Operativi" .
 
 
@@ -1142,11 +1320,40 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                        :nome "Statistica e Analisi dei Dati" .
 
 
+###  http://www.semanticweb.org/ontology#statisticaApplicata
+:statisticaApplicata rdf:type owl:NamedIndividual ,
+                              :Insegnamento ;
+                     :CFU 6 ;
+                     :annoDiCorso 3 ;
+                     :codice "SECS-S/02" ;
+                     :descrizione "Statistica applicata." ;
+                     :nome "Statistica Applicata" .
+
+
 ###  http://www.semanticweb.org/ontology#tecnicheAutomaticheCorrettezzaSoftware
 :tecnicheAutomaticheCorrettezzaSoftware rdf:type owl:NamedIndividual ,
                                                  :Insegnamento ;
                                         :nome "Tecniche Automatiche per la Correttezza del Software" .
 
+
+###  http://www.semanticweb.org/ontology#tecnologieElettriche
+:tecnologieElettriche rdf:type owl:NamedIndividual ,
+                               :Insegnamento ;
+                      :CFU 6 ;
+                      :annoDiCorso 3 ;
+                      :codice "ING-IND/31" ;
+                      :descrizione "Tecnologie elettriche per l'informatica industriale." ;
+                      :nome "Tecnologie Elettriche" .
+
+
+###  http://www.semanticweb.org/ontology#tecnologieInformaticheDeiSistemiDiControllo
+:tecnologieInformaticheDeiSistemiDiControllo rdf:type owl:NamedIndividual ,
+                                                      :Insegnamento ;
+                                             :CFU 6 ;
+                                             :annoDiCorso 3 ;
+                                             :codice "ING-INF/04" ;
+                                             :descrizione "Tecnologie informatiche dei sistemi di controllo." ;
+                                             :nome "Tecnologie Informatiche dei Sistemi di Controllo" .
 
 
 ###  http://www.semanticweb.org/ontology#tecnologieSoftwarePerIlWeb
@@ -1157,6 +1364,16 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                             :codice "INF302" ;
                             :descrizione "Tecnologie software per lo sviluppo web." ;
                             :nome "Tecnologie Software per il Web" .
+
+
+###  http://www.semanticweb.org/ontology#tecnologieWeb
+:tecnologieWeb rdf:type owl:NamedIndividual ,
+                        :Insegnamento ;
+               :CFU 9 ;
+               :annoDiCorso 3 ;
+               :codice "ING-INF/05" ;
+               :descrizione "Tecnologie web." ;
+               :nome "Tecnologie Web" .
 
 
 ###  http://www.semanticweb.org/ontology#teoriaDeiGrafi
@@ -1175,7 +1392,6 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                           :annoDiCorso 3 ;
                           :descrizione "Studio della teoria della computabilità e dei modelli di calcolo." ;
                           :nome "Teoria della Computabilità" .
-
 
 
 ###  http://www.semanticweb.org/ontology#teoriaDelleFunzioni
@@ -1215,237 +1431,22 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
            :nome "Topologia" .
 
 
-### http://www.semanticweb.org/ontology#analisiMatematica1
-:analisiMatematica1 rdf:type owl:NamedIndividual ,
-                             :Insegnamento ;
-                    :CFU 9 ;
-                    :annoDiCorso 1 ;
-                    :codice "MAT/05" ;
-                    :descrizione "Fondamenti di analisi matematica." ;
-                    :nome "Analisi Matematica 1" .
-
-### http://www.semanticweb.org/ontology#fisica1
-:fisica1 rdf:type owl:NamedIndividual ,
-                  :Insegnamento ;
-         :CFU 6 ;
-         :annoDiCorso 1 ;
-         :codice "FIS/01" ;
-         :descrizione "Fondamenti di fisica." ;
-         :nome "Fisica 1" .
-
-
-### http://www.semanticweb.org/ontology#fondamentiDiProgrammazione
-:fondamentiDiProgrammazione rdf:type owl:NamedIndividual ,
-                                     :Insegnamento ;
-                            :CFU 9 ;
-                            :annoDiCorso 1 ;
-                            :codice "ING-INF/05" ;
-                            :descrizione "Fondamenti di programmazione." ;
-                            :nome "Fondamenti di Programmazione" .
-
-### http://www.semanticweb.org/ontology#analisiMatematica2
-:analisiMatematica2 rdf:type owl:NamedIndividual ,
-                             :Insegnamento ;
-                    :CFU 6 ;
-                    :annoDiCorso 1 ;
-                    :codice "MAT/05" ;
-                    :descrizione "Approfondimenti di analisi matematica." ;
-                    :nome "Analisi Matematica 2" .
-
-### http://www.semanticweb.org/ontology#calcolatoriElettronici
-:calcolatoriElettronici rdf:type owl:NamedIndividual ,
-                                 :Insegnamento ;
-                        :CFU 9 ;
-                        :annoDiCorso 1 ;
-                        :codice "ING-INF/05" ;
-                        :descrizione "Fondamenti di calcolatori elettronici." ;
-                        :nome "Calcolatori Elettronici" .
-
-### http://www.semanticweb.org/ontology#fisica2
-:fisica2 rdf:type owl:NamedIndividual ,
-                  :Insegnamento ;
-         :CFU 6 ;
-         :annoDiCorso 1 ;
-         :codice "FIS/01" ;
-         :descrizione "Approfondimenti di fisica." ;
-         :nome "Fisica 2" .
-
-### http://www.semanticweb.org/ontology#geometriaAlgebraELogica
-:geometriaAlgebraELogica rdf:type owl:NamedIndividual ,
-                                  :Insegnamento ;
-                         :CFU 9 ;
-                         :annoDiCorso 1 ;
-                         :codice "MAT/03" ;
-                         :descrizione "Fondamenti di geometria, algebra e logica." ;
-                         :nome "Geometria, Algebra e Logica" .
-
-
-### http://www.semanticweb.org/ontology#algoritmiEStruttureDati
-:algoritmiEStruttureDati rdf:type owl:NamedIndividual ,
-                                  :Insegnamento ;
-                         :CFU 9 ;
-                         :annoDiCorso 2 ;
-                         :codice "ING-INF/05" ;
-                         :descrizione "Algoritmi e strutture dati." ;
-                         :nome "Algoritmi e Strutture Dati" .
-
-### http://www.semanticweb.org/ontology#analisiDeiSegnali
-:analisiDeiSegnali rdf:type owl:NamedIndividual ,
-                            :Insegnamento ;
-                   :CFU 9 ;
-                   :annoDiCorso 2 ;
-                   :codice "ING-INF/03" ;
-                   :descrizione "Analisi dei segnali." ;
-                   :nome "Analisi dei Segnali" .
-
-### http://www.semanticweb.org/ontology#elettrotecnica
-:elettrotecnica rdf:type owl:NamedIndividual ,
-                         :Insegnamento ;
-                :CFU 9 ;
-                :annoDiCorso 2 ;
-                :codice "ING-IND/31" ;
-                :descrizione "Fondamenti di elettrotecnica." ;
-                :nome "Elettrotecnica" .
-
-
-### http://www.semanticweb.org/ontology#circuitiESistemiDigitali
-:circuitiESistemiDigitali rdf:type owl:NamedIndividual ,
-                                   :Insegnamento ;
-                          :CFU 6 ;
-                          :annoDiCorso 2 ;
-                          :codice "ING-INF/01" ;
-                          :descrizione "Circuiti e sistemi digitali." ;
-                          :nome "Circuiti e Sistemi Digitali" .
-
-### http://www.semanticweb.org/ontology#controlliAutomatici
-:controlliAutomatici rdf:type owl:NamedIndividual ,
-                              :Insegnamento ;
-                     :CFU 9 ;
-                     :annoDiCorso 2 ;
-                     :codice "ING-INF/04" ;
-                     :descrizione "Controlli automatici." ;
-                     :nome "Controlli Automatici" .
-
-### http://www.semanticweb.org/ontology#retiDiCalcolatori
-:retiDiCalcolatori rdf:type owl:NamedIndividual ,
-                            :Insegnamento ;
-                   :CFU 9 ;
-                   :annoDiCorso 2 ;
-                   :codice "INF/01" ;
-                   :descrizione "Reti di calcolatori." ;
-                   :nome "Reti di Calcolatori" .
-
-### http://www.semanticweb.org/ontology#sistemiOperativi
-:sistemiOperativi rdf:type owl:NamedIndividual ,
-                           :Insegnamento ;
-                  :CFU 6 ;
-                  :annoDiCorso 2 ;
-                  :codice "ING-INF/05" ;
-                  :descrizione "Sistemi operativi." ;
-                  :nome "Sistemi Operativi" .
-
-### http://www.semanticweb.org/ontology#inglese
-:inglese rdf:type owl:NamedIndividual ,
-                  :Insegnamento ;
-         :CFU 3 ;
-         :annoDiCorso 2 ;
-         :codice "-" ;
-         :descrizione "Conoscenza della lingua inglese." ;
-         :nome "Inglese" .
-
-
-### http://www.semanticweb.org/ontology#basiDiDati
-:basiDiDati rdf:type owl:NamedIndividual ,
-                     :Insegnamento ;
-            :CFU 9 ;
-            :annoDiCorso 3 ;
-            :codice "ING-INF/05" ;
-            :descrizione "Basi di dati." ;
-            :nome "Basi di Dati" .
-
-### http://www.semanticweb.org/ontology#ingegneriaDelSoftware
-:ingegneriaDelSoftware rdf:type owl:NamedIndividual ,
-                                :Insegnamento ;
-                       :CFU 9 ;
-                       :annoDiCorso 3 ;
-                       :codice "ING-INF/05" ;
-                       :descrizione "Principi e metodologie dell'ingegneria del software." ;
-                       :nome "Ingegneria del Software" .
-
-### http://www.semanticweb.org/ontology#programmazioneAdOggetti
-:programmazioneAdOggetti rdf:type owl:NamedIndividual ,
-                                  :Insegnamento ;
-                         :CFU 9 ;
-                         :annoDiCorso 3 ;
-                         :codice "ING-INF/05" ;
-                         :descrizione "Programmazione ad oggetti." ;
-                         :nome "Programmazione ad Oggetti" .
-
-
-### http://www.semanticweb.org/ontology#5GNetworks
-:5GNetworks rdf:type owl:NamedIndividual ,
-                     :Insegnamento ;
-            :CFU 9 ;
-            :annoDiCorso 3 ;
-            :codice "ING-INF/03" ;
-            :descrizione "Reti 5G." ;
-            :nome "5G Networks" .
-
-### http://www.semanticweb.org/ontology#networkManagementAndSecurity
-:networkManagementAndSecurity rdf:type owl:NamedIndividual ,
-                                       :Insegnamento ;
-                              :CFU 6 ;
-                              :annoDiCorso 3 ;
-                              :codice "ING-INF/05" ;
-                              :descrizione "Gestione e sicurezza delle reti." ;
-                              :nome "Network Management and Security" .
-
-### http://www.semanticweb.org/ontology#tecnologieWeb
-:tecnologieWeb rdf:type owl:NamedIndividual ,
-                        :Insegnamento ;
-               :CFU 9 ;
-               :annoDiCorso 3 ;
-               :codice "ING-INF/05" ;
-               :descrizione "Tecnologie web." ;
-               :nome "Tecnologie Web" .
-
-
-### http://www.semanticweb.org/ontology#mobileProgramming
-:mobileProgramming rdf:type owl:NamedIndividual ,
-                            :Insegnamento ;
-                   :CFU 6 ;
-                   :annoDiCorso 3 ;
-                   :codice "INF/01" ;
-                   :descrizione "Programmazione mobile." ;
-                   :nome "Mobile Programming" .
-
-### http://www.semanticweb.org/ontology#internetOfThings
-:internetOfThings rdf:type owl:NamedIndividual ,
-                           :Insegnamento ;
-                  :CFU 9 ;
-                  :annoDiCorso 3 ;
-                  :codice "ING-INF/05" ;
-                  :descrizione "Internet delle cose." ;
-                  :nome "Internet of Things" .
-
-
-### http://www.semanticweb.org/ontology#tecnologieInformaticheDeiSistemiDiControllo
-:tecnologieInformaticheDeiSistemiDiControllo rdf:type owl:NamedIndividual ,
-                                                      :Insegnamento ;
-                                             :CFU 6 ;
-                                             :annoDiCorso 3 ;
-                                             :codice "ING-INF/04" ;
-                                             :descrizione "Tecnologie informatiche dei sistemi di controllo." ;
-                                             :nome "Tecnologie Informatiche dei Sistemi di Controllo" .
-
-
-
 ###  http://www.semanticweb.org/ontology#universitaSalerno
 :universitaSalerno rdf:type owl:NamedIndividual ,
                             :Università ;
                    :comprende :informatica ;
                    :ubicazione "Fisciano, Salerno, Italia" ;
                    :nome "Università degli Studi di Salerno" .
+
+
+###  http://www.semanticweb.org/ontology#5GNetworks
+<http://www.semanticweb.org/ontology#5GNetworks> rdf:type owl:NamedIndividual ,
+                                                          :Insegnamento ;
+                                                 :CFU 9 ;
+                                                 :annoDiCorso 3 ;
+                                                 :codice "ING-INF/03" ;
+                                                 :descrizione "Reti 5G." ;
+                                                 :nome "5G Networks" .
 
 
 [ owl:minCardinality "1"^^xsd:nonNegativeInteger
