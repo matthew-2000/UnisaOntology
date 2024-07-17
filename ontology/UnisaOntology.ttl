@@ -61,6 +61,13 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 #    Object Properties
 #################################################################
 
+###  http://www.co-ode.org/ontologies/ont.owl#èCompreso
+<http://www.co-ode.org/ontologies/ont.owl#èCompreso> rdf:type owl:ObjectProperty ;
+                                                     owl:inverseOf :comprendeInsegnamento ;
+                                                     rdfs:domain :Insegnamento ;
+                                                     rdfs:range :CorsoDiStudio .
+
+
 ###  http://www.semanticweb.org/ontology#comprende
 :comprende rdf:type owl:ObjectProperty ;
            rdfs:domain :Università ;
@@ -80,7 +87,11 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 ###  http://www.semanticweb.org/ontology#legatoA
 :legatoA rdf:type owl:ObjectProperty ;
          rdfs:domain :Interesse ;
-         rdfs:range :Insegnamento ;
+         rdfs:range [ rdf:type owl:Class ;
+                      owl:unionOf ( :CorsoDiStudio
+                                    :Insegnamento
+                                  )
+                    ] ;
          rdfs:comment "Relazione che collega un Interesse a un Corso di Studio correlato." ;
          rdfs:label "legatoA" .
 
@@ -212,6 +223,7 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 
 ###  http://www.semanticweb.org/ontology#CorsoDiStudio
 :CorsoDiStudio rdf:type owl:Class ;
+               owl:disjointWith :Insegnamento ;
                rdfs:comment "Classe che rappresenta un Corso di Studio offerto dall'Università." ;
                rdfs:label "CorsoDiStudio" .
 
@@ -230,11 +242,6 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 
 ###  http://www.semanticweb.org/ontology#Interesse
 :Interesse rdf:type owl:Class ;
-           rdfs:subClassOf [ rdf:type owl:Restriction ;
-                             owl:onProperty :legatoA ;
-                             owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                             owl:onClass :Insegnamento
-                           ] ;
            rdfs:comment "Classe che rappresenta un Interesse accademico di un Futuro Studente." ;
            rdfs:label "Interesse" .
 
@@ -254,6 +261,12 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 #################################################################
 #    Individuals
 #################################################################
+
+###  http://www.semanticweb.org/ontology#affidabilitaSistemi
+:affidabilitaSistemi rdf:type owl:NamedIndividual ,
+                              :Insegnamento ;
+                     :nome "Affidabilità dei Sistemi" .
+
 
 ###  http://www.semanticweb.org/ontology#analisiMatematica
 :analisiMatematica rdf:type owl:NamedIndividual ,
@@ -285,6 +298,12 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
             :nome "Basi di Dati" .
 
 
+###  http://www.semanticweb.org/ontology#basiDiDatiII
+:basiDiDatiII rdf:type owl:NamedIndividual ,
+                       :Insegnamento ;
+              :nome "Basi di Dati II" .
+
+
 ###  http://www.semanticweb.org/ontology#calcoloDelleProbabilitaEStatisticaMatematica
 :calcoloDelleProbabilitaEStatisticaMatematica rdf:type owl:NamedIndividual ,
                                                        :Insegnamento ;
@@ -305,6 +324,29 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                     :nome "Calcolo Scientifico" .
 
 
+###  http://www.semanticweb.org/ontology#cloudComputing
+:cloudComputing rdf:type owl:NamedIndividual ,
+                         :Insegnamento ;
+                :nome "Cloud Computing" .
+
+
+###  http://www.semanticweb.org/ontology#compilatori
+:compilatori rdf:type owl:NamedIndividual ,
+                      :Insegnamento ;
+             :legatoA :corsoLaureaMagistraleInformatica ;
+             :nome "Compilatori" .
+
+
+###  http://www.semanticweb.org/ontology#corsoLaureaMagistraleInformatica
+:corsoLaureaMagistraleInformatica rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/ontology#didatticaInformatica
+:didatticaInformatica rdf:type owl:NamedIndividual ,
+                               :Insegnamento ;
+                      :nome "Didattica dell’Informatica" .
+
+
 ###  http://www.semanticweb.org/ontology#elementiDiTeoriaDellaComputazione
 :elementiDiTeoriaDellaComputazione rdf:type owl:NamedIndividual ,
                                             :Insegnamento ;
@@ -315,6 +357,18 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                                    :nome "Elementi di Teoria della Computazione" .
 
 
+###  http://www.semanticweb.org/ontology#embeddedSystems
+:embeddedSystems rdf:type owl:NamedIndividual ,
+                          :Insegnamento ;
+                 :nome "Embedded Systems" .
+
+
+###  http://www.semanticweb.org/ontology#enterpriseMobileApplicationDevelopment
+:enterpriseMobileApplicationDevelopment rdf:type owl:NamedIndividual ,
+                                                 :Insegnamento ;
+                                        :nome "Enterprise Mobile Application Development" .
+
+
 ###  http://www.semanticweb.org/ontology#fisica
 :fisica rdf:type owl:NamedIndividual ,
                  :Insegnamento ;
@@ -323,6 +377,24 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
         :codice "FIS101" ;
         :descrizione "Fondamenti di fisica." ;
         :nome "Fisica" .
+
+
+###  http://www.semanticweb.org/ontology#fondamentiDataScienceMachineLearning
+:fondamentiDataScienceMachineLearning rdf:type owl:NamedIndividual ,
+                                               :Insegnamento ;
+                                      :nome "Fondamenti di Data Science e Machine Learning" .
+
+
+###  http://www.semanticweb.org/ontology#geographicalInformationSystems
+:geographicalInformationSystems rdf:type owl:NamedIndividual ,
+                                         :Insegnamento ;
+                                :nome "Geographical Information Systems" .
+
+
+###  http://www.semanticweb.org/ontology#gestioneProgettiSoftware
+:gestioneProgettiSoftware rdf:type owl:NamedIndividual ,
+                                   :Insegnamento ;
+                          :nome "Gestione dei Progetti Software" .
 
 
 ###  http://www.semanticweb.org/ontology#graficaEdInterattivita
@@ -356,6 +428,12 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                        :nome "Ingegneria del Software" .
 
 
+###  http://www.semanticweb.org/ontology#ingegneriaGestioneEvoluzioneSoftware
+:ingegneriaGestioneEvoluzioneSoftware rdf:type owl:NamedIndividual ,
+                                               :Insegnamento ;
+                                      :nome "Ingegneria, Gestione ed Evoluzione del Software" .
+
+
 ###  http://www.semanticweb.org/ontology#inglese
 :inglese rdf:type owl:NamedIndividual ,
                   :Insegnamento ;
@@ -364,6 +442,12 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
          :codice "LIN203" ;
          :descrizione "Insegnamento della lingua inglese per scopi specifici." ;
          :nome "Inglese" .
+
+
+###  http://www.semanticweb.org/ontology#intelligentWeb
+:intelligentWeb rdf:type owl:NamedIndividual ,
+                         :Insegnamento ;
+                :nome "Intelligent Web" .
 
 
 ###  http://www.semanticweb.org/ontology#intelligenzaArtificiale
@@ -386,9 +470,147 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                          :nome "Interazione Uomo-Macchina" .
 
 
+###  http://www.semanticweb.org/ontology#interazioneUomoMacchinaUsabilitaSoftware
+:interazioneUomoMacchinaUsabilitaSoftware rdf:type owl:NamedIndividual ,
+                                                   :Insegnamento ;
+                                          :nome "Interazione Uomo-Macchina e Usabilità del Software" .
+
+
+###  http://www.semanticweb.org/ontology#interesseDataScienceAI
+:interesseDataScienceAI rdf:type owl:NamedIndividual ,
+                                 :Interesse ;
+                        :legatoA :fondamentiDataScienceMachineLearning ,
+                                 :intelligenzaArtificiale ,
+                                 :naturalLanguageProcessing ,
+                                 :softwareEngineeringAI ;
+                        :nome "Interesse in Data Science e Intelligenza Artificiale" .
+
+
+###  http://www.semanticweb.org/ontology#interesseInAI
+:interesseInAI rdf:type owl:NamedIndividual ,
+                        :Interesse ;
+               :legatoA :intelligenzaArtificiale ;
+               :nome "Interesse in Intelligenza Artificiale e Machine Learning" .
+
+
+###  http://www.semanticweb.org/ontology#interesseInCybersecurity
+:interesseInCybersecurity rdf:type owl:NamedIndividual ,
+                                   :Interesse ;
+                          :legatoA :retiDiCalcolatori ,
+                                   :sicurezza ;
+                          :nome "Interesse in Sicurezza informatica" .
+
+
+###  http://www.semanticweb.org/ontology#interesseInDataScience
+:interesseInDataScience rdf:type owl:NamedIndividual ,
+                                 :Interesse ;
+                        :legatoA :analisiMatematica ,
+                                 :calcoloDelleProbabilitaEStatisticaMatematica ;
+                        :nome "Interesse in Data Science" .
+
+
+###  http://www.semanticweb.org/ontology#interesseInFisica
+:interesseInFisica rdf:type owl:NamedIndividual ,
+                            :Interesse ;
+                   :legatoA :fisica ;
+                   :nome "Interesse in Fisica" .
+
+
+###  http://www.semanticweb.org/ontology#interesseInMobileDevelopment
+:interesseInMobileDevelopment rdf:type owl:NamedIndividual ,
+                                       :Interesse ;
+                              :legatoA :mobileProgramming ;
+                              :nome "Interesse in Mobile Development" .
+
+
+###  http://www.semanticweb.org/ontology#interesseInSviluppoSoftware
+:interesseInSviluppoSoftware rdf:type owl:NamedIndividual ,
+                                      :Interesse ;
+                             :legatoA :ingegneriaDelSoftware ,
+                                      :mobileProgramming ,
+                                      :programmazioneI ,
+                                      :programmazioneStruttureDati ;
+                             :nome "Interesse in Sviluppo Software" .
+
+
+###  http://www.semanticweb.org/ontology#interesseInTecnologieWeb
+:interesseInTecnologieWeb rdf:type owl:NamedIndividual ,
+                                   :Interesse ;
+                          :legatoA :tecnologieSoftwarePerIlWeb ;
+                          :nome "Interesse in Tecnologie e Applicazioni Web" .
+
+
+###  http://www.semanticweb.org/ontology#interesseInUsabilita
+:interesseInUsabilita rdf:type owl:NamedIndividual ,
+                               :Interesse ;
+                      :legatoA :interazioneUomoMacchina ;
+                      :nome "Interesse in Interfacciamento e Usabilità" .
+
+
+###  http://www.semanticweb.org/ontology#interesseSicurezzaAffidabilitaSoftware
+:interesseSicurezzaAffidabilitaSoftware rdf:type owl:NamedIndividual ,
+                                                 :Interesse ;
+                                        :legatoA :penetrationTestingEthicalHacking ,
+                                                 :programmazioneSicura ,
+                                                 :sicurezzaDeiDati ,
+                                                 :softwareDependability ;
+                                        :nome "Interesse in Sicurezza e Affidabilità del Software" .
+
+
+###  http://www.semanticweb.org/ontology#interesseSistemiTecnologieEmergenti
+:interesseSistemiTecnologieEmergenti rdf:type owl:NamedIndividual ,
+                                              :Interesse ;
+                                     :legatoA :cloudComputing ,
+                                              :embeddedSystems ,
+                                              :geographicalInformationSystems ;
+                                     :nome "Interesse in Sistemi e Tecnologie Emergenti" .
+
+
+###  http://www.semanticweb.org/ontology#interesseSviluppoSoftwareTecnologieWeb
+:interesseSviluppoSoftwareTecnologieWeb rdf:type owl:NamedIndividual ,
+                                                 :Interesse ;
+                                        :legatoA :enterpriseMobileApplicationDevelopment ,
+                                                 :ingegneriaGestioneEvoluzioneSoftware ,
+                                                 :intelligentWeb ,
+                                                 :internetOfThings ;
+                                        :nome "Interesse in Sviluppo Software e Tecnologie Web" .
+
+
+###  http://www.semanticweb.org/ontology#internetOfThings
+:internetOfThings rdf:type owl:NamedIndividual ,
+                           :Insegnamento ;
+                  :nome "Internet of Things" .
+
+
 ###  http://www.semanticweb.org/ontology#laureaMagistraleInformatica
 :laureaMagistraleInformatica rdf:type owl:NamedIndividual ,
                                       :CorsoDiLaureaMagistrale ;
+                             :comprendeInsegnamento :affidabilitaSistemi ,
+                                                    :basiDiDatiII ,
+                                                    :cloudComputing ,
+                                                    :compilatori ,
+                                                    :didatticaInformatica ,
+                                                    :embeddedSystems ,
+                                                    :enterpriseMobileApplicationDevelopment ,
+                                                    :fondamentiDataScienceMachineLearning ,
+                                                    :geographicalInformationSystems ,
+                                                    :gestioneProgettiSoftware ,
+                                                    :ingegneriaGestioneEvoluzioneSoftware ,
+                                                    :intelligentWeb ,
+                                                    :intelligenzaArtificiale ,
+                                                    :interazioneUomoMacchinaUsabilitaSoftware ,
+                                                    :internetOfThings ,
+                                                    :metodiOttimizzazione ,
+                                                    :metricheQualitaSoftware ,
+                                                    :naturalLanguageProcessing ,
+                                                    :penetrationTestingEthicalHacking ,
+                                                    :programmazioneConcorrenteParallelaCloud ,
+                                                    :programmazioneSicura ,
+                                                    :sicurezzaDeiDati ,
+                                                    :softwareDependability ,
+                                                    :softwareEngineeringAI ,
+                                                    :statisticaAnalisiDati ,
+                                                    :tecnicheAutomaticheCorrettezzaSoftware ;
                              :offreOpportunità :opportunitàSviluppatoreWeb ;
                              <http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> 120 ;
                              :codice "LMINFO" ;
@@ -459,6 +681,18 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                                  :nome "Metodi Matematici per l'Informatica" .
 
 
+###  http://www.semanticweb.org/ontology#metodiOttimizzazione
+:metodiOttimizzazione rdf:type owl:NamedIndividual ,
+                               :Insegnamento ;
+                      :nome "Metodi di Ottimizzazione" .
+
+
+###  http://www.semanticweb.org/ontology#metricheQualitaSoftware
+:metricheQualitaSoftware rdf:type owl:NamedIndividual ,
+                                  :Insegnamento ;
+                         :nome "Metriche e Qualità del Software" .
+
+
 ###  http://www.semanticweb.org/ontology#mobileProgramming
 :mobileProgramming rdf:type owl:NamedIndividual ,
                             :Insegnamento ;
@@ -469,12 +703,24 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                    :nome "Mobile Programming" .
 
 
+###  http://www.semanticweb.org/ontology#naturalLanguageProcessing
+:naturalLanguageProcessing rdf:type owl:NamedIndividual ,
+                                    :Insegnamento ;
+                           :nome "Natural Language Processing" .
+
+
 ###  http://www.semanticweb.org/ontology#opportunitàSviluppatoreWeb
 :opportunitàSviluppatoreWeb rdf:type owl:NamedIndividual ,
                                      :OpportunitàDiCarriera ;
                             :descrizione "Opportunità di carriera come sviluppatore web frontend o backend." ;
                             :nome "Opportunità di Sviluppatore Web" ;
                             :settore "Informatica" .
+
+
+###  http://www.semanticweb.org/ontology#penetrationTestingEthicalHacking
+:penetrationTestingEthicalHacking rdf:type owl:NamedIndividual ,
+                                           :Insegnamento ;
+                                  :nome "Penetration Testing and Ethical Hacking" .
 
 
 ###  http://www.semanticweb.org/ontology#progettazioneDiAlgoritmi
@@ -495,6 +741,12 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                         :codice "INF312" ;
                         :descrizione "Tecniche avanzate di programmazione." ;
                         :nome "Programmazione Avanzata" .
+
+
+###  http://www.semanticweb.org/ontology#programmazioneConcorrenteParallelaCloud
+:programmazioneConcorrenteParallelaCloud rdf:type owl:NamedIndividual ,
+                                                  :Insegnamento ;
+                                         :nome "Programmazione Concorrente, Parallela e su Cloud" .
 
 
 ###  http://www.semanticweb.org/ontology#programmazioneDistribuita
@@ -525,6 +777,12 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                   :codice "INF205" ;
                   :descrizione "Programmazione orientata agli oggetti." ;
                   :nome "Programmazione OO" .
+
+
+###  http://www.semanticweb.org/ontology#programmazioneSicura
+:programmazioneSicura rdf:type owl:NamedIndividual ,
+                               :Insegnamento ;
+                      :nome "Programmazione Sicura" .
 
 
 ###  http://www.semanticweb.org/ontology#programmazioneStruttureDati
@@ -577,6 +835,12 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
            :nome "Sicurezza" .
 
 
+###  http://www.semanticweb.org/ontology#sicurezzaDeiDati
+:sicurezzaDeiDati rdf:type owl:NamedIndividual ,
+                           :Insegnamento ;
+                  :nome "Sicurezza dei Dati" .
+
+
 ###  http://www.semanticweb.org/ontology#simulazione
 :simulazione rdf:type owl:NamedIndividual ,
                       :Insegnamento ;
@@ -597,11 +861,28 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                   :nome "Sistemi Operativi" .
 
 
-###  http://www.semanticweb.org/ontology#softwareEngineering
-:softwareEngineering rdf:type owl:NamedIndividual ,
-                              :Interesse ;
-                     :legatoA :ingegneriaDelSoftware ;
-                     :nome "Ingegneria del Software" .
+###  http://www.semanticweb.org/ontology#softwareDependability
+:softwareDependability rdf:type owl:NamedIndividual ,
+                                :Insegnamento ;
+                       :nome "Software Dependability" .
+
+
+###  http://www.semanticweb.org/ontology#softwareEngineeringAI
+:softwareEngineeringAI rdf:type owl:NamedIndividual ,
+                                :Insegnamento ;
+                       :nome "Software Engineering for Artificial Intelligence" .
+
+
+###  http://www.semanticweb.org/ontology#statisticaAnalisiDati
+:statisticaAnalisiDati rdf:type owl:NamedIndividual ,
+                                :Insegnamento ;
+                       :nome "Statistica e Analisi dei Dati" .
+
+
+###  http://www.semanticweb.org/ontology#tecnicheAutomaticheCorrettezzaSoftware
+:tecnicheAutomaticheCorrettezzaSoftware rdf:type owl:NamedIndividual ,
+                                                 :Insegnamento ;
+                                        :nome "Tecniche Automatiche per la Correttezza del Software" .
 
 
 ###  http://www.semanticweb.org/ontology#tecnologieSoftwarePerIlWeb
