@@ -1,287 +1,550 @@
 @prefix : <http://www.semanticweb.org/ontology#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/ontology#> .
 
-### Classi ###
+[ rdf:type owl:Ontology
+ ] .
 
-### Definizione delle classi principali ###
-### Università ###
-<http://www.semanticweb.org/ontology#Università>
-  rdf:type owl:Class ;
-  rdfs:comment "Classe che rappresenta un'Università." ;
-  rdfs:label "Università" .
+#################################################################
+#    Annotation properties
+#################################################################
 
-### Dipartimento ###
-<http://www.semanticweb.org/ontology#Dipartimento>
-  rdf:type owl:Class ;
-  rdfs:comment "Classe che rappresenta un Dipartimento all'interno dell'Università." ;
-  rdfs:label "Dipartimento" .
-
-### Corso di Studio ###
-<http://www.semanticweb.org/ontology#CorsoDiStudio>
-  rdf:type owl:Class ;
-  rdfs:comment "Classe che rappresenta un Corso di Studio offerto dall'Università." ;
-  rdfs:label "CorsoDiStudio" .
-
-### Corso di Laurea Triennale ###
-<http://www.semanticweb.org/ontology#CorsoDiLaureaTriennale>
-  rdf:type owl:Class ;
-  rdfs:comment "Sottoclasse di CorsoDiStudio, rappresenta un Corso di Laurea Triennale." ;
-  rdfs:label "CorsoDiLaureaTriennale" ;
-  rdfs:subClassOf <http://www.semanticweb.org/ontology#CorsoDiStudio> .
-
-### Corso di Laurea Magistrale ###
-<http://www.semanticweb.org/ontology#CorsoDiLaureaMagistrale>
-  rdf:type owl:Class ;
-  rdfs:comment "Sottoclasse di CorsoDiStudio, rappresenta un Corso di Laurea Magistrale." ;
-  rdfs:label "CorsoDiLaureaMagistrale" ;
-  rdfs:subClassOf <http://www.semanticweb.org/ontology#CorsoDiStudio> .
-
-### Insegnamento ###
-<http://www.semanticweb.org/ontology#Insegnamento>
-  rdf:type owl:Class ;
-  rdfs:comment "Classe che rappresenta un Insegnamento all'interno di un Corso di Studio." ;
-  rdfs:label "Insegnamento" .
-
-### Docente ###
-<http://www.semanticweb.org/ontology#Docente>
-  rdf:type owl:Class ;
-  rdfs:comment "Classe che rappresenta un Docente dell'Università." ;
-  rdfs:label "Docente" .
-
-### Opportunità di Carriera ###
-<http://www.semanticweb.org/ontology#OpportunitàDiCarriera>
-  rdf:type owl:Class ;
-  rdfs:comment "Classe che rappresenta un'Opportunità di Carriera associata a un Corso di Studio." ;
-  rdfs:label "OpportunitàDiCarriera" .
-
-### Futuro Studente ###
-<http://www.semanticweb.org/ontology#FuturoStudente>
-  rdf:type owl:Class ;
-  rdfs:comment "Classe che rappresenta un potenziale Futuro Studente dell'Università." ;
-  rdfs:label "FuturoStudente" .
-
-### Interesse ###
-<http://www.semanticweb.org/ontology#Interesse>
-  rdf:type owl:Class ;
-  rdfs:comment "Classe che rappresenta un Interesse accademico di un Futuro Studente." ;
-  rdfs:label "Interesse" .
-
-### Proprietà ###
-
-### Proprietà degli oggetti ###
-
-### Comprende (Università → Dipartimento) ###
-<http://www.semanticweb.org/ontology#comprende>
-  rdf:type owl:ObjectProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#Università> ;
-  rdfs:range <http://www.semanticweb.org/ontology#Dipartimento> ;
-  rdfs:comment "Relazione che collega un'Università ai suoi Dipartimenti." ;
-  rdfs:label "comprende" .
-
-### Propone (Dipartimento → CorsoDiStudio) ###
-<http://www.semanticweb.org/ontology#propone>
-  rdf:type owl:ObjectProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#Dipartimento> ;
-  rdfs:range <http://www.semanticweb.org/ontology#CorsoDiStudio> ;
-  rdfs:comment "Relazione che collega un Dipartimento ai Corsi di Studio che propone." ;
-  rdfs:label "propone" .
-
-### Comprende (CorsoDiStudio → Insegnamento) ###
-<http://www.semanticweb.org/ontology#comprendeInsegnamento>
-  rdf:type owl:ObjectProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#CorsoDiStudio> ;
-  rdfs:range <http://www.semanticweb.org/ontology#Insegnamento> ;
-  rdfs:comment "Relazione che collega un Corso di Studio agli Insegnamenti che comprende." ;
-  rdfs:label "comprendeInsegnamento" .
-
-### TenutoDa (Insegnamento → Docente) ###
-<http://www.semanticweb.org/ontology#tenutoDa>
-  rdf:type owl:ObjectProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#Insegnamento> ;
-  rdfs:range <http://www.semanticweb.org/ontology#Docente> ;
-  rdfs:comment "Relazione che collega un Insegnamento al Docente che lo tiene." ;
-  rdfs:label "tenutoDa" .
-
-### OffreOpportunità (CorsoDiStudio → OpportunitàDiCarriera) ###
-<http://www.semanticweb.org/ontology#offreOpportunità>
-  rdf:type owl:ObjectProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#CorsoDiStudio> ;
-  rdfs:range <http://www.semanticweb.org/ontology#OpportunitàDiCarriera> ;
-  rdfs:comment "Relazione che collega un Corso di Studio alle Opportunità di Carriera offerte." ;
-  rdfs:label "offreOpportunità" .
-
-### HaInteresse (FuturoStudente → Interesse) ###
-<http://www.semanticweb.org/ontology#haInteresse>
-  rdf:type owl:ObjectProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#FuturoStudente> ;
-  rdfs:range <http://www.semanticweb.org/ontology#Interesse> ;
-  rdfs:comment "Relazione che collega un Futuro Studente ai suoi Interessi accademici." ;
-  rdfs:label "haInteresse" .
-
-### LegatoA (Interesse → CorsoDiStudio) ###
-<http://www.semanticweb.org/ontology#legatoA>
-  rdf:type owl:ObjectProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#Interesse> ;
-  rdfs:range <http://www.semanticweb.org/ontology#CorsoDiStudio> ;
-  rdfs:comment "Relazione che collega un Interesse a un Corso di Studio correlato." ;
-  rdfs:label "legatoA" .
-
-### IscrittoA (Studente → CorsoDiStudio) ###
-<http://www.semanticweb.org/ontology#iscrittoA>
-  rdf:type owl:ObjectProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#Studente> ;
-  rdfs:range <http://www.semanticweb.org/ontology#CorsoDiStudio> ;
-  rdfs:comment "Relazione che collega uno Studente al Corso di Studio a cui è iscritto." ;
-  rdfs:label "iscrittoA" .
+###  http://www.semanticweb.org/ontology#annoDiCorso
+:annoDiCorso rdf:type owl:AnnotationProperty .
 
 
-### Proprietà dei dati ###
-
-### Proprietà dei dati per Università ###
-<http://www.semanticweb.org/ontology#nomeUniversità>
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#Università> ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Nome dell'Università." ;
-  rdfs:label "nomeUniversità" .
-
-<http://www.semanticweb.org/ontology#ubicazione>
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#Università> ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Ubicazione dell'Università." ;
-  rdfs:label "ubicazione" .
+###  http://www.semanticweb.org/ontology#codice
+:codice rdf:type owl:AnnotationProperty .
 
 
-### Proprietà dei dati per Dipartimento ###
-<http://www.semanticweb.org/ontology#nomeDipartimento>
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#Dipartimento> ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Nome del Dipartimento." ;
-  rdfs:label "nomeDipartimento" .
-
-<http://www.semanticweb.org/ontology#codiceDipartimento>
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#Dipartimento> ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Codice identificativo del Dipartimento." ;
-  rdfs:label "codiceDipartimento" .
+###  http://www.semanticweb.org/ontology#cognome
+:cognome rdf:type owl:AnnotationProperty .
 
 
-### Proprietà dei dati per Corso di Studio ###
-<http://www.semanticweb.org/ontology#nomeCorsoDiStudio>
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#CorsoDiStudio> ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Nome del Corso di Studio." ;
-  rdfs:label "nomeCorsoDiStudio" .
-
-<http://www.semanticweb.org/ontology#CFU>
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#CorsoDiStudio> ;
-  rdfs:range xsd:int ;
-  rdfs:comment "Numero di Crediti Formativi Universitari (CFU) del Corso di Studio." ;
-  rdfs:label "CFU" .
+###  http://www.semanticweb.org/ontology#descrizione
+:descrizione rdf:type owl:AnnotationProperty .
 
 
-### Proprietà dei dati per Insegnamento ###
-<http://www.semanticweb.org/ontology#nomeInsegnamento>
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#Insegnamento> ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Nome dell'Insegnamento." ;
-  rdfs:label "nomeInsegnamento" .
+###  http://www.semanticweb.org/ontology#durata
+:durata rdf:type owl:AnnotationProperty .
 
 
-### Proprietà dei dati per Docente ###
-<http://www.semanticweb.org/ontology#nomeDocente>
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#Docente> ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Nome del Docente." ;
-  rdfs:label "nomeDocente" .
+###  http://www.semanticweb.org/ontology#edificio
+:edificio rdf:type owl:AnnotationProperty .
 
 
-### Proprietà dei dati per Opportunità di Carriera ###
-<http://www.semanticweb.org/ontology#descrizioneOpportunità>
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#OpportunitàDiCarriera> ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Descrizione dell'Opportunità di Carriera." ;
-  rdfs:label "descrizioneOpportunità" .
+###  http://www.semanticweb.org/ontology#email
+:email rdf:type owl:AnnotationProperty .
 
 
-### Proprietà dei dati per Futuro Studente ###
-<http://www.semanticweb.org/ontology#nomeFuturoStudente>
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#FuturoStudente> ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Nome del Futuro Studente." ;
-  rdfs:label "nomeFuturoStudente" .
+###  http://www.semanticweb.org/ontology#nome
+:nome rdf:type owl:AnnotationProperty .
 
 
-### Proprietà dei dati per Interesse ###
-<http://www.semanticweb.org/ontology#nomeInteresse>
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain <http://www.semanticweb.org/ontology#Interesse> ;
-  rdfs:range xsd:string ;
-  rdfs:comment "Nome dell'Interesse accademico." ;
-  rdfs:label "nomeInteresse" .
-
-### Vincoli ###
-
-### Vincolo 1: Ogni Università ha almeno un Dipartimento ###
-:Università rdf:type owl:Restriction ;
-            owl:onProperty :comprende ;
-            owl:someValuesFrom :Dipartimento .
-
-### Vincolo 2: Ogni Dipartimento propone almeno un Corso di Studio ###
-:Dipartimento rdf:type owl:Restriction ;
-              owl:onProperty :propone ;
-              owl:someValuesFrom :CorsoDiStudio .
-
-### Vincolo 3: Ogni Corso di Studio comprende almeno un Insegnamento ###
-:CorsoDiStudio rdf:type owl:Restriction ;
-               owl:onProperty :comprendeInsegnamento ;
-               owl:someValuesFrom :Insegnamento .
-
-### Vincolo 4: Ogni Insegnamento è tenuto da almeno un Docente ###
-:Insegnamento rdf:type owl:Restriction ;
-              owl:onProperty :tenutoDa ;
-              owl:someValuesFrom :Docente .
+###  http://www.semanticweb.org/ontology#settore
+:settore rdf:type owl:AnnotationProperty .
 
 
-### Vincolo 5: Ogni Docente tiene almeno un Insegnamento ###
-:Docente rdf:type owl:Restriction ;
-         owl:onProperty :tenutoDa ;
-         owl:minCardinality "1"^^xsd:nonNegativeInteger .
+###  http://www.semanticweb.org/ontology#sitoWeb
+:sitoWeb rdf:type owl:AnnotationProperty .
 
-### Vincolo 6: Ogni Corso di Studio ha un numero minimo di CFU ###
-:CorsoDiStudio rdf:type owl:Restriction ;
-               owl:onProperty :CFU ;
-               owl:minCardinality "120"^^xsd:int ;
-               owl:onClass xsd:int .
 
-### Vincolo 7: Ogni Studente è iscritto a un solo Corso di Studio alla volta ###
-:Studente rdf:type owl:Restriction ;
-          owl:onProperty :iscrittoA ;
-          owl:maxCardinality "1"^^xsd:nonNegativeInteger .
+###  http://www.w3.org/2002/07/owl#minCardinality
+owl:minCardinality rdf:type owl:AnnotationProperty .
 
-### Vincolo 8: Ogni Insegnamento deve essere parte di almeno un Corso di Studio ###
-:Insegnamento rdf:type owl:Restriction ;
-              owl:onProperty :comprendeInsegnamento ;
-              owl:minCardinality "1"^^xsd:nonNegativeInteger .
 
-### Vincolo 9: Ogni Futuro Studente ha almeno un Interesse accademico ###
-:FuturoStudente rdf:type owl:Restriction ;
-                owl:onProperty :haInteresse ;
-                owl:minCardinality "1"^^xsd:nonNegativeInteger .
+#################################################################
+#    Object Properties
+#################################################################
 
-### Vincolo 10: Ogni Interesse è collegato a almeno un Corso di Studio ###
-:Interesse rdf:type owl:Restriction ;
-           owl:onProperty :legatoA ;
-           owl:minCardinality "1"^^xsd:nonNegativeInteger .
+###  http://www.semanticweb.org/ontology#comprende
+:comprende rdf:type owl:ObjectProperty ;
+           rdfs:domain :Università ;
+           rdfs:range :Dipartimento ;
+           rdfs:comment "Relazione che collega un'Università ai suoi Dipartimenti." ;
+           rdfs:label "comprende" .
+
+
+###  http://www.semanticweb.org/ontology#comprendeInsegnamento
+:comprendeInsegnamento rdf:type owl:ObjectProperty ;
+                       rdfs:domain :CorsoDiStudio ;
+                       rdfs:range :Insegnamento ;
+                       rdfs:comment "Relazione che collega un Corso di Studio agli Insegnamenti che comprende." ;
+                       rdfs:label "comprendeInsegnamento" .
+
+
+###  http://www.semanticweb.org/ontology#legatoA
+:legatoA rdf:type owl:ObjectProperty ;
+         rdfs:domain :Interesse ;
+         rdfs:range :Insegnamento ;
+         rdfs:comment "Relazione che collega un Interesse a un Corso di Studio correlato." ;
+         rdfs:label "legatoA" .
+
+
+###  http://www.semanticweb.org/ontology#offreOpportunità
+:offreOpportunità rdf:type owl:ObjectProperty ;
+                  rdfs:domain :CorsoDiStudio ;
+                  rdfs:range :OpportunitàDiCarriera ;
+                  rdfs:comment "Relazione che collega un Corso di Studio alle Opportunità di Carriera offerte." ;
+                  rdfs:label "offreOpportunità" .
+
+
+###  http://www.semanticweb.org/ontology#propone
+:propone rdf:type owl:ObjectProperty ;
+         rdfs:domain :Dipartimento ;
+         rdfs:range :CorsoDiStudio ;
+         rdfs:comment "Relazione che collega un Dipartimento ai Corsi di Studio che propone." ;
+         rdfs:label "propone" .
+
+
+###  http://www.semanticweb.org/ontology#tenutoDa
+:tenutoDa rdf:type owl:ObjectProperty ;
+          rdfs:domain :Insegnamento ;
+          rdfs:range :Docente ;
+          rdfs:comment "Relazione che collega un Insegnamento al Docente che lo tiene." ;
+          rdfs:label "tenutoDa" .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio
+<http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> rdf:type owl:DatatypeProperty ;
+                                                            rdfs:domain :CorsoDiStudio ;
+                                                            rdfs:range xsd:int ;
+                                                            rdfs:comment "Numero di Crediti Formativi Universitari (CFU) del Corso di Studio." ;
+                                                            rdfs:label "CFUCorsoDiStudio" .
+
+
+###  http://www.semanticweb.org/ontology#CFU
+:CFU rdf:type owl:DatatypeProperty ;
+     rdfs:domain :Insegnamento ;
+     rdfs:range xsd:int ;
+     rdfs:comment "Numero di Crediti Formativi Universitari (CFU) del dell'Insegnamento" ;
+     rdfs:label "CFU" .
+
+
+###  http://www.semanticweb.org/ontology#codiceDipartimento
+:codiceDipartimento rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Dipartimento ;
+                    rdfs:range xsd:string ;
+                    rdfs:comment "Codice identificativo del Dipartimento." ;
+                    rdfs:label "codiceDipartimento" .
+
+
+###  http://www.semanticweb.org/ontology#descrizioneOpportunità
+:descrizioneOpportunità rdf:type owl:DatatypeProperty ;
+                        rdfs:domain :OpportunitàDiCarriera ;
+                        rdfs:range xsd:string ;
+                        rdfs:comment "Descrizione dell'Opportunità di Carriera." ;
+                        rdfs:label "descrizioneOpportunità" .
+
+
+###  http://www.semanticweb.org/ontology#nomeCorsoDiStudio
+:nomeCorsoDiStudio rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :CorsoDiStudio ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "Nome del Corso di Studio." ;
+                   rdfs:label "nomeCorsoDiStudio" .
+
+
+###  http://www.semanticweb.org/ontology#nomeDipartimento
+:nomeDipartimento rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Dipartimento ;
+                  rdfs:range xsd:string ;
+                  rdfs:comment "Nome del Dipartimento." ;
+                  rdfs:label "nomeDipartimento" .
+
+
+###  http://www.semanticweb.org/ontology#nomeDocente
+:nomeDocente rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Docente ;
+             rdfs:range xsd:string ;
+             rdfs:comment "Nome del Docente." ;
+             rdfs:label "nomeDocente" .
+
+
+###  http://www.semanticweb.org/ontology#nomeInsegnamento
+:nomeInsegnamento rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Insegnamento ;
+                  rdfs:range xsd:string ;
+                  rdfs:comment "Nome dell'Insegnamento." ;
+                  rdfs:label "nomeInsegnamento" .
+
+
+###  http://www.semanticweb.org/ontology#nomeInteresse
+:nomeInteresse rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Interesse ;
+               rdfs:range xsd:string ;
+               rdfs:comment "Nome dell'Interesse accademico." ;
+               rdfs:label "nomeInteresse" .
+
+
+###  http://www.semanticweb.org/ontology#nomeUniversità
+:nomeUniversità rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Università ;
+                rdfs:range xsd:string ;
+                rdfs:comment "Nome dell'Università." ;
+                rdfs:label "nomeUniversità" .
+
+
+###  http://www.semanticweb.org/ontology#ubicazione
+:ubicazione rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Università ;
+            rdfs:range xsd:string ;
+            rdfs:comment "Ubicazione dell'Università." ;
+            rdfs:label "ubicazione" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/ontology#CorsoDiLaureaMagistrale
+:CorsoDiLaureaMagistrale rdf:type owl:Class ;
+                         rdfs:subClassOf :CorsoDiStudio ;
+                         rdfs:comment "Sottoclasse di CorsoDiStudio, rappresenta un Corso di Laurea Magistrale." ;
+                         rdfs:label "CorsoDiLaureaMagistrale" .
+
+
+###  http://www.semanticweb.org/ontology#CorsoDiLaureaTriennale
+:CorsoDiLaureaTriennale rdf:type owl:Class ;
+                        rdfs:subClassOf :CorsoDiStudio ;
+                        rdfs:comment "Sottoclasse di CorsoDiStudio, rappresenta un Corso di Laurea Triennale." ;
+                        rdfs:label "CorsoDiLaureaTriennale" .
+
+
+###  http://www.semanticweb.org/ontology#CorsoDiStudio
+:CorsoDiStudio rdf:type owl:Class ;
+               rdfs:comment "Classe che rappresenta un Corso di Studio offerto dall'Università." ;
+               rdfs:label "CorsoDiStudio" .
+
+
+###  http://www.semanticweb.org/ontology#Dipartimento
+:Dipartimento rdf:type owl:Class ;
+              rdfs:comment "Classe che rappresenta un Dipartimento all'interno dell'Università." ;
+              rdfs:label "Dipartimento" .
+
+
+###  http://www.semanticweb.org/ontology#Docente
+:Docente rdf:type owl:Class ;
+         rdfs:comment "Classe che rappresenta un Docente dell'Università." ;
+         rdfs:label "Docente" .
+
+
+###  http://www.semanticweb.org/ontology#Insegnamento
+:Insegnamento rdf:type owl:Class ;
+              rdfs:comment "Classe che rappresenta un Insegnamento all'interno di un Corso di Studio." ;
+              rdfs:label "Insegnamento" .
+
+
+###  http://www.semanticweb.org/ontology#Interesse
+:Interesse rdf:type owl:Class ;
+           rdfs:comment "Classe che rappresenta un Interesse accademico di un Futuro Studente." ;
+           rdfs:label "Interesse" .
+
+
+###  http://www.semanticweb.org/ontology#OpportunitàDiCarriera
+:OpportunitàDiCarriera rdf:type owl:Class ;
+                       rdfs:comment "Classe che rappresenta un'Opportunità di Carriera associata a un Corso di Studio." ;
+                       rdfs:label "OpportunitàDiCarriera" .
+
+
+###  http://www.semanticweb.org/ontology#Università
+:Università rdf:type owl:Class ;
+            rdfs:comment "Classe che rappresenta un'Università." ;
+            rdfs:label "Università" .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/ontology#analisiMatematica
+:analisiMatematica rdf:type owl:NamedIndividual ,
+                            :Insegnamento ;
+                   :tenutoDa :docenteNeri ;
+                   :CFU 9 ;
+                   :annoDiCorso 1 ;
+                   :codice "MAT104" ;
+                   :descrizione "Fondamenti di analisi matematica." ;
+                   :nome "Analisi Matematica" .
+
+
+###  http://www.semanticweb.org/ontology#architetturaDegliElaboratori
+:architetturaDegliElaboratori rdf:type owl:NamedIndividual ,
+                                       :Insegnamento ;
+                              :tenutoDa :docenteRossi ;
+                              :CFU 9 ;
+                              :annoDiCorso 1 ;
+                              :codice "INF101" ;
+                              :descrizione "Struttura e funzionamento degli elaboratori." ;
+                              :nome "Architettura degli Elaboratori" .
+
+
+###  http://www.semanticweb.org/ontology#basiDiDati
+:basiDiDati rdf:type owl:NamedIndividual ,
+                     :Insegnamento ;
+            :tenutoDa :docenteBianchi ;
+            :CFU 9 ;
+            :annoDiCorso 2 ;
+            :codice "INF206" ;
+            :descrizione "Progettazione e gestione di basi di dati." ;
+            :nome "Basi di Dati" .
+
+
+###  http://www.semanticweb.org/ontology#calcoloDelleProbabilitaEStatisticaMatematica
+:calcoloDelleProbabilitaEStatisticaMatematica rdf:type owl:NamedIndividual ,
+                                                       :Insegnamento ;
+                                              :tenutoDa :docenteNeri ;
+                                              :CFU 6 ;
+                                              :annoDiCorso 2 ;
+                                              :codice "MAT207" ;
+                                              :descrizione "Calcolo delle probabilità e statistica matematica." ;
+                                              :nome "Calcolo delle Probabilità e Statistica Matematica" .
+
+
+###  http://www.semanticweb.org/ontology#docenteBianchi
+:docenteBianchi rdf:type owl:NamedIndividual ,
+                         :Docente .
+
+
+###  http://www.semanticweb.org/ontology#docenteNeri
+:docenteNeri rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/ontology#docenteRossi
+:docenteRossi rdf:type owl:NamedIndividual ,
+                       :Docente .
+
+
+###  http://www.semanticweb.org/ontology#docenteSmith
+:docenteSmith rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/ontology#docenteVerdi
+:docenteVerdi rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/ontology#informatica
+:informatica rdf:type owl:NamedIndividual ,
+                      :Dipartimento ;
+             :propone :laureaMagistraleInformatica ,
+                      :laureaTriennaleInformatica ;
+             :edificio "Edificio F2" ;
+             :nome "Dipartimento di Informatica" .
+
+
+###  http://www.semanticweb.org/ontology#ingegneriaDelSoftware
+:ingegneriaDelSoftware rdf:type owl:NamedIndividual ,
+                                :Insegnamento ;
+                       :tenutoDa :docenteBianchi ;
+                       :CFU 6 ;
+                       :annoDiCorso 1 ,
+                                    3 ;
+                       :codice "INF201" ,
+                               "INF304" ;
+                       :descrizione "Principi e metodologie dell'ingegneria del software." ;
+                       :nome "Ingegneria del Software" .
+
+
+###  http://www.semanticweb.org/ontology#inglese
+:inglese rdf:type owl:NamedIndividual ,
+                  :Insegnamento ;
+         :tenutoDa :docenteSmith ;
+         :CFU 6 ;
+         :annoDiCorso 2 ;
+         :codice "LIN203" ;
+         :descrizione "Insegnamento della lingua inglese per scopi specifici." ;
+         :nome "Inglese" .
+
+
+###  http://www.semanticweb.org/ontology#laureaMagistraleInformatica
+:laureaMagistraleInformatica rdf:type owl:NamedIndividual ,
+                                      :CorsoDiLaureaMagistrale ;
+                             :offreOpportunità :opportunitàSviluppatoreWeb ;
+                             <http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> 120 ;
+                             :codice "LMINFO" ;
+                             :descrizione "Corso di studi magistrale in Informatica presso il Dipartimento di Informatica dell'Università di Salerno." ;
+                             :durata 2 ;
+                             :nome "Corso di Laurea Magistrale in Informatica" ;
+                             :sitoWeb "http://www.informatica.unisa.it/laurea-magistrale-informatica" .
+
+
+###  http://www.semanticweb.org/ontology#laureaTriennaleInformatica
+:laureaTriennaleInformatica rdf:type owl:NamedIndividual ,
+                                     :CorsoDiLaureaTriennale ;
+                            :comprendeInsegnamento :analisiMatematica ,
+                                                   :architetturaDegliElaboratori ,
+                                                   :basiDiDati ,
+                                                   :calcoloDelleProbabilitaEStatisticaMatematica ,
+                                                   :ingegneriaDelSoftware ,
+                                                   :inglese ,
+                                                   :matematicaDiscreta ,
+                                                   :metodiMatematiciPerLInformatica ,
+                                                   :progettazioneDiAlgoritmi ,
+                                                   :programmazioneI ,
+                                                   :programmazioneOO ,
+                                                   :programmazioneStruttureDati ,
+                                                   :retiDiCalcolatori ,
+                                                   :ricercaOperativa ,
+                                                   :sistemiOperativi ,
+                                                   :tecnologieSoftwarePerIlWeb ;
+                            :offreOpportunità :opportunitàSviluppatoreWeb ;
+                            <http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> 180 ;
+                            :codice "L3INFO" ;
+                            :descrizione "Corso di studi triennale in Informatica presso il Dipartimento di Informatica dell'Università di Salerno." ;
+                            :durata 3 ;
+                            :nome "Corso di Laurea Triennale in Informatica" ;
+                            :sitoWeb "http://www.informatica.unisa.it/laurea-triennale-informatica" .
+
+
+###  http://www.semanticweb.org/ontology#matematicaDiscreta
+:matematicaDiscreta rdf:type owl:NamedIndividual ,
+                             :Insegnamento ;
+                    :tenutoDa :docenteVerdi ;
+                    :CFU 9 ;
+                    :annoDiCorso 1 ;
+                    :codice "MAT102" ;
+                    :descrizione "Concetti fondamentali della matematica discreta." ;
+                    :nome "Matematica Discreta" .
+
+
+###  http://www.semanticweb.org/ontology#metodiMatematiciPerLInformatica
+:metodiMatematiciPerLInformatica rdf:type owl:NamedIndividual ,
+                                          :Insegnamento ;
+                                 :tenutoDa :docenteVerdi ;
+                                 :CFU 9 ;
+                                 :annoDiCorso 2 ;
+                                 :codice "INF201" ;
+                                 :descrizione "Metodi matematici avanzati per l'informatica." ;
+                                 :nome "Metodi Matematici per l'Informatica" .
+
+
+###  http://www.semanticweb.org/ontology#opportunitàSviluppatoreWeb
+:opportunitàSviluppatoreWeb rdf:type owl:NamedIndividual ,
+                                     :OpportunitàDiCarriera ;
+                            :descrizione "Opportunità di carriera come sviluppatore web frontend o backend." ;
+                            :nome "Opportunità di Sviluppatore Web" ;
+                            :settore "Informatica" .
+
+
+###  http://www.semanticweb.org/ontology#progettazioneDiAlgoritmi
+:progettazioneDiAlgoritmi rdf:type owl:NamedIndividual ,
+                                   :Insegnamento ;
+                          :tenutoDa :docenteVerdi ;
+                          :CFU 9 ;
+                          :annoDiCorso 2 ;
+                          :codice "INF208" ;
+                          :descrizione "Tecniche di progettazione di algoritmi." ;
+                          :nome "Progettazione di Algoritmi" .
+
+
+###  http://www.semanticweb.org/ontology#programmazioneI
+:programmazioneI rdf:type owl:NamedIndividual ,
+                          :Insegnamento ;
+                 :tenutoDa :docenteBianchi ;
+                 :CFU 9 ;
+                 :annoDiCorso 1 ;
+                 :codice "INF103" ;
+                 :descrizione "Introduzione alla programmazione e alle strutture dati." ;
+                 :nome "Programmazione I" .
+
+
+###  http://www.semanticweb.org/ontology#programmazioneOO
+:programmazioneOO rdf:type owl:NamedIndividual ,
+                           :Insegnamento ;
+                  :tenutoDa :docenteVerdi ;
+                  :CFU 9 ;
+                  :annoDiCorso 2 ;
+                  :codice "INF205" ;
+                  :descrizione "Programmazione orientata agli oggetti." ;
+                  :nome "Programmazione OO" .
+
+
+###  http://www.semanticweb.org/ontology#programmazioneStruttureDati
+:programmazioneStruttureDati rdf:type owl:NamedIndividual ,
+                                      :Insegnamento ;
+                             :tenutoDa :docenteBianchi ;
+                             :CFU 9 ;
+                             :annoDiCorso 2 ;
+                             :codice "INF202" ;
+                             :descrizione "Programmazione avanzata e strutture dati complesse." ;
+                             :nome "Programmazione & Strutture Dati" .
+
+
+###  http://www.semanticweb.org/ontology#retiDiCalcolatori
+:retiDiCalcolatori rdf:type owl:NamedIndividual ,
+                            :Insegnamento ;
+                   :tenutoDa :docenteRossi ;
+                   :CFU 9 ;
+                   :annoDiCorso 3 ;
+                   :codice "INF301" ;
+                   :descrizione "Struttura e gestione delle reti di calcolatori." ;
+                   :nome "Reti di Calcolatori" .
+
+
+###  http://www.semanticweb.org/ontology#ricercaOperativa
+:ricercaOperativa rdf:type owl:NamedIndividual ,
+                           :Insegnamento ;
+                  :tenutoDa :docenteNeri ;
+                  :CFU 9 ;
+                  :annoDiCorso 3 ;
+                  :codice "MAT303" ;
+                  :descrizione "Metodi e modelli di ricerca operativa." ;
+                  :nome "Ricerca Operativa" .
+
+
+###  http://www.semanticweb.org/ontology#sistemiOperativi
+:sistemiOperativi rdf:type owl:NamedIndividual ,
+                           :Insegnamento ;
+                  :tenutoDa :docenteRossi ;
+                  :CFU 9 ;
+                  :annoDiCorso 2 ;
+                  :codice "INF204" ;
+                  :descrizione "Struttura e gestione dei sistemi operativi." ;
+                  :nome "Sistemi Operativi" .
+
+
+###  http://www.semanticweb.org/ontology#softwareEngineering
+:softwareEngineering rdf:type owl:NamedIndividual ,
+                              :Interesse ;
+                     :legatoA :ingegneriaDelSoftware ;
+                     :nome "Ingegneria del Software" .
+
+
+###  http://www.semanticweb.org/ontology#sviluppoSoftware
+:sviluppoSoftware rdf:type owl:NamedIndividual ,
+                           :Interesse ;
+                  :legatoA :ingegneriaDelSoftware ;
+                  :nome "Sviluppo Software" .
+
+
+###  http://www.semanticweb.org/ontology#tecnologieSoftwarePerIlWeb
+:tecnologieSoftwarePerIlWeb rdf:type owl:NamedIndividual ,
+                                     :Insegnamento ;
+                            :tenutoDa :docenteBianchi ;
+                            :CFU 6 ;
+                            :annoDiCorso 3 ;
+                            :codice "INF302" ;
+                            :descrizione "Tecnologie software per lo sviluppo web." ;
+                            :nome "Tecnologie Software per il Web" .
+
+
+###  http://www.semanticweb.org/ontology#universitaSalerno
+:universitaSalerno rdf:type owl:NamedIndividual ,
+                            :Università ;
+                   :comprende :informatica ;
+                   :ubicazione "Fisciano, Salerno, Italia" ;
+                   :nome "Università degli Studi di Salerno" .
+
+
+[ owl:minCardinality "1"^^xsd:nonNegativeInteger
+] .
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
