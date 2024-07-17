@@ -217,6 +217,7 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 ###  http://www.semanticweb.org/ontology#CorsoDiLaureaTriennale
 :CorsoDiLaureaTriennale rdf:type owl:Class ;
                         rdfs:subClassOf :CorsoDiStudio ;
+                        owl:disjointWith :Insegnamento ;
                         rdfs:comment "Sottoclasse di CorsoDiStudio, rappresenta un Corso di Laurea Triennale." ;
                         rdfs:label "CorsoDiLaureaTriennale" .
 
@@ -268,6 +269,28 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                      :nome "Affidabilità dei Sistemi" .
 
 
+###  http://www.semanticweb.org/ontology#algebraI
+:algebraI rdf:type owl:NamedIndividual ,
+                   :Insegnamento ;
+          :CFU 9 ;
+          :annoDiCorso 1 ;
+          :descrizione "Studio approfondito di strutture algebriche come gruppi, anelli e campi." ;
+          :nome "Algebra I" .
+
+
+###  http://www.semanticweb.org/ontology#algebraII
+:algebraII rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/ontology#algebraIII
+:algebraIII rdf:type owl:NamedIndividual ,
+                     :Insegnamento ;
+            :CFU 6 ;
+            :annoDiCorso 2 ;
+            :descrizione "Approfondimenti di algebra, inclusi teoremi avanzati e loro applicazioni." ;
+            :nome "Algebra III" .
+
+
 ###  http://www.semanticweb.org/ontology#analisiMatematica
 :analisiMatematica rdf:type owl:NamedIndividual ,
                             :Insegnamento ;
@@ -276,6 +299,32 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                    :codice "MAT104" ;
                    :descrizione "Fondamenti di analisi matematica." ;
                    :nome "Analisi Matematica" .
+
+
+###  http://www.semanticweb.org/ontology#analisiMatematicaI
+:analisiMatematicaI rdf:type owl:NamedIndividual ,
+                             :Insegnamento ;
+                    :CFU 16 ;
+                    :annoDiCorso 1 ;
+                    :descrizione "Teoria dell'analisi reale, inclusi limiti, serie, funzioni e integrazione." ;
+                    :nome "Analisi Matematica I e II" .
+
+
+###  http://www.semanticweb.org/ontology#analisiMatematicaII
+:analisiMatematicaII rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/ontology#analisiMatematicaIII
+:analisiMatematicaIII rdf:type owl:NamedIndividual ,
+                               :Insegnamento ;
+                      :CFU 10 ;
+                      :annoDiCorso 2 ;
+                      :descrizione "Analisi complessa e metodi avanzati di integrazione." ;
+                      :nome "Analisi Matematica III e IV" .
+
+
+###  http://www.semanticweb.org/ontology#analisiMatematicaIV
+:analisiMatematicaIV rdf:type owl:NamedIndividual .
 
 
 ###  http://www.semanticweb.org/ontology#architetturaDegliElaboratori
@@ -312,6 +361,15 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                                               :codice "MAT207" ;
                                               :descrizione "Calcolo delle probabilità e statistica matematica." ;
                                               :nome "Calcolo delle Probabilità e Statistica Matematica" .
+
+
+###  http://www.semanticweb.org/ontology#calcoloNumericoI
+:calcoloNumericoI rdf:type owl:NamedIndividual ,
+                           :Insegnamento ;
+                  :CFU 7 ;
+                  :annoDiCorso 2 ;
+                  :descrizione "Metodi numerici per la soluzione di equazioni e ottimizzazione." ;
+                  :nome "Calcolo Numerico I" .
 
 
 ###  http://www.semanticweb.org/ontology#calcoloScientifico
@@ -369,6 +427,15 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                                         :nome "Enterprise Mobile Application Development" .
 
 
+###  http://www.semanticweb.org/ontology#equazioniDifferenziali
+:equazioniDifferenziali rdf:type owl:NamedIndividual ,
+                                 :Insegnamento ;
+                        :CFU 6 ;
+                        :annoDiCorso 3 ;
+                        :descrizione "Studio delle equazioni differenziali e loro applicazioni." ;
+                        :nome "Equazioni Differenziali" .
+
+
 ###  http://www.semanticweb.org/ontology#fisica
 :fisica rdf:type owl:NamedIndividual ,
                  :Insegnamento ;
@@ -379,16 +446,56 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
         :nome "Fisica" .
 
 
+###  http://www.semanticweb.org/ontology#fisicaConEsercitazioni
+:fisicaConEsercitazioni rdf:type owl:NamedIndividual ,
+                                 :Insegnamento ;
+                        :CFU 13 ;
+                        :annoDiCorso 1 ;
+                        :descrizione "Principi fondamentali di fisica classica e moderna con esercitazioni pratiche." ;
+                        :nome "Fisica con Esercitazioni di Laboratorio I e II" .
+
+
 ###  http://www.semanticweb.org/ontology#fondamentiDataScienceMachineLearning
 :fondamentiDataScienceMachineLearning rdf:type owl:NamedIndividual ,
                                                :Insegnamento ;
                                       :nome "Fondamenti di Data Science e Machine Learning" .
 
 
+###  http://www.semanticweb.org/ontology#fondamentiInformatica
+:fondamentiInformatica rdf:type owl:NamedIndividual ,
+                                :Insegnamento ;
+                       :CFU 4 ;
+                       :annoDiCorso 2 ;
+                       :descrizione "Introduzione ai concetti di base dell'informatica e programmazione." ;
+                       :nome "Fondamenti di Informatica e Laboratorio" .
+
+
 ###  http://www.semanticweb.org/ontology#geographicalInformationSystems
 :geographicalInformationSystems rdf:type owl:NamedIndividual ,
                                          :Insegnamento ;
                                 :nome "Geographical Information Systems" .
+
+
+###  http://www.semanticweb.org/ontology#geometriaI
+:geometriaI rdf:type owl:NamedIndividual ,
+                     :Insegnamento ;
+            :CFU 16 ;
+            :annoDiCorso 1 ;
+            :descrizione "Introduzione alla geometria euclidea e non euclidea." ;
+            :nome "Geometria I e II" .
+
+
+###  http://www.semanticweb.org/ontology#geometriaII
+:geometriaII rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/ontology#geometriaIII
+:geometriaIII rdf:type owl:NamedIndividual ,
+                       :Insegnamento ;
+              :CFU 11 ;
+              :annoDiCorso 2 ;
+              :descrizione "Estensione della geometria analitica e differenziale." ;
+              :nome "Geometria III e IV" .
 
 
 ###  http://www.semanticweb.org/ontology#gestioneProgettiSoftware
@@ -582,6 +689,15 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                   :nome "Internet of Things" .
 
 
+###  http://www.semanticweb.org/ontology#laboratorioProgrammazioneCalcolo
+:laboratorioProgrammazioneCalcolo rdf:type owl:NamedIndividual ,
+                                           :Insegnamento ;
+                                  :CFU 4 ;
+                                  :annoDiCorso 1 ;
+                                  :descrizione "Principi di programmazione e calcolo numerico." ;
+                                  :nome "Laboratorio di programmazione e Calcolo" .
+
+
 ###  http://www.semanticweb.org/ontology#laureaMagistraleInformatica
 :laureaMagistraleInformatica rdf:type owl:NamedIndividual ,
                                       :CorsoDiLaureaMagistrale ;
@@ -618,6 +734,44 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                              :durata 2 ;
                              :nome "Corso di Laurea Magistrale in Informatica" ;
                              :sitoWeb "http://www.informatica.unisa.it/laurea-magistrale-informatica" .
+
+
+###  http://www.semanticweb.org/ontology#laureaTriennaleInMatematica
+:laureaTriennaleInMatematica rdf:type owl:NamedIndividual ,
+                                      :CorsoDiLaureaTriennale ;
+                             :comprendeInsegnamento :algebraI ,
+                                                    :algebraII ,
+                                                    :algebraIII ,
+                                                    :analisiMatematicaI ,
+                                                    :analisiMatematicaII ,
+                                                    :analisiMatematicaIII ,
+                                                    :analisiMatematicaIV ,
+                                                    :calcoloNumericoI ,
+                                                    :equazioniDifferenziali ,
+                                                    :fisicaConEsercitazioni ,
+                                                    :fondamentiInformatica ,
+                                                    :geometriaI ,
+                                                    :geometriaII ,
+                                                    :geometriaIII ,
+                                                    :laboratorioProgrammazioneCalcolo ,
+                                                    :logicaMatematica ,
+                                                    :matematicheComplementariI ,
+                                                    :meccanicaRazionale ,
+                                                    :metodiPerIlTrattamentoDellInformazione ,
+                                                    :probabilita ,
+                                                    :ricercaOperativa ,
+                                                    :semigruppiLiberiTeoriaDeiCodici ,
+                                                    :teoriaDeiGrafi ,
+                                                    :teoriaDellaComputabilita ,
+                                                    :teoriaDelleFunzioni ,
+                                                    :teoriaDiGalois ,
+                                                    :topologia ;
+                             <http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> 180 ;
+                             :codice "L35MAT" ;
+                             :descrizione "Corso di studi triennale in Matematica presso il Dipartimento di Matematica dell'Università di Salerno." ;
+                             :durata 3 ;
+                             :nome "Corso di Laurea Triennale in Matematica" ;
+                             :sitoWeb "http://www.matematica.unisa.it/laurea-triennale-in-matematica" .
 
 
 ###  http://www.semanticweb.org/ontology#laureaTriennaleInformatica
@@ -661,6 +815,23 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                             :sitoWeb "http://www.informatica.unisa.it/laurea-triennale-informatica" .
 
 
+###  http://www.semanticweb.org/ontology#logicaMatematica
+:logicaMatematica rdf:type owl:NamedIndividual ,
+                           :Insegnamento ;
+                  :CFU 7 ;
+                  :annoDiCorso 3 ;
+                  :descrizione "Studio della logica simbolica e dei sistemi formali." ;
+                  :nome "Logica Matematica" .
+
+
+###  http://www.semanticweb.org/ontology#matematica
+:matematica rdf:type owl:NamedIndividual ,
+                     :Dipartimento ;
+            :propone :laureaTriennaleInMatematica ;
+            :edificio "Edificio F2" ;
+            :nome "Dipartimento di Matematica" .
+
+
 ###  http://www.semanticweb.org/ontology#matematicaDiscreta
 :matematicaDiscreta rdf:type owl:NamedIndividual ,
                              :Insegnamento ;
@@ -669,6 +840,24 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                     :codice "MAT102" ;
                     :descrizione "Concetti fondamentali della matematica discreta." ;
                     :nome "Matematica Discreta" .
+
+
+###  http://www.semanticweb.org/ontology#matematicheComplementariI
+:matematicheComplementariI rdf:type owl:NamedIndividual ,
+                                    :Insegnamento ;
+                           :CFU 6 ;
+                           :annoDiCorso 3 ;
+                           :descrizione "Estensioni e argomenti complementari in diverse aree della matematica." ;
+                           :nome "Matematiche Complementari I" .
+
+
+###  http://www.semanticweb.org/ontology#meccanicaRazionale
+:meccanicaRazionale rdf:type owl:NamedIndividual ,
+                             :Insegnamento ;
+                    :CFU 6 ;
+                    :annoDiCorso 3 ;
+                    :descrizione "Principi della meccanica classica e loro applicazioni matematiche." ;
+                    :nome "Meccanica Razionale" .
 
 
 ###  http://www.semanticweb.org/ontology#metodiMatematiciPerLInformatica
@@ -685,6 +874,15 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 :metodiOttimizzazione rdf:type owl:NamedIndividual ,
                                :Insegnamento ;
                       :nome "Metodi di Ottimizzazione" .
+
+
+###  http://www.semanticweb.org/ontology#metodiPerIlTrattamentoDellInformazione
+:metodiPerIlTrattamentoDellInformazione rdf:type owl:NamedIndividual ,
+                                                 :Insegnamento ;
+                                        :CFU 6 ;
+                                        :annoDiCorso 3 ;
+                                        :descrizione "Metodi e tecniche per il trattamento dell'informazione." ;
+                                        :nome "Metodi per il Trattamento dell'Informazione" .
 
 
 ###  http://www.semanticweb.org/ontology#metricheQualitaSoftware
@@ -721,6 +919,15 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 :penetrationTestingEthicalHacking rdf:type owl:NamedIndividual ,
                                            :Insegnamento ;
                                   :nome "Penetration Testing and Ethical Hacking" .
+
+
+###  http://www.semanticweb.org/ontology#probabilita
+:probabilita rdf:type owl:NamedIndividual ,
+                      :Insegnamento ;
+             :CFU 6 ;
+             :annoDiCorso 3 ;
+             :descrizione "Teoria della probabilità e processi stocastici." ;
+             :nome "Probabilità" .
 
 
 ###  http://www.semanticweb.org/ontology#progettazioneDiAlgoritmi
@@ -818,11 +1025,23 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 ###  http://www.semanticweb.org/ontology#ricercaOperativa
 :ricercaOperativa rdf:type owl:NamedIndividual ,
                            :Insegnamento ;
-                  :CFU 9 ;
-                  :annoDiCorso 3 ;
+                  :CFU 7 ,
+                       9 ;
+                  :annoDiCorso 2 ,
+                               3 ;
                   :codice "MAT303" ;
-                  :descrizione "Metodi e modelli di ricerca operativa." ;
+                  :descrizione "Metodi e modelli di ricerca operativa." ,
+                               "Modelli matematici per la ricerca operativa e teoria delle decisioni." ;
                   :nome "Ricerca Operativa" .
+
+
+###  http://www.semanticweb.org/ontology#semigruppiLiberiTeoriaDeiCodici
+:semigruppiLiberiTeoriaDeiCodici rdf:type owl:NamedIndividual ,
+                                          :Insegnamento ;
+                                 :CFU 6 ;
+                                 :annoDiCorso 3 ;
+                                 :descrizione "Studio dei semigruppi liberi e delle applicazioni nella teoria dei codici." ;
+                                 :nome "Semigruppi Liberi e Teoria dei Codici" .
 
 
 ###  http://www.semanticweb.org/ontology#sicurezza
@@ -895,6 +1114,42 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                             :nome "Tecnologie Software per il Web" .
 
 
+###  http://www.semanticweb.org/ontology#teoriaDeiGrafi
+:teoriaDeiGrafi rdf:type owl:NamedIndividual ,
+                         :Insegnamento ;
+                :CFU 6 ;
+                :annoDiCorso 3 ;
+                :descrizione "Analisi dei grafi e algoritmi correlati, con applicazioni in varie discipline scientifiche." ;
+                :nome "Teoria dei Grafi" .
+
+
+###  http://www.semanticweb.org/ontology#teoriaDellaComputabilita
+:teoriaDellaComputabilita rdf:type owl:NamedIndividual ,
+                                   :Insegnamento ;
+                          :CFU 6 ;
+                          :annoDiCorso 3 ;
+                          :descrizione "Studio della teoria della computabilità e dei modelli di calcolo." ;
+                          :nome "Teoria della Computabilità" .
+
+
+###  http://www.semanticweb.org/ontology#teoriaDelleFunzioni
+:teoriaDelleFunzioni rdf:type owl:NamedIndividual ,
+                              :Insegnamento ;
+                     :CFU 6 ;
+                     :annoDiCorso 3 ;
+                     :descrizione "Approfondimenti sulla teoria delle funzioni reali e complesse." ;
+                     :nome "Teoria delle Funzioni" .
+
+
+###  http://www.semanticweb.org/ontology#teoriaDiGalois
+:teoriaDiGalois rdf:type owl:NamedIndividual ,
+                         :Insegnamento ;
+                :CFU 6 ;
+                :annoDiCorso 3 ;
+                :descrizione "Esplorazione della teoria di Galois, che collega il campo dell'algebra e della teoria dei numeri." ;
+                :nome "Teoria di Galois" .
+
+
 ###  http://www.semanticweb.org/ontology#tirocinio
 :tirocinio rdf:type owl:NamedIndividual ,
                     :Insegnamento ;
@@ -904,237 +1159,14 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
            :descrizione "Tirocini formativi e di orientamento." ;
            :nome "Tirocinio" .
 
-### http://www.semanticweb.org/ontology#matematica
-:matematica rdf:type owl:NamedIndividual ,
-                     :Dipartimento ;
-            :propone :laureaTriennaleInMatematica ;
-            :edificio "Edificio F2" ;
-            :nome "Dipartimento di Matematica" .
 
-### Algebra I
-:algebraI rdf:type owl:NamedIndividual ,
-                   :Insegnamento ;
-          :CFU 9 ;
-          :annoDiCorso 1 ;
-          :descrizione "Studio approfondito di strutture algebriche come gruppi, anelli e campi." ;
-          :nome "Algebra I" .
-
-### Geometria I e II
-:geometriaI rdf:type owl:NamedIndividual ,
-                     :Insegnamento ;
-            :CFU 16 ;  # Somma di Geometria I e II
-            :annoDiCorso 1 ;
-            :descrizione "Introduzione alla geometria euclidea e non euclidea." ;
-            :nome "Geometria I e II" .
-
-### Analisi Matematica I e II
-:analisiMatematicaI rdf:type owl:NamedIndividual ,
-                             :Insegnamento ;
-                    :CFU 16 ;  # Somma di Analisi Matematica I e II
-                    :annoDiCorso 1 ;
-                    :descrizione "Teoria dell'analisi reale, inclusi limiti, serie, funzioni e integrazione." ;
-                    :nome "Analisi Matematica I e II" .
-
-### Laboratorio di programmazione e Calcolo
-:laboratorioProgrammazioneCalcolo rdf:type owl:NamedIndividual ,
-                                           :Insegnamento ;
-                                  :CFU 4 ;
-                                  :annoDiCorso 1 ;
-                                  :descrizione "Principi di programmazione e calcolo numerico." ;
-                                  :nome "Laboratorio di programmazione e Calcolo" .
-
-### Fisica con Esercitazioni di Laboratorio I e II
-:fisicaConEsercitazioni rdf:type owl:NamedIndividual ,
-                                 :Insegnamento ;
-                        :CFU 13 ;  # Somma di Fisica I e II
-                        :annoDiCorso 1 ;  # Annodato alla parte I
-                        :descrizione "Principi fondamentali di fisica classica e moderna con esercitazioni pratiche." ;
-                        :nome "Fisica con Esercitazioni di Laboratorio I e II" .
-
-### Fondamenti di Informatica e Laboratorio
-:fondamentiInformatica rdf:type owl:NamedIndividual ,
-                                :Insegnamento ;
-                       :CFU 4 ;
-                       :annoDiCorso 2 ;
-                       :descrizione "Introduzione ai concetti di base dell'informatica e programmazione." ;
-                       :nome "Fondamenti di Informatica e Laboratorio" .
-
-### Algebra III
-:algebraIII rdf:type owl:NamedIndividual ,
-                     :Insegnamento ;
-            :CFU 6 ;
-            :annoDiCorso 2 ;
-            :descrizione "Approfondimenti di algebra, inclusi teoremi avanzati e loro applicazioni." ;
-            :nome "Algebra III" .
-
-### Geometria III e IV
-:geometriaIII rdf:type owl:NamedIndividual ,
-                       :Insegnamento ;
-              :CFU 11 ;  # Somma di Geometria III e IV
-              :annoDiCorso 2 ;  # Annodato alla parte III
-              :descrizione "Estensione della geometria analitica e differenziale." ;
-              :nome "Geometria III e IV" .
-
-### Analisi Matematica III e IV
-:analisiMatematicaIII rdf:type owl:NamedIndividual ,
-                               :Insegnamento ;
-                      :CFU 10 ;  # Somma di Analisi Matematica III e IV
-                      :annoDiCorso 2 ;  # Annodato alla parte III
-                      :descrizione "Analisi complessa e metodi avanzati di integrazione." ;
-                      :nome "Analisi Matematica III e IV" .
-
-### Calcolo Numerico I
-:calcoloNumericoI rdf:type owl:NamedIndividual ,
-                           :Insegnamento ;
-                  :CFU 7 ;
-                  :annoDiCorso 2 ;
-                  :descrizione "Metodi numerici per la soluzione di equazioni e ottimizzazione." ;
-                  :nome "Calcolo Numerico I" .
-
-### Ricerca Operativa
-:ricercaOperativa rdf:type owl:NamedIndividual ,
-                           :Insegnamento ;
-                  :CFU 7 ;
-                  :annoDiCorso 2 ;
-                  :descrizione "Modelli matematici per la ricerca operativa e teoria delle decisioni." ;
-                  :nome "Ricerca Operativa" .
-
-### Logica Matematica
-:logicaMatematica rdf:type owl:NamedIndividual ,
-                           :Insegnamento ;
-                  :CFU 7 ;
-                  :annoDiCorso 3 ;
-                  :descrizione "Studio della logica simbolica e dei sistemi formali." ;
-                  :nome "Logica Matematica" .
-
-### Probabilità
-:probabilita rdf:type owl:NamedIndividual ,
-                      :Insegnamento ;
-             :CFU 6 ;
-             :annoDiCorso 3 ;
-             :descrizione "Teoria della probabilità e processi stocastici." ;
-             :nome "Probabilità" .
-
-### Meccanica Razionale
-:meccanicaRazionale rdf:type owl:NamedIndividual ,
-                             :Insegnamento ;
-                    :CFU 6 ;
-                    :annoDiCorso 3 ;
-                    :descrizione "Principi della meccanica classica e loro applicazioni matematiche." ;
-                    :nome "Meccanica Razionale" .
-
-### Insegnamenti Opzionali e a Scelta Autonoma
-# Esempio per Teoria della Computabilità
-:teoriaDellaComputabilita rdf:type owl:NamedIndividual ,
-                                   :Insegnamento ;
-                          :CFU 6 ;
-                          :annoDiCorso 3 ;
-                          :descrizione "Studio della teoria della computabilità e dei modelli di calcolo." ;
-                          :nome "Teoria della Computabilità" .
-
-# Continuare per altri insegnamenti opzionali e a scelta seguendo il modello sopra
-
-### Teoria di Galois
-:teoriaDiGalois rdf:type owl:NamedIndividual ,
-                         :Insegnamento ;
-                :CFU 6 ;
-                :annoDiCorso 3 ;
-                :descrizione "Esplorazione della teoria di Galois, che collega il campo dell'algebra e della teoria dei numeri." ;
-                :nome "Teoria di Galois" .
-
-### Semigruppi Liberi e Teoria dei Codici
-:semigruppiLiberiTeoriaDeiCodici rdf:type owl:NamedIndividual ,
-                                          :Insegnamento ;
-                                 :CFU 6 ;
-                                 :annoDiCorso 3 ;
-                                 :descrizione "Studio dei semigruppi liberi e delle applicazioni nella teoria dei codici." ;
-                                 :nome "Semigruppi Liberi e Teoria dei Codici" .
-
-### Topologia
+###  http://www.semanticweb.org/ontology#topologia
 :topologia rdf:type owl:NamedIndividual ,
                     :Insegnamento ;
            :CFU 6 ;
            :annoDiCorso 3 ;
            :descrizione "Fondamenti di topologia e sue applicazioni nella matematica moderna." ;
            :nome "Topologia" .
-
-### Teoria dei Grafi
-:teoriaDeiGrafi rdf:type owl:NamedIndividual ,
-                         :Insegnamento ;
-                :CFU 6 ;
-                :annoDiCorso 3 ;
-                :descrizione "Analisi dei grafi e algoritmi correlati, con applicazioni in varie discipline scientifiche." ;
-                :nome "Teoria dei Grafi" .
-
-### Matematiche Complementari I
-:matematicheComplementariI rdf:type owl:NamedIndividual ,
-                                    :Insegnamento ;
-                           :CFU 6 ;
-                           :annoDiCorso 3 ;
-                           :descrizione "Estensioni e argomenti complementari in diverse aree della matematica." ;
-                           :nome "Matematiche Complementari I" .
-
-### Equazioni Differenziali
-:equazioniDifferenziali rdf:type owl:NamedIndividual ,
-                                 :Insegnamento ;
-                        :CFU 6 ;
-                        :annoDiCorso 3 ;
-                        :descrizione "Studio delle equazioni differenziali e loro applicazioni." ;
-                        :nome "Equazioni Differenziali" .
-
-### Teoria delle Funzioni
-:teoriaDelleFunzioni rdf:type owl:NamedIndividual ,
-                              :Insegnamento ;
-                     :CFU 6 ;
-                     :annoDiCorso 3 ;
-                     :descrizione "Approfondimenti sulla teoria delle funzioni reali e complesse." ;
-                     :nome "Teoria delle Funzioni" .
-
-### Attività formative aggiuntive come insegnamenti opzionali presso altri corsi
-# Esempio generico per un corso opzionale di Informatica
-:metodiPerIlTrattamentoDellInformazione rdf:type owl:NamedIndividual ,
-                                                 :Insegnamento ;
-                                        :CFU 6 ;
-                                        :annoDiCorso 3 ;
-                                        :descrizione "Metodi e tecniche per il trattamento dell'informazione." ;
-                                        :nome "Metodi per il Trattamento dell'Informazione" .
-### http://www.semanticweb.org/ontology#laureaTriennaleInMatematica
-:laureaTriennaleInMatematica rdf:type owl:NamedIndividual ,
-                                      :CorsoDiLaureaTriennale ;
-                             :comprendeInsegnamento :algebraI ,
-                             :algebraII ,
-                             :geometriaI ,
-                             :geometriaII ,
-                             :analisiMatematicaI ,
-                             :analisiMatematicaII ,
-                             :laboratorioProgrammazioneCalcolo ,
-                             :fisicaConEsercitazioni ,
-                             :fondamentiInformatica ,
-                             :algebraIII ,
-                             :geometriaIII ,
-                             :analisiMatematicaIII ,
-                             :analisiMatematicaIV ,
-                             :calcoloNumericoI ,
-                             :ricercaOperativa ,
-                             :logicaMatematica ,
-                             :probabilita ,
-                             :meccanicaRazionale ,
-                             :teoriaDellaComputabilita ,
-                             :teoriaDiGalois ,
-                             :semigruppiLiberiTeoriaDeiCodici ,
-                             :topologia ,
-                             :teoriaDeiGrafi ,
-                             :matematicheComplementariI ,
-                             :equazioniDifferenziali ,
-                             :teoriaDelleFunzioni ,
-                             :metodiPerIlTrattamentoDellInformazione ;
-                             <http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> 180 ;
-                             :codice "L35MAT" ;
-                             :descrizione "Corso di studi triennale in Matematica presso il Dipartimento di Matematica dell'Università di Salerno." ;
-                             :durata 3 ;
-                             :nome "Corso di Laurea Triennale in Matematica" ;
-                             :sitoWeb "http://www.matematica.unisa.it/laurea-triennale-in-matematica" .
-
 
 
 ###  http://www.semanticweb.org/ontology#universitaSalerno
