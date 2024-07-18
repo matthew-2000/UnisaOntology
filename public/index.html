@@ -40,6 +40,13 @@
   </div>
 
   <div>
+    <h2>Visualizza Insegnamenti per Corso di Studio</h2>
+    <select id="corsiSelect"></select>
+    <button onclick="fetchInsegnamenti()">Mostra Insegnamenti</button>
+    <div id="insegnamentiResult"></div>
+  </div>
+
+  <div>
     <h2>Visualizza Corsi di Studio per Interesse</h2>
     <select id="interessiSelect"></select>
     <button onclick="fetchCorsiLegatiInteressi()">Mostra Corsi Legati a Interesse</button>
@@ -52,6 +59,7 @@
     <button onclick="fetchCorsiPerOpportunita()">Mostra Corsi per Opportunità</button>
     <div id="corsiOpportunitaResult"></div>
   </div>
+
 </div>
 
 <script>
@@ -90,6 +98,7 @@
   async function fetchCorsiDiStudio() {
     const dipartimento = document.getElementById('dipartimentiSelect').value;
     const data = await fetchData(`/corsi-di-studio?dipartimento=${encodeURIComponent(dipartimento)}`);
+    populateSelect('corsiSelect', data.results.bindings, 'nomeCorso', 'nomeCorso'); // Popola il nuovo select per i corsi
     displayResult(data, 'corsiResult');
   }
 
@@ -103,6 +112,12 @@
     const opportunita = document.getElementById('opportunitaSelect').value;
     const data = await fetchData(`/corsi-legati-opportunita?opportunita=${encodeURIComponent(opportunita)}`);
     displayResult(data, 'corsiOpportunitaResult');
+  }
+
+  async function fetchInsegnamenti() {
+    const corsoDiStudio = document.getElementById('corsiSelect').value;
+    const data = await fetchData(`/insegnamenti?corsoDiStudio=${encodeURIComponent(corsoDiStudio)}`);
+    displayResult(data, 'insegnamentiResult');
   }
 
   function displayResult(data, elementId) {
