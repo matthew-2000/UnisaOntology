@@ -68,6 +68,13 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                                                      rdfs:range :CorsoDiStudio .
 
 
+###  http://www.co-ode.org/ontologies/ont.owl#èOffertaDa
+<http://www.co-ode.org/ontologies/ont.owl#èOffertaDa> rdf:type owl:ObjectProperty ;
+                                                      owl:inverseOf :offreOpportunità ;
+                                                      rdfs:domain :OpportunitàDiCarriera ;
+                                                      rdfs:range :CorsoDiStudio .
+
+
 ###  http://www.semanticweb.org/ontology#comprende
 :comprende rdf:type owl:ObjectProperty ;
            rdfs:domain :Università ;
@@ -715,6 +722,32 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                                           :nome "Interazione Uomo-Macchina e Usabilità del Software" .
 
 
+###  http://www.semanticweb.org/ontology#interesseAlgoritmiStruttureDatiAvanzate
+:interesseAlgoritmiStruttureDatiAvanzate rdf:type owl:NamedIndividual ,
+                                                  :Interesse ;
+                                         :legatoA :algoritmiEStruttureDati ,
+                                                  :progettazioneDiAlgoritmi ,
+                                                  :teoriaDeiGrafi ;
+                                         :nome "Interesse in Algoritmi e Strutture Dati Avanzate" .
+
+
+###  http://www.semanticweb.org/ontology#interesseAnalisiMatematicaApplicazioni
+:interesseAnalisiMatematicaApplicazioni rdf:type owl:NamedIndividual ,
+                                                 :Interesse ;
+                                        :legatoA :analisiMatematicaI ,
+                                                 :analisiMatematicaIII ;
+                                        :nome "Interesse in Analisi Matematica e Applicazioni" .
+
+
+###  http://www.semanticweb.org/ontology#interesseApplicazioniMatematicheIngegneria
+:interesseApplicazioniMatematicheIngegneria rdf:type owl:NamedIndividual ,
+                                                     :Interesse ;
+                                            :legatoA :calcoloNumericoI ,
+                                                     :metodiMatematiciPerLInformatica ,
+                                                     :tecnicheAutomaticheCorrettezzaSoftware ;
+                                            :nome "Interesse in Applicazioni Matematiche nell'Ingegneria" .
+
+
 ###  http://www.semanticweb.org/ontology#interesseDataScienceAI
 :interesseDataScienceAI rdf:type owl:NamedIndividual ,
                                  :Interesse ;
@@ -723,6 +756,15 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                                  :naturalLanguageProcessing ,
                                  :softwareEngineeringAI ;
                         :nome "Interesse in Data Science e Intelligenza Artificiale" .
+
+
+###  http://www.semanticweb.org/ontology#interesseFondamentiMatematiciLogicaComputazionale
+:interesseFondamentiMatematiciLogicaComputazionale rdf:type owl:NamedIndividual ,
+                                                            :Interesse ;
+                                                   :legatoA :logicaMatematica ,
+                                                            :matematicaDiscreta ,
+                                                            :teoriaDellaComputabilita ;
+                                                   :nome "Interesse in Fondamenti Matematici e Logica Computazionale" .
 
 
 ###  http://www.semanticweb.org/ontology#interesseInAI
@@ -786,6 +828,15 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                       :nome "Interesse in Interfacciamento e Usabilità" .
 
 
+###  http://www.semanticweb.org/ontology#interesseIntelligenzaArtificialeMachineLearning
+:interesseIntelligenzaArtificialeMachineLearning rdf:type owl:NamedIndividual ,
+                                                          :Interesse ;
+                                                 :legatoA :intelligenzaArtificiale ,
+                                                          :naturalLanguageProcessing ,
+                                                          :softwareEngineeringAI ;
+                                                 :nome "Interesse in Intelligenza Artificiale e Machine Learning" .
+
+
 ###  http://www.semanticweb.org/ontology#interesseSicurezzaAffidabilitaSoftware
 :interesseSicurezzaAffidabilitaSoftware rdf:type owl:NamedIndividual ,
                                                  :Interesse ;
@@ -794,6 +845,15 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                                                  :sicurezzaDeiDati ,
                                                  :softwareDependability ;
                                         :nome "Interesse in Sicurezza e Affidabilità del Software" .
+
+
+###  http://www.semanticweb.org/ontology#interesseSicurezzaInformatica
+:interesseSicurezzaInformatica rdf:type owl:NamedIndividual ,
+                                        :Interesse ;
+                               :legatoA :networkManagementAndSecurity ,
+                                        :penetrationTestingEthicalHacking ,
+                                        :sicurezza ;
+                               :nome "Interesse in Sicurezza Informatica" .
 
 
 ###  http://www.semanticweb.org/ontology#interesseSistemiTecnologieEmergenti
@@ -805,6 +865,23 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                                      :nome "Interesse in Sistemi e Tecnologie Emergenti" .
 
 
+###  http://www.semanticweb.org/ontology#interesseSistemiTecnologieInformatiche
+:interesseSistemiTecnologieInformatiche rdf:type owl:NamedIndividual ,
+                                                 :Interesse ;
+                                        :legatoA :internetOfThings ,
+                                                 :retiDiCalcolatori ,
+                                                 :sistemiOperativi ;
+                                        :nome "Interesse in Sistemi e Tecnologie Informatiche" .
+
+
+###  http://www.semanticweb.org/ontology#interesseStatisticaDataScience
+:interesseStatisticaDataScience rdf:type owl:NamedIndividual ,
+                                         :Interesse ;
+                                :legatoA :calcoloDelleProbabilitaEStatisticaMatematica ,
+                                         :statisticaAnalisiDati ;
+                                :nome "Interesse in Statistica e Data Science" .
+
+
 ###  http://www.semanticweb.org/ontology#interesseSviluppoSoftwareTecnologieWeb
 :interesseSviluppoSoftwareTecnologieWeb rdf:type owl:NamedIndividual ,
                                                  :Interesse ;
@@ -813,6 +890,24 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                                                  :intelligentWeb ,
                                                  :internetOfThings ;
                                         :nome "Interesse in Sviluppo Software e Tecnologie Web" .
+
+
+###  http://www.semanticweb.org/ontology#interesseTecnicheProgrammazioneSviluppoSoftware
+:interesseTecnicheProgrammazioneSviluppoSoftware rdf:type owl:NamedIndividual ,
+                                                          :Interesse ;
+                                                 :legatoA :ingegneriaDelSoftware ,
+                                                          :programmazioneAdOggetti ,
+                                                          :programmazioneAvanzata ,
+                                                          :programmazioneJavaAvanzata ;
+                                                 :nome "Interesse in Tecniche di Programmazione e Sviluppo Software" .
+
+
+###  http://www.semanticweb.org/ontology#interesseTecnologieMobiliApplicazioni
+:interesseTecnologieMobiliApplicazioni rdf:type owl:NamedIndividual ,
+                                                :Interesse ;
+                                       :legatoA :enterpriseMobileApplicationDevelopment ,
+                                                :mobileProgramming ;
+                                       :nome "Interesse in Tecnologie Mobili e Applicazioni" .
 
 
 ###  http://www.semanticweb.org/ontology#internetOfThings
@@ -863,7 +958,10 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                                                     :softwareEngineeringAI ,
                                                     :statisticaAnalisiDati ,
                                                     :tecnicheAutomaticheCorrettezzaSoftware ;
-                             :offreOpportunità :opportunitàSviluppatoreWeb ;
+                             :offreOpportunità :opportunitàAnalistaDati ,
+                                               :opportunitàIngegnereSoftware ,
+                                               :opportunitàSicurezzaInformatica ,
+                                               :opportunitàSviluppatoreWeb ;
                              <http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> 120 ;
                              :codice "LMINFO" ;
                              :descrizione "Corso di studi magistrale in Informatica presso il Dipartimento di Informatica dell'Università di Salerno." ;
@@ -899,6 +997,7 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                                                     :teoriaDelleFunzioni ,
                                                     :teoriaDiGalois ,
                                                     :topologia ;
+                             :offreOpportunità :opportunitàRicercatoreMatematico ;
                              <http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> 180 ;
                              :codice "L35MAT" ;
                              :descrizione "Corso di studi triennale in Matematica presso il Dipartimento di Matematica dell'Università di Salerno." ;
@@ -939,7 +1038,8 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                                                    :sistemiOperativi ,
                                                    :tecnologieSoftwarePerIlWeb ,
                                                    :tirocinio ;
-                            :offreOpportunità :opportunitàSviluppatoreWeb ;
+                            :offreOpportunità :opportunitàConsulenteIT ,
+                                              :opportunitàSviluppatoreWeb ;
                             <http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> 180 ;
                             :codice "L3INFO" ;
                             :descrizione "Corso di studi triennale in Informatica presso il Dipartimento di Informatica dell'Università di Salerno." ;
@@ -981,6 +1081,8 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                                                              :tecnologieInformaticheDeiSistemiDiControllo ,
                                                              :tecnologieWeb ,
                                                              <http://www.semanticweb.org/ontology#5GNetworks> ;
+                                      :offreOpportunità :opportunitàIngegnereSoftware ,
+                                                        :opportunitàSicurezzaInformatica ;
                                       <http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> 180 ;
                                       :codice "L3INF" ;
                                       :descrizione "Corso di studi triennale in Ingegneria Informatica presso il Dipartimento di Ingegneria Informatica." ;
@@ -1091,6 +1193,46 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                               :codice "ING-INF/05" ;
                               :descrizione "Gestione e sicurezza delle reti." ;
                               :nome "Network Management and Security" .
+
+
+###  http://www.semanticweb.org/ontology#opportunitàAnalistaDati
+:opportunitàAnalistaDati rdf:type owl:NamedIndividual ,
+                                  :OpportunitàDiCarriera ;
+                         :descrizione "Opportunità di carriera come analista di dati, specializzato nell'interpretazione di grandi volumi di dati per informare le decisioni aziendali." ;
+                         :nome "Opportunità di Analista Dati" ;
+                         :settore "Data Science" .
+
+
+###  http://www.semanticweb.org/ontology#opportunitàConsulenteIT
+:opportunitàConsulenteIT rdf:type owl:NamedIndividual ,
+                                  :OpportunitàDiCarriera ;
+                         :descrizione "Opportunità di carriera come consulente IT, supportando le aziende nell'implementazione di soluzioni tecnologiche efficaci." ;
+                         :nome "Opportunità di Consulente IT" ;
+                         :settore "Consulting" .
+
+
+###  http://www.semanticweb.org/ontology#opportunitàIngegnereSoftware
+:opportunitàIngegnereSoftware rdf:type owl:NamedIndividual ,
+                                       :OpportunitàDiCarriera ;
+                              :descrizione "Opportunità di carriera come ingegnere del software, responsabile della progettazione, sviluppo e manutenzione del software." ;
+                              :nome "Opportunità di Ingegnere Software" ;
+                              :settore "Informatica" .
+
+
+###  http://www.semanticweb.org/ontology#opportunitàRicercatoreMatematico
+:opportunitàRicercatoreMatematico rdf:type owl:NamedIndividual ,
+                                           :OpportunitàDiCarriera ;
+                                  :descrizione "Opportunità di carriera come ricercatore matematico, focalizzato su ricerca pura o applicata in ambito accademico o industriale." ;
+                                  :nome "Opportunità di Ricercatore Matematico" ;
+                                  :settore "Ricerca e Sviluppo" .
+
+
+###  http://www.semanticweb.org/ontology#opportunitàSicurezzaInformatica
+:opportunitàSicurezzaInformatica rdf:type owl:NamedIndividual ,
+                                          :OpportunitàDiCarriera ;
+                                 :descrizione "Opportunità di carriera come esperto di sicurezza informatica, incaricato di proteggere le infrastrutture IT e i dati aziendali." ;
+                                 :nome "Opportunità di Sicurezza Informatica" ;
+                                 :settore "Sicurezza Informatica" .
 
 
 ###  http://www.semanticweb.org/ontology#opportunitàSviluppatoreWeb
