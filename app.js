@@ -4,16 +4,13 @@ const app = express();
 const PORT = 3000;
 const FUSEKI_URL = 'http://localhost:3030/unisa/query';
 
-
-// Servi i file statici dalla cartella 'public'
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Serve il file HTML
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
-// Funzione per eseguire una query SPARQL
 async function executeSparqlQuery(query) {
   const fetch = (await import('node-fetch')).default;
   const response = await fetch(FUSEKI_URL, {
@@ -32,78 +29,142 @@ async function executeSparqlQuery(query) {
   return await response.json();
 }
 
+// Funzione helper per creare filtri SPARQL da array
+function createSparqlFilter(param, values) {
+  if (!Array.isArray(values)) {
+    values = [values];
+  }
+  return values.map(value => `?${param} = "${value}"`).join(" || ");
+}
+
+app.get('/dipartimenti', async (req, res) => {
+  const query = `
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX : <http://www.semanticweb.org/ontology#>    
+    SELECT ?nome ?edificio WHERE {
+      ?dip rdf:type :Dipartimento;
+           :nome ?nome;
+           :edificio ?edificio.
+    }
+  `;
+  try {
+    const data = await executeSparqlQuery(query);
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.get('/corsi-di-studio', async (req, res) => {
+  const dipartimento = req.query.dipartimento; // Passa il nome del dipartimento come query param
+  const query = `
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX : <http://www.semanticweb.org/ontology#>    
+    SELECT ?nomeCorso ?descrizione ?durata ?cfu
+    WHERE {
+      ?dipartimento rdf:type :Dipartimento;
+                    :nome "${dipartimento}";  # Sostituisci con il nome del dipartimento specifico
+                    :propone ?corso.
+      ?corso :nome ?nomeCorso;
+              :descrizione ?descrizione;
+              :durata ?durata;
+              <http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> ?cfu.
+    }
+  `;
+  try {
+    const data = await executeSparqlQuery(query);
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/insegnamenti', async (req, res) => {
+  const corsoDiStudio = req.query.corsoDiStudio; // Passa il nome del corso di studio come query param
+  const query = `
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX : <http://www.semanticweb.org/ontology#>    
+
+    SELECT ?nomeInsegnamento ?cfu ?descrizione
+    WHERE {
+          ?corso rdf:type/rdfs:subClassOf* :CorsoDiStudio ;
+            :nome "${corsoDiStudio}";
+            :comprendeInsegnamento ?insegnamento.
+      ?insegnamento :nome ?nomeInsegnamento;
+                     :CFU ?cfu;
+                     :descrizione ?descrizione.
+    }
+  `;
+  try {
+    const data = await executeSparqlQuery(query);
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/opportunita-di-carriera', async (req, res) => {
+  const query = `
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX : <http://www.semanticweb.org/ontology#>    
+    SELECT ?nome ?descrizione ?settore WHERE {
+      ?opp rdf:type :OpportunitàDiCarriera;
+           :nome ?nome;
+           :descrizione ?descrizione;
+           :settore ?settore.
+    }
+  `;
+  try {
+    const data = await executeSparqlQuery(query);
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/corsi-legati-opportunita', async (req, res) => {
+  let opportunita = req.query.opportunita; // Può essere un array o una stringa singola
+
+  // Assicurati che opportunita sia un array
+  if (typeof opportunita === 'string') {
+    opportunita = opportunita.split(','); // Suddividi la stringa per la virgola
+  }
+
+  if (!opportunita || !Array.isArray(opportunita) || opportunita.length === 0) {
+    return res.status(400).json({ error: "Opportunità non fornite o non valide" });
+  }
+
+  // Creazione dinamica della parte VALUES della query
+  const valoriOpportunita = opportunita.map(op => `"${op.trim()}"`).join(' ');
+
   const query = `
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX owl: <http://www.w3.org/2002/07/owl#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX : <http://www.semanticweb.org/ontology#>
     
-    SELECT ?nome ?codice ?descrizione ?durata ?CFU ?sitoWeb
+    SELECT DISTINCT ?nomeCorso ?descrizione ?durata ?cfu
     WHERE {
       ?corso rdf:type/rdfs:subClassOf* :CorsoDiStudio ;
-             :nome ?nome ;
-             :codice ?codice ;
-             :descrizione ?descrizione ;
-             :durata ?durata ;
-             :CFU ?CFU ;
-             :sitoWeb ?sitoWeb .
+             :nome ?nomeCorso;
+             :descrizione ?descrizione;
+             :durata ?durata;
+             <http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> ?cfu.
+             
+      ?corso :offreOpportunità ?opportunita.
+      ?opportunita :nome ?nomeOpportunita.
+
+      VALUES ?nomeOpportunita { ${valoriOpportunita} }
     }
   `;
-  try {
-    const data = await executeSparqlQuery(query);
-    res.json(data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-app.get('/corsi-laurea-magistrale', async (req, res) => {
-  const query = `
-    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    PREFIX owl: <http://www.w3.org/2002/07/owl#>
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    PREFIX : <http://www.semanticweb.org/ontology#>
-    
-    SELECT ?corso ?nome ?codice ?descrizione ?durata ?CFU ?sitoWeb
-    WHERE {
-      ?corso rdf:type :CorsoDiLaureaMagistrale ;
-             :nome ?nome ;
-             :codice ?codice ;
-             :descrizione ?descrizione ;
-             :durata ?durata ;
-             :CFU ?CFU ;
-             :sitoWeb ?sitoWeb .
-    }
-  `;
-
-  app.get('/corsi-laurea-triennale', async (req, res) => {
-    const query = `
-    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    PREFIX owl: <http://www.w3.org/2002/07/owl#>
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    PREFIX : <http://www.semanticweb.org/ontology#>
-    
-    SELECT ?corso ?nome ?codice ?descrizione ?durata ?CFU ?sitoWeb
-    WHERE {
-      ?corso rdf:type :CorsoDiLaureaTriennale ;
-             :nome ?nome ;
-             :codice ?codice ;
-             :descrizione ?descrizione ;
-             :durata ?durata ;
-             :CFU ?CFU ;
-             :sitoWeb ?sitoWeb .
-    }
-  `;
-
-    try {
-      const data = await executeSparqlQuery(query);
-      res.json(data);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  });
-
 
   try {
     const data = await executeSparqlQuery(query);
@@ -114,115 +175,16 @@ app.get('/corsi-laurea-magistrale', async (req, res) => {
 });
 
 
-
-// Route per ottenere gli insegnamenti di un corso di studio
-app.get('/insegnamenti-corso', async (req, res) => {
-  const corsoDiStudio = req.query.corso; // Nome del corso di studio passato come parametro di query
-  const query = `
-    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    PREFIX owl: <http://www.w3.org/2002/07/owl#>
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    PREFIX : <http://www.semanticweb.org/ontology#>
-    
-    SELECT ?insegnamento
-    WHERE {
-      ?corso :nome "${corsoDiStudio}" ;
-             :comprende ?insegnamento .
-    }
-  `;
-  try {
-    const data = await executeSparqlQuery(query);
-    res.json(data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-app.get('/professori-corso', async (req, res) => {
-  const corsoDiStudio = req.query.corso; // Nome del corso di studio passato come parametro di query
-  const query = `
-    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    PREFIX owl: <http://www.w3.org/2002/07/owl#>
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    PREFIX : <http://www.semanticweb.org/ontology#>
-    
-    SELECT ?professore
-    WHERE {
-      ?corsoDiStudio :nome "${corsoDiStudio}" ;
-                     :comprende ?insegnamento .
-      ?insegnamento :insegna ?professore .
-    }
-  `;
-  try {
-    const data = await executeSparqlQuery(query);
-    res.json(data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-
-// Route per ottenere i dettagli di un insegnamento specifico
-app.get('/dettagli-insegnamento', async (req, res) => {
-  const insegnamento = req.query.insegnamento; // Nome dell'insegnamento passato come parametro di query
-  const query = `
-    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    PREFIX owl: <http://www.w3.org/2002/07/owl#>
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    PREFIX : <http://www.semanticweb.org/ontology#>
-    
-    SELECT ?nome ?codice ?descrizione ?CFU ?annoDiCorso
-    WHERE {
-      ?insegnamento :nome "${insegnamento}" ;
-                     :codice ?codice ;
-                     :descrizione ?descrizione ;
-                     :CFU ?CFU ;
-                     :annoDiCorso ?annoDiCorso .
-    }
-  `;
-  try {
-    const data = await executeSparqlQuery(query);
-    res.json(data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-app.get('/dettagli-professore', async (req, res) => {
-  const nomeProfessore = req.query.nome;
-  const query = `
-    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    PREFIX owl: <http://www.w3.org/2002/07/owl#>
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    PREFIX : <http://www.semanticweb.org/ontology#>
-    
-    SELECT ?nome ?cognome ?insegnamento
-    WHERE {
-      ?professore rdf:type :Professore ;
-                  :nome "${nomeProfessore}" ;
-                  :cognome ?cognome ;
-                  :insegna ?insegnamento .
-    }
-  `;
-  try {
-    const data = await executeSparqlQuery(query);
-    res.json(data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
 
 app.get('/interessi', async (req, res) => {
   const query = `
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX owl: <http://www.w3.org/2002/07/owl#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    PREFIX : <http://www.semanticweb.org/ontology#>
-
-    SELECT ?nome
-    WHERE {
-      ?interest rdf:type :Interesse ;
-                :nomeInteresse ?nome .
+    PREFIX : <http://www.semanticweb.org/ontology#>    
+    SELECT ?nome WHERE {
+      ?interesse rdf:type :Interesse;
+                 :nome ?nome.
     }
   `;
   try {
@@ -233,45 +195,36 @@ app.get('/interessi', async (req, res) => {
   }
 });
 
-app.get('/corsi-per-interesse', async (req, res) => {
-  let interessi = req.query.interessi;
-
-  // Assicurati che gli interessi siano una stringa e suddividili in un array
+app.get('/corsi-legati-interessi', async (req, res) => {
+  let interessi = req.query.interesse; // Può essere un array o una stringa singola
   if (typeof interessi === 'string') {
-    interessi = interessi.split('_'); // Suddividi la stringa per il carattere di underscore
+    interessi = interessi.split(','); // Suddividi la stringa per la virgola
   }
-
   if (!interessi || !Array.isArray(interessi) || interessi.length === 0) {
     return res.status(400).json({ error: "Interessi non forniti o non validi" });
   }
-
-  // Creazione dinamica della parte VALUES della query
-  const valoriInteressi = interessi.map(interesse => `"${interesse}"`).join(' ');
-
+  const valoriInteressi = interessi.map(interesse => `"${interesse.trim()}"`).join(' ');
   const query = `
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX owl: <http://www.w3.org/2002/07/owl#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX : <http://www.semanticweb.org/ontology#>
     
-    SELECT DISTINCT ?nomeInteresse ?nomeCorso ?descrizioneCorso ?sitoWeb
+    SELECT DISTINCT ?nomeCorso ?descrizione ?durata ?cfu
     WHERE {
-      ?interesse rdf:type :Interesse ;
-                 :nomeInteresse ?nomeInteresse .
-      
+      ?interesse rdf:type :Interesse;
+                 :nome ?nomeInteresse.
+                 
       VALUES ?nomeInteresse { ${valoriInteressi} }
       
-      ?interesse :legatoA ?corsoDiStudio .
-      
-      ?corsoDiStudio rdf:type ?tipoCorso ;
-                     :nome ?nomeCorso ;
-                     :descrizione ?descrizioneCorso ;
-                     :sitoWeb ?sitoWeb .
-      
-      FILTER ( ?tipoCorso IN (:CorsoDiLaureaTriennale, :CorsoDiLaureaMagistrale) )
+      ?interesse :legatoA ?insegnamento.
+      ?corso :comprendeInsegnamento ?insegnamento;
+              :nome ?nomeCorso;
+              :descrizione ?descrizione;
+              :durata ?durata;
+              <http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> ?cfu.
     }
   `;
-
   try {
     const data = await executeSparqlQuery(query);
     res.json(data);
@@ -279,6 +232,7 @@ app.get('/corsi-per-interesse', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 
 
 // Avvia il server

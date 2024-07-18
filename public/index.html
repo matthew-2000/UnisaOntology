@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unisa Ontology</title>
+  <title>Unisa Ontology Explorer</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -22,138 +22,96 @@
     .result-table th {
       background-color: #f2f2f2;
     }
-
-    #a-div {
-      margin: 30px 0;
+    select {
+      width: 200px;
+      margin-bottom: 20px;
     }
-
   </style>
 </head>
 <body>
 <div class="container">
-  <h1>Unisa Ontology</h1>
+  <h1>Unisa Ontology Explorer</h1>
 
   <div>
-    <h2>Corsi di Studio</h2>
-    <button onclick="getCorsi()">Mostra tutti i corsi</button>
+    <h2>Visualizza Dipartimenti</h2>
+    <select id="dipartimentiSelect"></select>
+    <button onclick="fetchCorsiDiStudio()">Mostra Corsi di Studio per Dipartimento</button>
     <div id="corsiResult"></div>
   </div>
 
   <div>
-    <h2>Corsi di Studio Magistrali e Triennali</h2>
-    <button onclick="getCorsiLaureaMagistrale()">Mostra Corsi di Laurea Magistrale</button>
-    <button onclick="getCorsiLaureaTriennale()">Mostra Corsi di Laurea Triennale</button>
-    <div id="corsiInsegnamentiResult"></div>
+    <h2>Visualizza Corsi di Studio per Interesse</h2>
+    <select id="interessiSelect"></select>
+    <button onclick="fetchCorsiLegatiInteressi()">Mostra Corsi Legati a Interesse</button>
+    <div id="corsiInteressiResult"></div>
   </div>
 
   <div>
-    <h2>Insegnamenti di un Corso di Studio</h2>
-    <input type="text" id="corsoInput" placeholder="Nome del corso di studio">
-    <button onclick="getInsegnamentiCorso()">Cerca</button>
-    <div id="insegnamentiCorsoResult"></div>
-  </div>
-
-  <div>
-    <h2>Dettagli di un Insegnamento</h2>
-    <input type="text" id="insegnamentoInput" placeholder="Nome dell'insegnamento">
-    <button onclick="getDettagliInsegnamento()">Cerca</button>
-    <div id="dettagliInsegnamentoResult"></div>
-  </div>
-
-  <!-- Aggiungi il bottone per il link ad interessi.html -->
-  <div id="a-div">
-    <a href="/interessi.html" class="button">Vai a Interessi</a>
+    <h2>Visualizza Dipartimenti per Opportunità di Carriera</h2>
+    <select id="opportunitaSelect"></select>
+    <button onclick="fetchCorsiPerOpportunita()">Mostra Corsi per Opportunità</button>
+    <div id="corsiOpportunitaResult"></div>
   </div>
 </div>
 
 <script>
+  async function fetchData(url) {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('Errore nella richiesta al server');
+    }
+    return response.json();
+  }
 
-  async function getCorsi() {
+  function populateSelect(selectId, items, textProperty, valueProperty) {
+    const select = document.getElementById(selectId);
+    select.innerHTML = ''; // Pulisce eventuali opzioni precedenti
+    items.forEach(item => {
+      const option = document.createElement('option');
+      option.textContent = item[textProperty].value; // Assicurati che il valore sia accessibile
+      option.value = item[valueProperty].value; // Assicurati che il valore sia accessibile
+      select.appendChild(option);
+    });
+  }
+
+  async function loadInitialData() {
     try {
-      const response = await fetch(`/corsi-di-studio`);
-      if (!response.ok) {
-        throw new Error('Errore nella richiesta al server');
-      }
-      const data = await response.json();
-      displayResult(data, 'corsiResult');
+      const dipartimentiData = await fetchData('/dipartimenti');
+      populateSelect('dipartimentiSelect', dipartimentiData.results.bindings, 'nome', 'nome');
+      const interessiData = await fetchData('/interessi');
+      populateSelect('interessiSelect', interessiData.results.bindings, 'nome', 'nome');
+      const opportunitaData = await fetchData('/opportunita-di-carriera');
+      populateSelect('opportunitaSelect', opportunitaData.results.bindings, 'nome', 'nome');
     } catch (error) {
-      console.error('Errore:', error);
-      document.getElementById('corsiResult').textContent = 'Errore durante la richiesta.';
+      console.error('Errore durante il caricamento dei dati:', error);
     }
   }
 
-  async function getInsegnamentiCorso() {
-    const corso = document.getElementById('corsoInput').value.trim();
-    if (corso === '') return;
-
-    try {
-      const response = await fetch(`/insegnamenti-corso?corso=${encodeURIComponent(corso)}`);
-      if (!response.ok) {
-        throw new Error('Errore nella richiesta al server');
-      }
-      const data = await response.json();
-      displayResult(data, 'insegnamentiCorsoResult');
-    } catch (error) {
-      console.error('Errore:', error);
-      document.getElementById('insegnamentiCorsoResult').textContent = 'Errore durante la richiesta.';
-    }
+  async function fetchCorsiDiStudio() {
+    const dipartimento = document.getElementById('dipartimentiSelect').value;
+    const data = await fetchData(`/corsi-di-studio?dipartimento=${encodeURIComponent(dipartimento)}`);
+    displayResult(data, 'corsiResult');
   }
 
-  async function getCorsiLaureaMagistrale() {
-    try {
-      const response = await fetch('/corsi-laurea-magistrale');
-      if (!response.ok) {
-        throw new Error('Errore nella richiesta al server');
-      }
-      const data = await response.json();
-      displayResult(data, 'corsiInsegnamentiResult');
-    } catch (error) {
-      console.error('Errore:', error);
-      document.getElementById('corsiInsegnamentiResult').textContent = 'Errore durante la richiesta.';
-    }
+  async function fetchCorsiLegatiInteressi() {
+    const interesse = document.getElementById('interessiSelect').value;
+    const data = await fetchData(`/corsi-legati-interessi?interesse=${encodeURIComponent(interesse)}`);
+    displayResult(data, 'corsiInteressiResult');
   }
 
-  async function getCorsiLaureaTriennale() {
-    try {
-      const response = await fetch('/corsi-laurea-triennale');
-      if (!response.ok) {
-        throw new Error('Errore nella richiesta al server');
-      }
-      const data = await response.json();
-      displayResult(data, 'corsiInsegnamentiResult');
-    } catch (error) {
-      console.error('Errore:', error);
-      document.getElementById('corsiInsegnamentiResult').textContent = 'Errore durante la richiesta.';
-    }
-  }
-
-  async function getDettagliInsegnamento() {
-    const insegnamento = document.getElementById('insegnamentoInput').value.trim();
-    if (insegnamento === '') return;
-
-    try {
-      const response = await fetch(`/dettagli-insegnamento?insegnamento=${encodeURIComponent(insegnamento)}`);
-      if (!response.ok) {
-        throw new Error('Errore nella richiesta al server');
-      }
-      const data = await response.json();
-      displayResult(data, 'dettagliInsegnamentoResult');
-    } catch (error) {
-      console.error('Errore:', error);
-      document.getElementById('dettagliInsegnamentoResult').textContent = 'Errore durante la richiesta.';
-    }
+  async function fetchCorsiPerOpportunita() {
+    const opportunita = document.getElementById('opportunitaSelect').value;
+    const data = await fetchData(`/corsi-legati-opportunita?opportunita=${encodeURIComponent(opportunita)}`);
+    displayResult(data, 'corsiOpportunitaResult');
   }
 
   function displayResult(data, elementId) {
     const resultDiv = document.getElementById(elementId);
-    resultDiv.innerHTML = '';
-
     if (data.results.bindings.length > 0) {
       const table = document.createElement('table');
       table.className = 'result-table';
       const thead = document.createElement('thead');
       const tbody = document.createElement('tbody');
-
       const headerRow = document.createElement('tr');
       Object.keys(data.results.bindings[0]).forEach(key => {
         const th = document.createElement('th');
@@ -161,7 +119,6 @@
         headerRow.appendChild(th);
       });
       thead.appendChild(headerRow);
-
       data.results.bindings.forEach(row => {
         const tr = document.createElement('tr');
         Object.values(row).forEach(value => {
@@ -171,14 +128,16 @@
         });
         tbody.appendChild(tr);
       });
-
       table.appendChild(thead);
       table.appendChild(tbody);
+      resultDiv.innerHTML = '';
       resultDiv.appendChild(table);
     } else {
       resultDiv.textContent = 'Nessun risultato trovato.';
     }
   }
+
+  window.onload = loadInitialData;
 </script>
 </body>
 </html>
