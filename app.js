@@ -104,7 +104,6 @@ app.get('/insegnamenti', async (req, res) => {
       ?insegnamento :nome ?nomeInsegnamento .
       OPTIONAL { ?insegnamento :CFU ?CFU }
       OPTIONAL { ?insegnamento :annoDiCorso ?annoDiCorso }
-      OPTIONAL { ?insegnamento :codice ?codice }
       OPTIONAL { ?insegnamento :descrizione ?descrizione }
     }
     ORDER BY ?annoDiCorso

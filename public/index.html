@@ -4,68 +4,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Unisa Ontology Explorer</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    .container {
-      margin: 20px;
-    }
-    .result-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .result-table th, .result-table td {
-      border: 1px solid #ddd;
-      padding: 8px;
-    }
-    .result-table th {
-      background-color: #f2f2f2;
-    }
-    select {
-      width: 200px;
-      margin-bottom: 20px;
-    }
-    button {
-      margin-bottom: 20px;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
 <div class="container">
   <h1>Unisa Ontology Explorer</h1>
 
-  <!-- Sezione Dipartimenti -->
-  <div>
+  <!-- Breadcrumbs for navigation -->
+  <nav aria-label="Breadcrumb">
+    <ul class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Explorer</a></li>
+    </ul>
+  </nav>
+
+  <!-- Section: Dipartimenti -->
+  <section class="section">
     <h2>Visualizza Dipartimenti</h2>
-    <select id="dipartimentiSelect"></select>
-    <button onclick="fetchCorsiDiStudio()">Mostra Corsi di Studio per Dipartimento</button>
-    <div id="corsiResult"></div>
-  </div>
+    <select id="dipartimentiSelect" class="select-style"></select>
+    <button class="btn" onclick="fetchCorsiDiStudio()">Mostra Corsi di Studio per Dipartimento</button>
+    <div id="corsiResult" class="result-div"></div>
+  </section>
 
-  <!-- Sezione Corsi di Studio -->
-  <div>
+  <!-- Section: Corsi di Studio -->
+  <section class="section">
     <h2>Visualizza Insegnamenti per Corso di Studio</h2>
-    <select id="corsiSelect"></select>
-    <button onclick="fetchInsegnamenti()">Mostra Insegnamenti</button>
-    <div id="insegnamentiResult"></div>
-  </div>
+    <select id="corsiSelect" class="select-style"></select>
+    <button class="btn" onclick="fetchInsegnamenti()">Mostra Insegnamenti</button>
+    <div id="insegnamentiResult" class="result-div"></div>
+  </section>
 
-  <!-- Sezione Corsi di Studio per Interesse -->
-  <div>
+  <!-- Section: Corsi di Studio per Interesse -->
+  <section class="section">
     <h2>Visualizza Corsi di Studio per Interesse</h2>
-    <select id="interessiSelect" multiple></select>
-    <button onclick="fetchCorsiLegatiInteressi()">Mostra Corsi Legati a Interesse</button>
-    <div id="corsiInteressiResult"></div>
-  </div>
+    <select id="interessiSelect" class="select-style" multiple></select>
+    <button class="btn" onclick="fetchCorsiLegatiInteressi()">Mostra Corsi Legati a Interesse</button>
+    <div id="selectedInterests" class="selected-interests"></div>
+    <div id="corsiInteressiResult" class="result-div"></div>
+  </section>
 
-  <!-- Sezione Corsi di Studio per Opportunità di Carriera -->
-  <div>
+  <!-- Section: Corsi di Studio per Opportunità di Carriera -->
+  <section class="section">
     <h2>Visualizza Dipartimenti per Opportunità di Carriera</h2>
-    <select id="opportunitaSelect"></select>
-    <button onclick="fetchCorsiPerOpportunita()">Mostra Corsi per Opportunità</button>
-    <div id="corsiOpportunitaResult"></div>
-  </div>
+    <select id="opportunitaSelect" class="select-style"></select>
+    <button class="btn" onclick="fetchCorsiPerOpportunita()">Mostra Corsi per Opportunità</button>
+    <div id="corsiOpportunitaResult" class="result-div"></div>
+  </section>
 
 </div>
 
@@ -117,6 +102,10 @@
     const interessi = Array.from(document.getElementById('interessiSelect').selectedOptions).map(option => option.value);
     const queryParam = interessi.join(',');
     const data = await fetchData(`/corsi-legati-interessi?interesse=${encodeURIComponent(queryParam)}`);
+
+    // Pulizia del div prima di mostrare i nuovi risultati
+    document.getElementById('corsiInteressiResult').innerHTML = '';
+
     displayGroupedResults(data, 'corsiInteressiResult');
   }
 
@@ -218,6 +207,28 @@
     }
 
     return courses;
+  }
+
+  document.getElementById('interessiSelect').addEventListener('change', function() {
+    updateSelectedInterestsDisplay();
+  });
+
+  function updateSelectedInterestsDisplay() {
+    const select = document.getElementById('interessiSelect');
+    const selectedDiv = document.getElementById('selectedInterests');
+    selectedDiv.innerHTML = ''; // Pulisci la visualizzazione corrente
+
+    // Aggiungi ogni interesse selezionato come un tag cliccabile nel div
+    Array.from(select.selectedOptions).forEach(option => {
+      const interestTag = document.createElement('span');
+      interestTag.classList.add('interest-tag');
+      interestTag.textContent = option.text + ' ×'; // Aggiungi una '×' per la deselezione
+      interestTag.onclick = function() {
+        option.selected = false; // Deseleziona l'opzione quando il tag è cliccato
+        updateSelectedInterestsDisplay(); // Aggiorna la visualizzazione
+      };
+      selectedDiv.appendChild(interestTag);
+    });
   }
 
 

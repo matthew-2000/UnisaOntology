@@ -1,8 +1,104 @@
+/* styles.css */
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 20px;
 }
 
-a {
-  color: #00B7FF;
+.container {
+  max-width: 960px;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+h1 {
+  color: #0056b3;
+}
+
+h2 {
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.select-style, .btn {
+  width: 100%; /* o una larghezza fissa se preferisci */
+  padding: 15px 20px; /* Aumento del padding per una migliore area di clic */
+  margin: 10px 0;
+  font-size: 16px; /* Aumento della dimensione del font per una migliore leggibilità */
+  border: 2px solid #ccc; /* Bordo più spesso */
+  border-radius: 8px; /* Bordi arrotondati per un look più morbido */
+  cursor: pointer;
+  display: inline-block;
+  box-sizing: border-box; /* Assicurarsi che padding e bordo siano inclusi nella larghezza */
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.result-div {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.breadcrumb {
+  list-style: none;
+  padding: 0;
+}
+
+.breadcrumb li {
+  display: inline;
+  margin-right: 5px;
+}
+
+.breadcrumb li a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.breadcrumb li a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .select-style, .btn {
+    width: auto;
+  }
+}
+
+.selected-interests {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #eef;
+  border-radius: 4px;
+}
+
+.interest-tag {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #dde;
+  border-radius: 10px;
+  margin-right: 5px;
+  cursor: pointer;
 }
