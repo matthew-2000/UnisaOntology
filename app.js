@@ -94,15 +94,20 @@ app.get('/insegnamenti', async (req, res) => {
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX owl: <http://www.w3.org/2002/07/owl#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    PREFIX : <http://www.semanticweb.org/ontology#>    
-
-    SELECT ?nomeInsegnamento
+    PREFIX : <http://www.semanticweb.org/ontology#>
+    
+    SELECT ?nomeInsegnamento ?CFU ?annoDiCorso ?codice ?descrizione
     WHERE {
       ?corso rdf:type/rdfs:subClassOf* :CorsoDiStudio ;
-             :nome "${corsoDiStudio}";
-             :comprendeInsegnamento ?insegnamento.
-      ?insegnamento :nome ?nomeInsegnamento.
+             :nome "${corsoDiStudio}" ;
+             :comprendeInsegnamento ?insegnamento .
+      ?insegnamento :nome ?nomeInsegnamento .
+      OPTIONAL { ?insegnamento :CFU ?CFU }
+      OPTIONAL { ?insegnamento :annoDiCorso ?annoDiCorso }
+      OPTIONAL { ?insegnamento :codice ?codice }
+      OPTIONAL { ?insegnamento :descrizione ?descrizione }
     }
+    ORDER BY ?annoDiCorso
   `;
   try {
     const data = await executeSparqlQuery(query);
