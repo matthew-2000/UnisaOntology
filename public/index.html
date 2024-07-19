@@ -26,12 +26,16 @@
       width: 200px;
       margin-bottom: 20px;
     }
+    button {
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
 <div class="container">
   <h1>Unisa Ontology Explorer</h1>
 
+  <!-- Sezione Dipartimenti -->
   <div>
     <h2>Visualizza Dipartimenti</h2>
     <select id="dipartimentiSelect"></select>
@@ -39,6 +43,7 @@
     <div id="corsiResult"></div>
   </div>
 
+  <!-- Sezione Corsi di Studio -->
   <div>
     <h2>Visualizza Insegnamenti per Corso di Studio</h2>
     <select id="corsiSelect"></select>
@@ -46,13 +51,15 @@
     <div id="insegnamentiResult"></div>
   </div>
 
+  <!-- Sezione Corsi di Studio per Interesse -->
   <div>
     <h2>Visualizza Corsi di Studio per Interesse</h2>
-    <select id="interessiSelect"></select>
+    <select id="interessiSelect" multiple></select>
     <button onclick="fetchCorsiLegatiInteressi()">Mostra Corsi Legati a Interesse</button>
     <div id="corsiInteressiResult"></div>
   </div>
 
+  <!-- Sezione Corsi di Studio per Opportunità di Carriera -->
   <div>
     <h2>Visualizza Dipartimenti per Opportunità di Carriera</h2>
     <select id="opportunitaSelect"></select>
@@ -63,6 +70,7 @@
 </div>
 
 <script>
+  // Funzione per fetch dei dati dal server
   async function fetchData(url) {
     const response = await fetch(url);
     if (!response.ok) {
@@ -71,17 +79,19 @@
     return response.json();
   }
 
+  // Funzione per popolare i select con i dati ricevuti
   function populateSelect(selectId, items, textProperty, valueProperty) {
     const select = document.getElementById(selectId);
     select.innerHTML = ''; // Pulisce eventuali opzioni precedenti
     items.forEach(item => {
       const option = document.createElement('option');
-      option.textContent = item[textProperty].value; // Assicurati che il valore sia accessibile
-      option.value = item[valueProperty].value; // Assicurati che il valore sia accessibile
+      option.textContent = item[textProperty].value;
+      option.value = item[valueProperty].value;
       select.appendChild(option);
     });
   }
 
+  // Funzione per caricare i dati iniziali
   async function loadInitialData() {
     try {
       const dipartimentiData = await fetchData('/dipartimenti');
@@ -95,31 +105,37 @@
     }
   }
 
+  // Funzione per ottenere corsi di studio per dipartimento
   async function fetchCorsiDiStudio() {
     const dipartimento = document.getElementById('dipartimentiSelect').value;
     const data = await fetchData(`/corsi-di-studio?dipartimento=${encodeURIComponent(dipartimento)}`);
-    populateSelect('corsiSelect', data.results.bindings, 'nomeCorso', 'nomeCorso'); // Popola il nuovo select per i corsi
+    populateSelect('corsiSelect', data.results.bindings, 'nomeCorso', 'nomeCorso');
     displayResult(data, 'corsiResult');
   }
 
   async function fetchCorsiLegatiInteressi() {
-    const interesse = document.getElementById('interessiSelect').value;
-    const data = await fetchData(`/corsi-legati-interessi?interesse=${encodeURIComponent(interesse)}`);
-    displayResult(data, 'corsiInteressiResult');
+    const interessi = Array.from(document.getElementById('interessiSelect').selectedOptions).map(option => option.value);
+    const queryParam = interessi.join(',');
+    const data = await fetchData(`/corsi-legati-interessi?interesse=${encodeURIComponent(queryParam)}`);
+    displayGroupedResults(data, 'corsiInteressiResult');
   }
 
+
+  // Funzione per ottenere corsi per opportunità di carriera
   async function fetchCorsiPerOpportunita() {
     const opportunita = document.getElementById('opportunitaSelect').value;
     const data = await fetchData(`/corsi-legati-opportunita?opportunita=${encodeURIComponent(opportunita)}`);
     displayResult(data, 'corsiOpportunitaResult');
   }
 
+  // Funzione per ottenere insegnamenti per corso di studio
   async function fetchInsegnamenti() {
     const corsoDiStudio = document.getElementById('corsiSelect').value;
     const data = await fetchData(`/insegnamenti?corsoDiStudio=${encodeURIComponent(corsoDiStudio)}`);
     displayResult(data, 'insegnamentiResult');
   }
 
+  // Funzione per visualizzare i risultati in una tabella
   function displayResult(data, elementId) {
     const resultDiv = document.getElementById(elementId);
     if (data.results.bindings.length > 0) {
@@ -152,6 +168,60 @@
     }
   }
 
+  // Funzione per visualizzare i risultati raggruppati in una forma migliore
+  function displayGroupedResults(data, elementId) {
+    const resultDiv = document.getElementById(elementId);
+    if (data.results.bindings.length > 0) {
+      const courses = groupByCourse(data.results.bindings);
+
+      for (const [courseName, details] of Object.entries(courses)) {
+        const container = document.createElement('div');
+        const courseHeader = document.createElement('h3');
+        courseHeader.textContent = courseName + ' - Insegnamenti Correlati';
+        container.appendChild(courseHeader);
+
+        const list = document.createElement('ul');
+        details.teachings.forEach(teaching => {
+          const item = document.createElement('li');
+          item.textContent = `${teaching.name} - CFU: ${teaching.cfu}`;
+          list.appendChild(item);
+        });
+        container.appendChild(list);
+        resultDiv.appendChild(container);
+      }
+    } else {
+      resultDiv.textContent = 'Nessun risultato trovato.';
+    }
+  }
+
+  // Funzione per raggruppare i risultati per corso di studio
+  function groupByCourse(bindings) {
+    const courses = {};
+    bindings.forEach(binding => {
+      const courseName = binding.nomeCorso.value;
+      if (!courses[courseName]) {
+        courses[courseName] = {
+          teachings: [],
+          totalTeachings: 0
+        };
+      }
+      courses[courseName].teachings.push({
+        name: binding.nomeInsegnamento.value,
+        cfu: binding.cfuInsegnamento.value
+      });
+      courses[courseName].totalTeachings++;
+    });
+
+    // Calcolo della percentuale di insegnamenti per interesse
+    for (const course of Object.values(courses)) {
+      course.percentage = (course.teachings.length / course.totalTeachings) * 100;
+    }
+
+    return courses;
+  }
+
+
+  // Carica i dati iniziali quando la pagina viene caricata
   window.onload = loadInitialData;
 </script>
 </body>

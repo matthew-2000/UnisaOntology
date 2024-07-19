@@ -217,20 +217,24 @@ app.get('/corsi-legati-interessi', async (req, res) => {
     PREFIX owl: <http://www.w3.org/2002/07/owl#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX : <http://www.semanticweb.org/ontology#>
+    PREFIX co: <http://www.co-ode.org/ontologies/ont.owl#>
     
-    SELECT DISTINCT ?nomeCorso ?descrizione ?durata ?cfu
+    SELECT DISTINCT ?nomeCorso ?nomeInsegnamento ?cfuInsegnamento
     WHERE {
-      ?interesse rdf:type :Interesse;
-                 :nome ?nomeInteresse.
-                 
+      ?interesse rdf:type :Interesse ;
+                 :nome ?nomeInteresse .
+      
       VALUES ?nomeInteresse { ${valoriInteressi} }
       
-      ?interesse :legatoA ?insegnamento.
-      ?corso :comprendeInsegnamento ?insegnamento;
-              :nome ?nomeCorso;
-              :descrizione ?descrizione;
-              :durata ?durata;
-              <http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> ?cfu.
+      ?interesse :legatoA ?insegnamento .
+      ?corso :comprendeInsegnamento ?insegnamento ;
+             :nome ?nomeCorso ;
+             :descrizione ?descrizione ;
+             :durata ?durata ;
+             co:CFUCorsoDiStudio ?cfu .
+      
+      ?insegnamento :nome ?nomeInsegnamento ;
+                    :CFU ?cfuInsegnamento .
     }
   `;
   try {
