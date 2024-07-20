@@ -64,6 +64,7 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 ###  http://www.co-ode.org/ontologies/ont.owl#èCompreso
 <http://www.co-ode.org/ontologies/ont.owl#èCompreso> rdf:type owl:ObjectProperty ;
                                                      owl:inverseOf :comprendeInsegnamento ;
+                                                     rdf:type owl:AsymmetricProperty ;
                                                      rdfs:domain :Insegnamento ;
                                                      rdfs:range :CorsoDiStudio .
 
@@ -71,12 +72,14 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 ###  http://www.co-ode.org/ontologies/ont.owl#èOffertaDa
 <http://www.co-ode.org/ontologies/ont.owl#èOffertaDa> rdf:type owl:ObjectProperty ;
                                                       owl:inverseOf :offreOpportunità ;
+                                                      rdf:type owl:AsymmetricProperty ;
                                                       rdfs:domain :OpportunitàDiCarriera ;
                                                       rdfs:range :CorsoDiStudio .
 
 
 ###  http://www.semanticweb.org/ontology#comprende
-:comprende rdf:type owl:ObjectProperty ;
+:comprende rdf:type owl:ObjectProperty ,
+                    owl:AsymmetricProperty ;
            rdfs:domain :Università ;
            rdfs:range :Dipartimento ;
            rdfs:comment "Relazione che collega un'Università ai suoi Dipartimenti." ;
@@ -84,7 +87,8 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 
 
 ###  http://www.semanticweb.org/ontology#comprendeInsegnamento
-:comprendeInsegnamento rdf:type owl:ObjectProperty ;
+:comprendeInsegnamento rdf:type owl:ObjectProperty ,
+                                owl:AsymmetricProperty ;
                        rdfs:domain :CorsoDiStudio ;
                        rdfs:range :Insegnamento ;
                        rdfs:comment "Relazione che collega un Corso di Studio agli Insegnamenti che comprende." ;
@@ -104,7 +108,8 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 
 
 ###  http://www.semanticweb.org/ontology#offreOpportunità
-:offreOpportunità rdf:type owl:ObjectProperty ;
+:offreOpportunità rdf:type owl:ObjectProperty ,
+                           owl:AsymmetricProperty ;
                   rdfs:domain :CorsoDiStudio ;
                   rdfs:range :OpportunitàDiCarriera ;
                   rdfs:comment "Relazione che collega un Corso di Studio alle Opportunità di Carriera offerte." ;
@@ -112,7 +117,8 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 
 
 ###  http://www.semanticweb.org/ontology#propone
-:propone rdf:type owl:ObjectProperty ;
+:propone rdf:type owl:ObjectProperty ,
+                  owl:AsymmetricProperty ;
          rdfs:domain :Dipartimento ;
          rdfs:range :CorsoDiStudio ;
          rdfs:comment "Relazione che collega un Dipartimento ai Corsi di Studio che propone." ;
@@ -126,7 +132,12 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 ###  http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio
 <http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> rdf:type owl:DatatypeProperty ;
                                                             rdfs:domain :CorsoDiStudio ;
-                                                            rdfs:range xsd:int ;
+                                                            rdfs:range [ rdf:type rdfs:Datatype ;
+                                                                         owl:onDatatype xsd:integer ;
+                                                                         owl:withRestrictions ( [ xsd:minInclusive 120
+                                                                                                ]
+                                                                                              )
+                                                                       ] ;
                                                             rdfs:comment "Numero di Crediti Formativi Universitari (CFU) del Corso di Studio." ;
                                                             rdfs:label "CFUCorsoDiStudio" .
 
@@ -134,7 +145,12 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 ###  http://www.semanticweb.org/ontology#CFU
 :CFU rdf:type owl:DatatypeProperty ;
      rdfs:domain :Insegnamento ;
-     rdfs:range xsd:int ;
+     rdfs:range [ rdf:type rdfs:Datatype ;
+                  owl:onDatatype xsd:integer ;
+                  owl:withRestrictions ( [ xsd:minInclusive 1
+                                         ]
+                                       )
+                ] ;
      rdfs:comment "Numero di Crediti Formativi Universitari (CFU) del dell'Insegnamento" ;
      rdfs:label "CFU" .
 
@@ -169,14 +185,6 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
                   rdfs:range xsd:string ;
                   rdfs:comment "Nome del Dipartimento." ;
                   rdfs:label "nomeDipartimento" .
-
-
-###  http://www.semanticweb.org/ontology#nomeDocente
-:nomeDocente rdf:type owl:DatatypeProperty ;
-             rdfs:range xsd:string ;
-             rdfs:comment "Nome del Docente." ;
-             rdfs:label "nomeDocente" .
-
 
 ###  http://www.semanticweb.org/ontology#nomeInsegnamento
 :nomeInsegnamento rdf:type owl:DatatypeProperty ;
@@ -217,6 +225,7 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 ###  http://www.semanticweb.org/ontology#CorsoDiLaureaMagistrale
 :CorsoDiLaureaMagistrale rdf:type owl:Class ;
                          rdfs:subClassOf :CorsoDiStudio ;
+                         owl:disjointWith :CorsoDiLaureaTriennale ;
                          rdfs:comment "Sottoclasse di CorsoDiStudio, rappresenta un Corso di Laurea Magistrale." ;
                          rdfs:label "CorsoDiLaureaMagistrale" .
 
@@ -224,20 +233,26 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 ###  http://www.semanticweb.org/ontology#CorsoDiLaureaTriennale
 :CorsoDiLaureaTriennale rdf:type owl:Class ;
                         rdfs:subClassOf :CorsoDiStudio ;
-                        owl:disjointWith :Insegnamento ;
                         rdfs:comment "Sottoclasse di CorsoDiStudio, rappresenta un Corso di Laurea Triennale." ;
                         rdfs:label "CorsoDiLaureaTriennale" .
 
 
 ###  http://www.semanticweb.org/ontology#CorsoDiStudio
 :CorsoDiStudio rdf:type owl:Class ;
-               owl:disjointWith :Insegnamento ;
+               rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                 owl:onProperty :comprendeInsegnamento ;
+                                 owl:someValuesFrom :Insegnamento
+                               ] ;
                rdfs:comment "Classe che rappresenta un Corso di Studio offerto dall'Università." ;
                rdfs:label "CorsoDiStudio" .
 
 
 ###  http://www.semanticweb.org/ontology#Dipartimento
 :Dipartimento rdf:type owl:Class ;
+              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                owl:onProperty :propone ;
+                                owl:someValuesFrom :CorsoDiStudio
+                              ] ;
               owl:disjointWith :Università ;
               rdfs:comment "Classe che rappresenta un Dipartimento all'interno dell'Università." ;
               rdfs:label "Dipartimento" .
@@ -245,25 +260,40 @@ owl:minCardinality rdf:type owl:AnnotationProperty .
 
 ###  http://www.semanticweb.org/ontology#Insegnamento
 :Insegnamento rdf:type owl:Class ;
+              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                owl:onProperty <http://www.co-ode.org/ontologies/ont.owl#èCompreso> ;
+                                owl:someValuesFrom :CorsoDiStudio
+                              ] ;
               rdfs:comment "Classe che rappresenta un Insegnamento all'interno di un Corso di Studio." ;
               rdfs:label "Insegnamento" .
 
 
 ###  http://www.semanticweb.org/ontology#Interesse
 :Interesse rdf:type owl:Class ;
-           owl:disjointWith :OpportunitàDiCarriera ;
+           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                             owl:onProperty :legatoA ;
+                             owl:someValuesFrom :Insegnamento
+                           ] ;
            rdfs:comment "Classe che rappresenta un Interesse accademico di un Futuro Studente." ;
            rdfs:label "Interesse" .
 
 
 ###  http://www.semanticweb.org/ontology#OpportunitàDiCarriera
 :OpportunitàDiCarriera rdf:type owl:Class ;
+                       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                         owl:onProperty <http://www.co-ode.org/ontologies/ont.owl#èOffertaDa> ;
+                                         owl:someValuesFrom :CorsoDiStudio
+                                       ] ;
                        rdfs:comment "Classe che rappresenta un'Opportunità di Carriera associata a un Corso di Studio." ;
                        rdfs:label "OpportunitàDiCarriera" .
 
 
 ###  http://www.semanticweb.org/ontology#Università
 :Università rdf:type owl:Class ;
+            rdfs:subClassOf [ rdf:type owl:Restriction ;
+                              owl:onProperty :comprende ;
+                              owl:someValuesFrom :Dipartimento
+                            ] ;
             rdfs:comment "Classe che rappresenta un'Università." ;
             rdfs:label "Università" .
 
