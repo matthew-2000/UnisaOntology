@@ -1,0 +1,1707 @@
+@prefix : <http://www.semanticweb.org/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/ontology#> .
+
+[ rdf:type owl:Ontology
+ ] .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.semanticweb.org/ontology#annoDiCorso
+:annoDiCorso rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/ontology#codice
+:codice rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/ontology#cognome
+:cognome rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/ontology#descrizione
+:descrizione rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/ontology#durata
+:durata rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/ontology#edificio
+:edificio rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/ontology#email
+:email rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/ontology#nome
+:nome rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/ontology#settore
+:settore rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/ontology#sitoWeb
+:sitoWeb rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2002/07/owl#minCardinality
+owl:minCardinality rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.co-ode.org/ontologies/ont.owl#èCompreso
+<http://www.co-ode.org/ontologies/ont.owl#èCompreso> rdf:type owl:ObjectProperty ;
+                                                     owl:inverseOf :comprendeInsegnamento ;
+                                                     rdf:type owl:AsymmetricProperty ;
+                                                     rdfs:domain :Insegnamento ;
+                                                     rdfs:range :CorsoDiStudio .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#èOffertaDa
+<http://www.co-ode.org/ontologies/ont.owl#èOffertaDa> rdf:type owl:ObjectProperty ;
+                                                      owl:inverseOf :offreOpportunità ;
+                                                      rdf:type owl:AsymmetricProperty ;
+                                                      rdfs:domain :OpportunitàDiCarriera ;
+                                                      rdfs:range :CorsoDiStudio .
+
+
+###  http://www.semanticweb.org/ontology#comprende
+:comprende rdf:type owl:ObjectProperty ,
+                    owl:AsymmetricProperty ;
+           rdfs:domain :Università ;
+           rdfs:range :Dipartimento ;
+           rdfs:comment "Relazione che collega un'Università ai suoi Dipartimenti." ;
+           rdfs:label "comprende" .
+
+
+###  http://www.semanticweb.org/ontology#comprendeInsegnamento
+:comprendeInsegnamento rdf:type owl:ObjectProperty ,
+                                owl:AsymmetricProperty ;
+                       rdfs:domain :CorsoDiStudio ;
+                       rdfs:range :Insegnamento ;
+                       rdfs:comment "Relazione che collega un Corso di Studio agli Insegnamenti che comprende." ;
+                       rdfs:label "comprendeInsegnamento" .
+
+
+###  http://www.semanticweb.org/ontology#legatoA
+:legatoA rdf:type owl:ObjectProperty ;
+         rdfs:domain :Interesse ;
+         rdfs:range [ rdf:type owl:Class ;
+                      owl:unionOf ( :CorsoDiStudio
+                                    :Insegnamento
+                                  )
+                    ] ;
+         rdfs:comment "Relazione che collega un Interesse a un Corso di Studio correlato." ;
+         rdfs:label "legatoA" .
+
+
+###  http://www.semanticweb.org/ontology#offreOpportunità
+:offreOpportunità rdf:type owl:ObjectProperty ,
+                           owl:AsymmetricProperty ;
+                  rdfs:domain :CorsoDiStudio ;
+                  rdfs:range :OpportunitàDiCarriera ;
+                  rdfs:comment "Relazione che collega un Corso di Studio alle Opportunità di Carriera offerte." ;
+                  rdfs:label "offreOpportunità" .
+
+
+###  http://www.semanticweb.org/ontology#propone
+:propone rdf:type owl:ObjectProperty ,
+                  owl:AsymmetricProperty ;
+         rdfs:domain :Dipartimento ;
+         rdfs:range :CorsoDiStudio ;
+         rdfs:comment "Relazione che collega un Dipartimento ai Corsi di Studio che propone." ;
+         rdfs:label "propone" .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio
+<http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> rdf:type owl:DatatypeProperty ;
+                                                            rdfs:domain :CorsoDiStudio ;
+                                                            rdfs:range [ rdf:type rdfs:Datatype ;
+                                                                         owl:onDatatype xsd:integer ;
+                                                                         owl:withRestrictions ( [ xsd:minInclusive 120
+                                                                                                ]
+                                                                                              )
+                                                                       ] ;
+                                                            rdfs:comment "Numero di Crediti Formativi Universitari (CFU) del Corso di Studio." ;
+                                                            rdfs:label "CFUCorsoDiStudio" .
+
+
+###  http://www.semanticweb.org/ontology#CFU
+:CFU rdf:type owl:DatatypeProperty ;
+     rdfs:domain :Insegnamento ;
+     rdfs:range [ rdf:type rdfs:Datatype ;
+                  owl:onDatatype xsd:integer ;
+                  owl:withRestrictions ( [ xsd:minInclusive 1
+                                         ]
+                                       )
+                ] ;
+     rdfs:comment "Numero di Crediti Formativi Universitari (CFU) del dell'Insegnamento" ;
+     rdfs:label "CFU" .
+
+
+###  http://www.semanticweb.org/ontology#codiceDipartimento
+:codiceDipartimento rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Dipartimento ;
+                    rdfs:range xsd:string ;
+                    rdfs:comment "Codice identificativo del Dipartimento." ;
+                    rdfs:label "codiceDipartimento" .
+
+
+###  http://www.semanticweb.org/ontology#descrizioneOpportunità
+:descrizioneOpportunità rdf:type owl:DatatypeProperty ;
+                        rdfs:domain :OpportunitàDiCarriera ;
+                        rdfs:range xsd:string ;
+                        rdfs:comment "Descrizione dell'Opportunità di Carriera." ;
+                        rdfs:label "descrizioneOpportunità" .
+
+
+###  http://www.semanticweb.org/ontology#nomeCorsoDiStudio
+:nomeCorsoDiStudio rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :CorsoDiStudio ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "Nome del Corso di Studio." ;
+                   rdfs:label "nomeCorsoDiStudio" .
+
+
+###  http://www.semanticweb.org/ontology#nomeDipartimento
+:nomeDipartimento rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Dipartimento ;
+                  rdfs:range xsd:string ;
+                  rdfs:comment "Nome del Dipartimento." ;
+                  rdfs:label "nomeDipartimento" .
+
+###  http://www.semanticweb.org/ontology#nomeInsegnamento
+:nomeInsegnamento rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Insegnamento ;
+                  rdfs:range xsd:string ;
+                  rdfs:comment "Nome dell'Insegnamento." ;
+                  rdfs:label "nomeInsegnamento" .
+
+
+###  http://www.semanticweb.org/ontology#nomeInteresse
+:nomeInteresse rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Interesse ;
+               rdfs:range xsd:string ;
+               rdfs:comment "Nome dell'Interesse accademico." ;
+               rdfs:label "nomeInteresse" .
+
+
+###  http://www.semanticweb.org/ontology#nomeUniversità
+:nomeUniversità rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Università ;
+                rdfs:range xsd:string ;
+                rdfs:comment "Nome dell'Università." ;
+                rdfs:label "nomeUniversità" .
+
+
+###  http://www.semanticweb.org/ontology#ubicazione
+:ubicazione rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Università ;
+            rdfs:range xsd:string ;
+            rdfs:comment "Ubicazione dell'Università." ;
+            rdfs:label "ubicazione" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/ontology#CorsoDiLaureaMagistrale
+:CorsoDiLaureaMagistrale rdf:type owl:Class ;
+                         rdfs:subClassOf :CorsoDiStudio ;
+                         owl:disjointWith :CorsoDiLaureaTriennale ;
+                         rdfs:comment "Sottoclasse di CorsoDiStudio, rappresenta un Corso di Laurea Magistrale." ;
+                         rdfs:label "CorsoDiLaureaMagistrale" .
+
+
+###  http://www.semanticweb.org/ontology#CorsoDiLaureaTriennale
+:CorsoDiLaureaTriennale rdf:type owl:Class ;
+                        rdfs:subClassOf :CorsoDiStudio ;
+                        rdfs:comment "Sottoclasse di CorsoDiStudio, rappresenta un Corso di Laurea Triennale." ;
+                        rdfs:label "CorsoDiLaureaTriennale" .
+
+
+###  http://www.semanticweb.org/ontology#CorsoDiStudio
+:CorsoDiStudio rdf:type owl:Class ;
+               rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                 owl:onProperty :comprendeInsegnamento ;
+                                 owl:someValuesFrom :Insegnamento
+                               ] ;
+               rdfs:comment "Classe che rappresenta un Corso di Studio offerto dall'Università." ;
+               rdfs:label "CorsoDiStudio" .
+
+
+###  http://www.semanticweb.org/ontology#Dipartimento
+:Dipartimento rdf:type owl:Class ;
+              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                owl:onProperty :propone ;
+                                owl:someValuesFrom :CorsoDiStudio
+                              ] ;
+              owl:disjointWith :Università ;
+              rdfs:comment "Classe che rappresenta un Dipartimento all'interno dell'Università." ;
+              rdfs:label "Dipartimento" .
+
+
+###  http://www.semanticweb.org/ontology#Insegnamento
+:Insegnamento rdf:type owl:Class ;
+              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                owl:onProperty <http://www.co-ode.org/ontologies/ont.owl#èCompreso> ;
+                                owl:someValuesFrom :CorsoDiStudio
+                              ] ;
+              rdfs:comment "Classe che rappresenta un Insegnamento all'interno di un Corso di Studio." ;
+              rdfs:label "Insegnamento" .
+
+
+###  http://www.semanticweb.org/ontology#Interesse
+:Interesse rdf:type owl:Class ;
+           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                             owl:onProperty :legatoA ;
+                             owl:someValuesFrom :Insegnamento
+                           ] ;
+           rdfs:comment "Classe che rappresenta un Interesse accademico di un Futuro Studente." ;
+           rdfs:label "Interesse" .
+
+
+###  http://www.semanticweb.org/ontology#OpportunitàDiCarriera
+:OpportunitàDiCarriera rdf:type owl:Class ;
+                       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                         owl:onProperty <http://www.co-ode.org/ontologies/ont.owl#èOffertaDa> ;
+                                         owl:someValuesFrom :CorsoDiStudio
+                                       ] ;
+                       rdfs:comment "Classe che rappresenta un'Opportunità di Carriera associata a un Corso di Studio." ;
+                       rdfs:label "OpportunitàDiCarriera" .
+
+
+###  http://www.semanticweb.org/ontology#Università
+:Università rdf:type owl:Class ;
+            rdfs:subClassOf [ rdf:type owl:Restriction ;
+                              owl:onProperty :comprende ;
+                              owl:someValuesFrom :Dipartimento
+                            ] ;
+            rdfs:comment "Classe che rappresenta un'Università." ;
+            rdfs:label "Università" .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/ontology#affidabilitaSistemi
+:affidabilitaSistemi rdf:type owl:NamedIndividual ,
+                              :Insegnamento ;
+                     :nome "Affidabilità dei Sistemi" .
+
+
+###  http://www.semanticweb.org/ontology#algebraI
+:algebraI rdf:type owl:NamedIndividual ,
+                   :Insegnamento ;
+          :CFU 9 ;
+          :annoDiCorso 1 ;
+          :descrizione "Studio approfondito di strutture algebriche come gruppi, anelli e campi." ;
+          :nome "Algebra I" .
+
+
+###  http://www.semanticweb.org/ontology#algebraIII
+:algebraIII rdf:type owl:NamedIndividual ,
+                     :Insegnamento ;
+            :CFU 6 ;
+            :annoDiCorso 2 ;
+            :descrizione "Approfondimenti di algebra, inclusi teoremi avanzati e loro applicazioni." ;
+            :nome "Algebra III" .
+
+
+###  http://www.semanticweb.org/ontology#algoritmiEStruttureDati
+:algoritmiEStruttureDati rdf:type owl:NamedIndividual ,
+                                  :Insegnamento ;
+                         :CFU 9 ;
+                         :annoDiCorso 2 ;
+                         :codice "ING-INF/05" ;
+                         :descrizione "Algoritmi e strutture dati." ;
+                         :nome "Algoritmi e Strutture Dati" .
+
+
+###  http://www.semanticweb.org/ontology#analisiDeiSegnali
+:analisiDeiSegnali rdf:type owl:NamedIndividual ,
+                            :Insegnamento ;
+                   :CFU 9 ;
+                   :annoDiCorso 2 ;
+                   :codice "ING-INF/03" ;
+                   :descrizione "Analisi dei segnali." ;
+                   :nome "Analisi dei Segnali" .
+
+
+###  http://www.semanticweb.org/ontology#analisiMatematica
+:analisiMatematica rdf:type owl:NamedIndividual ,
+                            :Insegnamento ;
+                   :CFU 9 ;
+                   :annoDiCorso 1 ;
+                   :codice "MAT104" ;
+                   :descrizione "Fondamenti di analisi matematica." ;
+                   :nome "Analisi Matematica" .
+
+
+###  http://www.semanticweb.org/ontology#analisiMatematica1
+:analisiMatematica1 rdf:type owl:NamedIndividual ,
+                             :Insegnamento ;
+                    :CFU 9 ;
+                    :annoDiCorso 1 ;
+                    :codice "MAT/05" ;
+                    :descrizione "Fondamenti di analisi matematica." ;
+                    :nome "Analisi Matematica 1" .
+
+
+###  http://www.semanticweb.org/ontology#analisiMatematica2
+:analisiMatematica2 rdf:type owl:NamedIndividual ,
+                             :Insegnamento ;
+                    :CFU 6 ;
+                    :annoDiCorso 1 ;
+                    :codice "MAT/05" ;
+                    :descrizione "Approfondimenti di analisi matematica." ;
+                    :nome "Analisi Matematica 2" .
+
+
+###  http://www.semanticweb.org/ontology#analisiMatematicaI
+:analisiMatematicaI rdf:type owl:NamedIndividual ,
+                             :Insegnamento ;
+                    :CFU 16 ;
+                    :annoDiCorso 1 ;
+                    :descrizione "Teoria dell'analisi reale, inclusi limiti, serie, funzioni e integrazione." ;
+                    :nome "Analisi Matematica I e II" .
+
+
+###  http://www.semanticweb.org/ontology#analisiMatematicaIII
+:analisiMatematicaIII rdf:type owl:NamedIndividual ,
+                               :Insegnamento ;
+                      :CFU 10 ;
+                      :annoDiCorso 2 ;
+                      :descrizione "Analisi complessa e metodi avanzati di integrazione." ;
+                      :nome "Analisi Matematica III e IV" .
+
+
+###  http://www.semanticweb.org/ontology#architetturaDegliElaboratori
+:architetturaDegliElaboratori rdf:type owl:NamedIndividual ,
+                                       :Insegnamento ;
+                              :CFU 9 ;
+                              :annoDiCorso 1 ;
+                              :codice "INF101" ;
+                              :descrizione "Struttura e funzionamento degli elaboratori." ;
+                              :nome "Architettura degli Elaboratori" .
+
+
+###  http://www.semanticweb.org/ontology#basiDiDati
+:basiDiDati rdf:type owl:NamedIndividual ,
+                     :Insegnamento ;
+            :CFU 9 ;
+            :annoDiCorso 2 ;
+            :codice "INF206" ;
+            :descrizione "Progettazione e gestione di basi di dati." ;
+            :nome "Basi di Dati" .
+
+
+###  http://www.semanticweb.org/ontology#basiDiDatiII
+:basiDiDatiII rdf:type owl:NamedIndividual ,
+                       :Insegnamento ;
+              :nome "Basi di Dati II" .
+
+
+###  http://www.semanticweb.org/ontology#basiDiDatiIng
+:basiDiDatiIng rdf:type owl:NamedIndividual ,
+                        :Insegnamento ;
+               :CFU 9 ;
+               :annoDiCorso 3 ;
+               :codice "ING-INF/05" ;
+               :descrizione "Progettazione e gestione di basi di dati." ;
+               :nome "Basi di Dati" .
+
+
+###  http://www.semanticweb.org/ontology#calcolatoriElettronici
+:calcolatoriElettronici rdf:type owl:NamedIndividual ,
+                                 :Insegnamento ;
+                        :CFU 9 ;
+                        :annoDiCorso 1 ;
+                        :codice "ING-INF/05" ;
+                        :descrizione "Fondamenti di calcolatori elettronici." ;
+                        :nome "Calcolatori Elettronici" .
+
+
+###  http://www.semanticweb.org/ontology#calcoloDelleProbabilitaEStatisticaMatematica
+:calcoloDelleProbabilitaEStatisticaMatematica rdf:type owl:NamedIndividual ,
+                                                       :Insegnamento ;
+                                              :CFU 6 ;
+                                              :annoDiCorso 2 ;
+                                              :codice "MAT207" ;
+                                              :descrizione "Calcolo delle probabilità e statistica matematica." ;
+                                              :nome "Calcolo delle Probabilità e Statistica Matematica" .
+
+
+###  http://www.semanticweb.org/ontology#calcoloNumericoI
+:calcoloNumericoI rdf:type owl:NamedIndividual ,
+                           :Insegnamento ;
+                  :CFU 7 ;
+                  :annoDiCorso 2 ;
+                  :descrizione "Metodi numerici per la soluzione di equazioni e ottimizzazione." ;
+                  :nome "Calcolo Numerico I" .
+
+
+###  http://www.semanticweb.org/ontology#calcoloScientifico
+:calcoloScientifico rdf:type owl:NamedIndividual ,
+                             :Insegnamento ;
+                    :CFU 6 ;
+                    :annoDiCorso 3 ;
+                    :codice "MAT307" ;
+                    :descrizione "Tecniche di calcolo scientifico." ;
+                    :nome "Calcolo Scientifico" .
+
+
+###  http://www.semanticweb.org/ontology#circuitiESistemiDigitali
+:circuitiESistemiDigitali rdf:type owl:NamedIndividual ,
+                                   :Insegnamento ;
+                          :CFU 6 ;
+                          :annoDiCorso 2 ;
+                          :codice "ING-INF/01" ;
+                          :descrizione "Circuiti e sistemi digitali." ;
+                          :nome "Circuiti e Sistemi Digitali" .
+
+
+###  http://www.semanticweb.org/ontology#cloudComputing
+:cloudComputing rdf:type owl:NamedIndividual ,
+                         :Insegnamento ;
+                :nome "Cloud Computing" .
+
+
+###  http://www.semanticweb.org/ontology#compilatori
+:compilatori rdf:type owl:NamedIndividual ,
+                      :Insegnamento ;
+             :nome "Compilatori" .
+
+
+###  http://www.semanticweb.org/ontology#controlliAutomatici
+:controlliAutomatici rdf:type owl:NamedIndividual ,
+                              :Insegnamento ;
+                     :CFU 9 ;
+                     :annoDiCorso 2 ;
+                     :codice "ING-INF/04" ;
+                     :descrizione "Controlli automatici." ;
+                     :nome "Controlli Automatici" .
+
+
+###  http://www.semanticweb.org/ontology#didatticaInformatica
+:didatticaInformatica rdf:type owl:NamedIndividual ,
+                               :Insegnamento ;
+                      :nome "Didattica dell’Informatica" .
+
+
+###  http://www.semanticweb.org/ontology#elementiDiTeoriaDellaComputazione
+:elementiDiTeoriaDellaComputazione rdf:type owl:NamedIndividual ,
+                                            :Insegnamento ;
+                                   :CFU 9 ;
+                                   :annoDiCorso 3 ;
+                                   :codice "INF306" ;
+                                   :descrizione "Elementi di base della teoria della computazione." ;
+                                   :nome "Elementi di Teoria della Computazione" .
+
+
+###  http://www.semanticweb.org/ontology#elettrotecnica
+:elettrotecnica rdf:type owl:NamedIndividual ,
+                         :Insegnamento ;
+                :CFU 9 ;
+                :annoDiCorso 2 ;
+                :codice "ING-IND/31" ;
+                :descrizione "Fondamenti di elettrotecnica." ;
+                :nome "Elettrotecnica" .
+
+
+###  http://www.semanticweb.org/ontology#embeddedSystems
+:embeddedSystems rdf:type owl:NamedIndividual ,
+                          :Insegnamento ;
+                 :nome "Embedded Systems" .
+
+
+###  http://www.semanticweb.org/ontology#enterpriseMobileApplicationDevelopment
+:enterpriseMobileApplicationDevelopment rdf:type owl:NamedIndividual ,
+                                                 :Insegnamento ;
+                                        :nome "Enterprise Mobile Application Development" .
+
+
+###  http://www.semanticweb.org/ontology#equazioniDifferenziali
+:equazioniDifferenziali rdf:type owl:NamedIndividual ,
+                                 :Insegnamento ;
+                        :CFU 6 ;
+                        :annoDiCorso 3 ;
+                        :descrizione "Studio delle equazioni differenziali e loro applicazioni." ;
+                        :nome "Equazioni Differenziali" .
+
+
+###  http://www.semanticweb.org/ontology#estensioneTirocinioAziendale
+:estensioneTirocinioAziendale rdf:type owl:NamedIndividual ,
+                                       :Insegnamento ;
+                              :CFU 6 ;
+                              :annoDiCorso 3 ;
+                              :codice "-" ;
+                              :descrizione "Estensione tirocinio aziendale." ;
+                              :nome "Estensione Tirocinio Aziendale" .
+
+
+###  http://www.semanticweb.org/ontology#fisica
+:fisica rdf:type owl:NamedIndividual ,
+                 :Insegnamento ;
+        :CFU 6 ;
+        :annoDiCorso 1 ;
+        :codice "FIS101" ;
+        :descrizione "Fondamenti di fisica." ;
+        :nome "Fisica" .
+
+
+###  http://www.semanticweb.org/ontology#fisica1
+:fisica1 rdf:type owl:NamedIndividual ,
+                  :Insegnamento ;
+         :CFU 6 ;
+         :annoDiCorso 1 ;
+         :codice "FIS/01" ;
+         :descrizione "Fondamenti di fisica." ;
+         :nome "Fisica 1" .
+
+
+###  http://www.semanticweb.org/ontology#fisica2
+:fisica2 rdf:type owl:NamedIndividual ,
+                  :Insegnamento ;
+         :CFU 6 ;
+         :annoDiCorso 1 ;
+         :codice "FIS/01" ;
+         :descrizione "Approfondimenti di fisica." ;
+         :nome "Fisica 2" .
+
+
+###  http://www.semanticweb.org/ontology#fisicaConEsercitazioni
+:fisicaConEsercitazioni rdf:type owl:NamedIndividual ,
+                                 :Insegnamento ;
+                        :CFU 13 ;
+                        :annoDiCorso 1 ;
+                        :descrizione "Principi fondamentali di fisica classica e moderna con esercitazioni pratiche." ;
+                        :nome "Fisica con Esercitazioni di Laboratorio I e II" .
+
+
+###  http://www.semanticweb.org/ontology#fondamentiDataScienceMachineLearning
+:fondamentiDataScienceMachineLearning rdf:type owl:NamedIndividual ,
+                                               :Insegnamento ;
+                                      :nome "Fondamenti di Data Science e Machine Learning" .
+
+
+###  http://www.semanticweb.org/ontology#fondamentiDiProgrammazione
+:fondamentiDiProgrammazione rdf:type owl:NamedIndividual ,
+                                     :Insegnamento ;
+                            :CFU 9 ;
+                            :annoDiCorso 1 ;
+                            :codice "ING-INF/05" ;
+                            :descrizione "Fondamenti di programmazione." ;
+                            :nome "Fondamenti di Programmazione" .
+
+
+###  http://www.semanticweb.org/ontology#fondamentiInformatica
+:fondamentiInformatica rdf:type owl:NamedIndividual ,
+                                :Insegnamento ;
+                       :CFU 4 ;
+                       :annoDiCorso 2 ;
+                       :descrizione "Introduzione ai concetti di base dell'informatica e programmazione." ;
+                       :nome "Fondamenti di Informatica e Laboratorio" .
+
+
+###  http://www.semanticweb.org/ontology#fondamentiIntelligenzaArtificiale
+:fondamentiIntelligenzaArtificiale rdf:type owl:NamedIndividual ,
+                                            :Insegnamento ;
+                                   :CFU 6 ;
+                                   :annoDiCorso 3 ;
+                                   :codice "INF308" ;
+                                   :descrizione "Principi e tecniche dell'intelligenza artificiale." ;
+                                   :nome "Fondamenti di Intelligenza Artificiale" .
+
+
+###  http://www.semanticweb.org/ontology#geographicalInformationSystems
+:geographicalInformationSystems rdf:type owl:NamedIndividual ,
+                                         :Insegnamento ;
+                                :nome "Geographical Information Systems" .
+
+
+###  http://www.semanticweb.org/ontology#geometriaAlgebraELogica
+:geometriaAlgebraELogica rdf:type owl:NamedIndividual ,
+                                  :Insegnamento ;
+                         :CFU 9 ;
+                         :annoDiCorso 1 ;
+                         :codice "MAT/03" ;
+                         :descrizione "Fondamenti di geometria, algebra e logica." ;
+                         :nome "Geometria, Algebra e Logica" .
+
+
+###  http://www.semanticweb.org/ontology#geometriaI
+:geometriaI rdf:type owl:NamedIndividual ,
+                     :Insegnamento ;
+            :CFU 16 ;
+            :annoDiCorso 1 ;
+            :descrizione "Introduzione alla geometria euclidea e non euclidea." ;
+            :nome "Geometria I e II" .
+
+
+###  http://www.semanticweb.org/ontology#geometriaII
+:geometriaII rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/ontology#geometriaIII
+:geometriaIII rdf:type owl:NamedIndividual ,
+                       :Insegnamento ;
+              :CFU 11 ;
+              :annoDiCorso 2 ;
+              :descrizione "Estensione della geometria analitica e differenziale." ;
+              :nome "Geometria III e IV" .
+
+
+###  http://www.semanticweb.org/ontology#gestioneProgettiSoftware
+:gestioneProgettiSoftware rdf:type owl:NamedIndividual ,
+                                   :Insegnamento ;
+                          :nome "Gestione dei Progetti Software" .
+
+
+###  http://www.semanticweb.org/ontology#graficaEdInterattivita
+:graficaEdInterattivita rdf:type owl:NamedIndividual ,
+                                 :Insegnamento ;
+                        :CFU 6 ;
+                        :annoDiCorso 3 ;
+                        :codice "INF309" ;
+                        :descrizione "Grafica ed interattività." ;
+                        :nome "Grafica ed Interattività" .
+
+
+###  http://www.semanticweb.org/ontology#informatica
+:informatica rdf:type owl:NamedIndividual ,
+                      :Dipartimento ;
+             :propone :laureaMagistraleInformatica ,
+                      :laureaTriennaleInformatica ;
+             :edificio "Edificio F2" ;
+             :nome "Dipartimento di Informatica" .
+
+
+###  http://www.semanticweb.org/ontology#ingegneriaDelSoftware
+:ingegneriaDelSoftware rdf:type owl:NamedIndividual ,
+                                :Insegnamento ;
+                       :CFU 9 ;
+                       :annoDiCorso 3 ;
+                       :codice "INF201" ;
+                       :descrizione "Principi e metodologie dell'ingegneria del software." ;
+                       :nome "Ingegneria del Software" .
+
+
+###  http://www.semanticweb.org/ontology#ingegneriaDelSoftwareIng
+:ingegneriaDelSoftwareIng rdf:type owl:NamedIndividual ,
+                                   :Insegnamento ;
+                          :CFU 6 ;
+                          :annoDiCorso 3 ;
+                          :codice "ING-INF/05" ;
+                          :descrizione "Principi e metodologie dell'ingegneria del software." ;
+                          :nome "Ingegneria del Software" .
+
+
+###  http://www.semanticweb.org/ontology#ingegneriaGestioneEvoluzioneSoftware
+:ingegneriaGestioneEvoluzioneSoftware rdf:type owl:NamedIndividual ,
+                                               :Insegnamento ;
+                                      :nome "Ingegneria, Gestione ed Evoluzione del Software" .
+
+
+###  http://www.semanticweb.org/ontology#ingegneriainformatica
+:ingegneriainformatica rdf:type owl:NamedIndividual ,
+                                :Dipartimento ;
+                       :propone :laureaTriennaleIngegneriaInformatica ;
+                       :edificio "Edificio E1" ;
+                       :nome "Dipartimento di Ingegneria Informatica" .
+
+
+###  http://www.semanticweb.org/ontology#inglese
+:inglese rdf:type owl:NamedIndividual ,
+                  :Insegnamento ;
+         :CFU 3 ;
+         :annoDiCorso 2 ;
+         :codice "-" ;
+         :descrizione "Conoscenza della lingua inglese." ;
+         :nome "Inglese" .
+
+
+###  http://www.semanticweb.org/ontology#ingleseIng
+:ingleseIng rdf:type owl:NamedIndividual ,
+                     :Insegnamento ;
+            :CFU 6 ;
+            :annoDiCorso 2 ;
+            :codice "-" ;
+            :descrizione "Conoscenza della lingua inglese." ;
+            :nome "Inglese" .
+
+
+###  http://www.semanticweb.org/ontology#intelligentWeb
+:intelligentWeb rdf:type owl:NamedIndividual ,
+                         :Insegnamento ;
+                :nome "Intelligent Web" .
+
+
+###  http://www.semanticweb.org/ontology#intelligenzaArtificiale
+:intelligenzaArtificiale rdf:type owl:NamedIndividual ,
+                                  :Insegnamento ;
+                         :CFU 9 ;
+                         :annoDiCorso 2 ;
+                         :codice "INF308" ;
+                         :descrizione "Metodi ed applicazioni dell'intelligenza artificiale." ;
+                         :nome "Intelligenza Artificiale" .
+
+
+###  http://www.semanticweb.org/ontology#intelligenzaArtificialeIng
+:intelligenzaArtificialeIng rdf:type owl:NamedIndividual ,
+                                     :Insegnamento ;
+                            :CFU 6 ;
+                            :annoDiCorso 3 ;
+                            :codice "ING-INF/05" ;
+                            :descrizione "Principi e tecniche dell'intelligenza artificiale." ;
+                            :nome "Intelligenza Artificiale" .
+
+
+###  http://www.semanticweb.org/ontology#interazioneUomoMacchina
+:interazioneUomoMacchina rdf:type owl:NamedIndividual ,
+                                  :Insegnamento ;
+                         :CFU 6 ;
+                         :annoDiCorso 3 ;
+                         :codice "INF310" ;
+                         :descrizione "Interazione uomo-macchina." ;
+                         :nome "Interazione Uomo-Macchina" .
+
+
+###  http://www.semanticweb.org/ontology#interazioneUomoMacchinaUsabilitaSoftware
+:interazioneUomoMacchinaUsabilitaSoftware rdf:type owl:NamedIndividual ,
+                                                   :Insegnamento ;
+                                          :nome "Interazione Uomo-Macchina e Usabilità del Software" .
+
+
+###  http://www.semanticweb.org/ontology#interesseAlgoritmiStruttureDatiAvanzate
+:interesseAlgoritmiStruttureDatiAvanzate rdf:type owl:NamedIndividual ,
+                                                  :Interesse ;
+                                         :legatoA :algoritmiEStruttureDati ,
+                                                  :progettazioneDiAlgoritmi ,
+                                                  :teoriaDeiGrafi ;
+                                         :nome "Interesse in Algoritmi e Strutture Dati Avanzate" .
+
+
+###  http://www.semanticweb.org/ontology#interesseAnalisiMatematicaApplicazioni
+:interesseAnalisiMatematicaApplicazioni rdf:type owl:NamedIndividual ,
+                                                 :Interesse ;
+                                        :legatoA :analisiMatematicaI ,
+                                                 :analisiMatematicaIII ;
+                                        :nome "Interesse in Analisi Matematica e Applicazioni" .
+
+
+###  http://www.semanticweb.org/ontology#interesseApplicazioniMatematicheIngegneria
+:interesseApplicazioniMatematicheIngegneria rdf:type owl:NamedIndividual ,
+                                                     :Interesse ;
+                                            :legatoA :calcoloNumericoI ,
+                                                     :metodiMatematiciPerLInformatica ,
+                                                     :tecnicheAutomaticheCorrettezzaSoftware ;
+                                            :nome "Interesse in Applicazioni Matematiche nell'Ingegneria" .
+
+
+###  http://www.semanticweb.org/ontology#interesseDataScienceAI
+:interesseDataScienceAI rdf:type owl:NamedIndividual ,
+                                 :Interesse ;
+                        :legatoA :fondamentiDataScienceMachineLearning ,
+                                 :intelligenzaArtificiale ,
+                                 :naturalLanguageProcessing ,
+                                 :softwareEngineeringAI ;
+                        :nome "Interesse in Data Science e Intelligenza Artificiale" .
+
+
+###  http://www.semanticweb.org/ontology#interesseFondamentiMatematiciLogicaComputazionale
+:interesseFondamentiMatematiciLogicaComputazionale rdf:type owl:NamedIndividual ,
+                                                            :Interesse ;
+                                                   :legatoA :logicaMatematica ,
+                                                            :matematicaDiscreta ,
+                                                            :teoriaDellaComputabilita ;
+                                                   :nome "Interesse in Fondamenti Matematici e Logica Computazionale" .
+
+
+###  http://www.semanticweb.org/ontology#interesseInAI
+:interesseInAI rdf:type owl:NamedIndividual ,
+                        :Interesse ;
+               :legatoA :intelligenzaArtificiale ;
+               :nome "Interesse in Intelligenza Artificiale e Machine Learning" .
+
+
+###  http://www.semanticweb.org/ontology#interesseInCybersecurity
+:interesseInCybersecurity rdf:type owl:NamedIndividual ,
+                                   :Interesse ;
+                          :legatoA :retiDiCalcolatori ,
+                                   :sicurezza ;
+                          :nome "Interesse in Sicurezza informatica" .
+
+
+###  http://www.semanticweb.org/ontology#interesseInDataScience
+:interesseInDataScience rdf:type owl:NamedIndividual ,
+                                 :Interesse ;
+                        :legatoA :analisiMatematica ,
+                                 :calcoloDelleProbabilitaEStatisticaMatematica ;
+                        :nome "Interesse in Data Science" .
+
+
+###  http://www.semanticweb.org/ontology#interesseInFisica
+:interesseInFisica rdf:type owl:NamedIndividual ,
+                            :Interesse ;
+                   :legatoA :fisica ;
+                   :nome "Interesse in Fisica" .
+
+
+###  http://www.semanticweb.org/ontology#interesseInMobileDevelopment
+:interesseInMobileDevelopment rdf:type owl:NamedIndividual ,
+                                       :Interesse ;
+                              :legatoA :mobileProgramming ;
+                              :nome "Interesse in Mobile Development" .
+
+
+###  http://www.semanticweb.org/ontology#interesseInSviluppoSoftware
+:interesseInSviluppoSoftware rdf:type owl:NamedIndividual ,
+                                      :Interesse ;
+                             :legatoA :ingegneriaDelSoftware ,
+                                      :ingegneriaDelSoftwareIng ,
+                                      :mobileProgramming ,
+                                      :programmazioneI ,
+                                      :programmazioneStruttureDati ;
+                             :nome "Interesse in Sviluppo Software" .
+
+
+###  http://www.semanticweb.org/ontology#interesseInTecnologieWeb
+:interesseInTecnologieWeb rdf:type owl:NamedIndividual ,
+                                   :Interesse ;
+                          :legatoA :tecnologieSoftwarePerIlWeb ;
+                          :nome "Interesse in Tecnologie e Applicazioni Web" .
+
+
+###  http://www.semanticweb.org/ontology#interesseInUsabilita
+:interesseInUsabilita rdf:type owl:NamedIndividual ,
+                               :Interesse ;
+                      :legatoA :interazioneUomoMacchina ;
+                      :nome "Interesse in Interfacciamento e Usabilità" .
+
+
+###  http://www.semanticweb.org/ontology#interesseIntelligenzaArtificialeMachineLearning
+:interesseIntelligenzaArtificialeMachineLearning rdf:type owl:NamedIndividual ,
+                                                          :Interesse ;
+                                                 :legatoA :intelligenzaArtificiale ,
+                                                          :naturalLanguageProcessing ,
+                                                          :softwareEngineeringAI ;
+                                                 :nome "Interesse in Intelligenza Artificiale e Machine Learning" .
+
+
+###  http://www.semanticweb.org/ontology#interesseSicurezzaAffidabilitaSoftware
+:interesseSicurezzaAffidabilitaSoftware rdf:type owl:NamedIndividual ,
+                                                 :Interesse ;
+                                        :legatoA :penetrationTestingEthicalHacking ,
+                                                 :programmazioneSicura ,
+                                                 :sicurezzaDeiDati ,
+                                                 :softwareDependability ;
+                                        :nome "Interesse in Sicurezza e Affidabilità del Software" .
+
+
+###  http://www.semanticweb.org/ontology#interesseSicurezzaInformatica
+:interesseSicurezzaInformatica rdf:type owl:NamedIndividual ,
+                                        :Interesse ;
+                               :legatoA :networkManagementAndSecurity ,
+                                        :penetrationTestingEthicalHacking ,
+                                        :sicurezza ;
+                               :nome "Interesse in Sicurezza Informatica" .
+
+
+###  http://www.semanticweb.org/ontology#interesseSistemiTecnologieEmergenti
+:interesseSistemiTecnologieEmergenti rdf:type owl:NamedIndividual ,
+                                              :Interesse ;
+                                     :legatoA :cloudComputing ,
+                                              :embeddedSystems ,
+                                              :geographicalInformationSystems ;
+                                     :nome "Interesse in Sistemi e Tecnologie Emergenti" .
+
+
+###  http://www.semanticweb.org/ontology#interesseSistemiTecnologieInformatiche
+:interesseSistemiTecnologieInformatiche rdf:type owl:NamedIndividual ,
+                                                 :Interesse ;
+                                        :legatoA :internetOfThings ,
+                                                 :retiDiCalcolatori ,
+                                                 :sistemiOperativi ;
+                                        :nome "Interesse in Sistemi e Tecnologie Informatiche" .
+
+
+###  http://www.semanticweb.org/ontology#interesseStatisticaDataScience
+:interesseStatisticaDataScience rdf:type owl:NamedIndividual ,
+                                         :Interesse ;
+                                :legatoA :calcoloDelleProbabilitaEStatisticaMatematica ,
+                                         :statisticaAnalisiDati ;
+                                :nome "Interesse in Statistica e Data Science" .
+
+
+###  http://www.semanticweb.org/ontology#interesseSviluppoSoftwareTecnologieWeb
+:interesseSviluppoSoftwareTecnologieWeb rdf:type owl:NamedIndividual ,
+                                                 :Interesse ;
+                                        :legatoA :enterpriseMobileApplicationDevelopment ,
+                                                 :ingegneriaGestioneEvoluzioneSoftware ,
+                                                 :intelligentWeb ,
+                                                 :internetOfThings ;
+                                        :nome "Interesse in Sviluppo Software e Tecnologie Web" .
+
+
+###  http://www.semanticweb.org/ontology#interesseTecnicheProgrammazioneSviluppoSoftware
+:interesseTecnicheProgrammazioneSviluppoSoftware rdf:type owl:NamedIndividual ,
+                                                          :Interesse ;
+                                                 :legatoA :ingegneriaDelSoftware ,
+                                                          :ingegneriaDelSoftwareIng ,
+                                                          :programmazioneAdOggetti ,
+                                                          :programmazioneAvanzata ,
+                                                          :programmazioneJavaAvanzata ;
+                                                 :nome "Interesse in Tecniche di Programmazione e Sviluppo Software" .
+
+
+###  http://www.semanticweb.org/ontology#interesseTecnologieMobiliApplicazioni
+:interesseTecnologieMobiliApplicazioni rdf:type owl:NamedIndividual ,
+                                                :Interesse ;
+                                       :legatoA :enterpriseMobileApplicationDevelopment ,
+                                                :mobileProgramming ;
+                                       :nome "Interesse in Tecnologie Mobili e Applicazioni" .
+
+
+###  http://www.semanticweb.org/ontology#internetOfThings
+:internetOfThings rdf:type owl:NamedIndividual ,
+                           :Insegnamento ;
+                  :CFU 9 ;
+                  :annoDiCorso 2 ;
+                  :codice "ING-INF/05" ;
+                  :descrizione "Internet delle cose." ;
+                  :nome "Internet of Things" .
+
+
+###  http://www.semanticweb.org/ontology#internetOfThingsIng
+:internetOfThingsIng rdf:type owl:NamedIndividual ,
+                              :Insegnamento ;
+                     :CFU 9 ;
+                     :annoDiCorso 3 ;
+                     :codice "ING-INF/05" ;
+                     :descrizione "Internet delle cose." ;
+                     :nome "Internet of Things" .
+
+
+###  http://www.semanticweb.org/ontology#laboratorioProgrammazioneCalcolo
+:laboratorioProgrammazioneCalcolo rdf:type owl:NamedIndividual ,
+                                           :Insegnamento ;
+                                  :CFU 4 ;
+                                  :annoDiCorso 1 ;
+                                  :descrizione "Principi di programmazione e calcolo numerico." ;
+                                  :nome "Laboratorio di programmazione e Calcolo" .
+
+
+###  http://www.semanticweb.org/ontology#laureaMagistraleInformatica
+:laureaMagistraleInformatica rdf:type owl:NamedIndividual ,
+                                      :CorsoDiLaureaMagistrale ;
+                             :comprendeInsegnamento :affidabilitaSistemi ,
+                                                    :basiDiDatiII ,
+                                                    :cloudComputing ,
+                                                    :compilatori ,
+                                                    :didatticaInformatica ,
+                                                    :embeddedSystems ,
+                                                    :enterpriseMobileApplicationDevelopment ,
+                                                    :fondamentiDataScienceMachineLearning ,
+                                                    :geographicalInformationSystems ,
+                                                    :gestioneProgettiSoftware ,
+                                                    :ingegneriaGestioneEvoluzioneSoftware ,
+                                                    :intelligentWeb ,
+                                                    :intelligenzaArtificiale ,
+                                                    :interazioneUomoMacchinaUsabilitaSoftware ,
+                                                    :internetOfThings ,
+                                                    :metodiOttimizzazione ,
+                                                    :metricheQualitaSoftware ,
+                                                    :naturalLanguageProcessing ,
+                                                    :penetrationTestingEthicalHacking ,
+                                                    :programmazioneConcorrenteParallelaCloud ,
+                                                    :programmazioneSicura ,
+                                                    :sicurezzaDeiDati ,
+                                                    :softwareDependability ,
+                                                    :softwareEngineeringAI ,
+                                                    :statisticaAnalisiDati ,
+                                                    :tecnicheAutomaticheCorrettezzaSoftware ;
+                             :offreOpportunità :opportunitàAnalistaDati ,
+                                               :opportunitàIngegnereSoftware ,
+                                               :opportunitàSicurezzaInformatica ,
+                                               :opportunitàSviluppatoreWeb ;
+                             <http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> 120 ;
+                             :codice "LMINFO" ;
+                             :descrizione "Corso di studi magistrale in Informatica presso il Dipartimento di Informatica dell'Università di Salerno." ;
+                             :durata 2 ;
+                             :nome "Corso di Laurea Magistrale in Informatica" ;
+                             :sitoWeb "http://www.informatica.unisa.it/laurea-magistrale-informatica" .
+
+
+###  http://www.semanticweb.org/ontology#laureaTriennaleInMatematica
+:laureaTriennaleInMatematica rdf:type owl:NamedIndividual ,
+                                      :CorsoDiLaureaTriennale ;
+                             :comprendeInsegnamento :algebraI ,
+                                                    :algebraIII ,
+                                                    :analisiMatematicaI ,
+                                                    :analisiMatematicaIII ,
+                                                    :calcoloNumericoI ,
+                                                    :equazioniDifferenziali ,
+                                                    :fisicaConEsercitazioni ,
+                                                    :fondamentiInformatica ,
+                                                    :geometriaI ,
+                                                    :geometriaII ,
+                                                    :geometriaIII ,
+                                                    :laboratorioProgrammazioneCalcolo ,
+                                                    :logicaMatematica ,
+                                                    :matematicheComplementariI ,
+                                                    :meccanicaRazionale ,
+                                                    :metodiPerIlTrattamentoDellInformazione ,
+                                                    :probabilita ,
+                                                    :ricercaOperativaMat ,
+                                                    :semigruppiLiberiTeoriaDeiCodici ,
+                                                    :teoriaDeiGrafi ,
+                                                    :teoriaDellaComputabilita ,
+                                                    :teoriaDelleFunzioni ,
+                                                    :teoriaDiGalois ,
+                                                    :topologia ;
+                             :offreOpportunità :opportunitàRicercatoreMatematico ;
+                             <http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> 180 ;
+                             :codice "L35MAT" ;
+                             :descrizione "Corso di studi triennale in Matematica presso il Dipartimento di Matematica dell'Università di Salerno." ;
+                             :durata 3 ;
+                             :nome "Corso di Laurea Triennale in Matematica" ;
+                             :sitoWeb "http://www.matematica.unisa.it/laurea-triennale-in-matematica" .
+
+
+###  http://www.semanticweb.org/ontology#laureaTriennaleInformatica
+:laureaTriennaleInformatica rdf:type owl:NamedIndividual ,
+                                     :CorsoDiLaureaTriennale ;
+                            :comprendeInsegnamento :analisiMatematica ,
+                                                   :architetturaDegliElaboratori ,
+                                                   :basiDiDati ,
+                                                   :calcoloDelleProbabilitaEStatisticaMatematica ,
+                                                   :calcoloScientifico ,
+                                                   :elementiDiTeoriaDellaComputazione ,
+                                                   :fisica ,
+                                                   :fondamentiIntelligenzaArtificiale ,
+                                                   :graficaEdInterattivita ,
+                                                   :ingegneriaDelSoftware ,
+                                                   :inglese ,
+                                                   :interazioneUomoMacchina ,
+                                                   :matematicaDiscreta ,
+                                                   :metodiMatematiciPerLInformatica ,
+                                                   :mobileProgramming ,
+                                                   :progettazioneDiAlgoritmi ,
+                                                   :programmazioneAvanzata ,
+                                                   :programmazioneDistribuita ,
+                                                   :programmazioneI ,
+                                                   :programmazioneOO ,
+                                                   :programmazioneStruttureDati ,
+                                                   :provaFinale ,
+                                                   :retiDiCalcolatori ,
+                                                   :ricercaOperativa ,
+                                                   :sicurezza ,
+                                                   :simulazione ,
+                                                   :sistemiOperativi ,
+                                                   :tecnologieSoftwarePerIlWeb ,
+                                                   :tirocinio ;
+                            :offreOpportunità :opportunitàConsulenteIT ,
+                                              :opportunitàSviluppatoreWeb ;
+                            <http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> 180 ;
+                            :codice "L3INFO" ;
+                            :descrizione "Corso di studi triennale in Informatica presso il Dipartimento di Informatica dell'Università di Salerno." ;
+                            :durata 3 ;
+                            :nome "Corso di Laurea Triennale in Informatica" ;
+                            :sitoWeb "http://www.informatica.unisa.it/laurea-triennale-informatica" .
+
+
+###  http://www.semanticweb.org/ontology#laureaTriennaleIngegneriaInformatica
+:laureaTriennaleIngegneriaInformatica rdf:type owl:NamedIndividual ,
+                                               :CorsoDiLaureaTriennale ;
+                                      :comprendeInsegnamento :algoritmiEStruttureDati ,
+                                                             :analisiDeiSegnali ,
+                                                             :analisiMatematica1 ,
+                                                             :analisiMatematica2 ,
+                                                             :basiDiDatiIng ,
+                                                             :calcolatoriElettronici ,
+                                                             :circuitiESistemiDigitali ,
+                                                             :controlliAutomatici ,
+                                                             :elettrotecnica ,
+                                                             :estensioneTirocinioAziendale ,
+                                                             :fisica1 ,
+                                                             :fisica2 ,
+                                                             :fondamentiDiProgrammazione ,
+                                                             :geometriaAlgebraELogica ,
+                                                             :ingegneriaDelSoftwareIng ,
+                                                             :ingleseIng ,
+                                                             :intelligenzaArtificialeIng ,
+                                                             :internetOfThingsIng ,
+                                                             :mobileProgrammingIng ,
+                                                             :networkManagementAndSecurity ,
+                                                             :progettazioneImpiantiDiRete ,
+                                                             :programmazioneAdOggetti ,
+                                                             :programmazioneJavaAvanzata ,
+                                                             :retiDiCalcolatoriIng ,
+                                                             :sistemiOperativiIng ,
+                                                             :statisticaApplicata ,
+                                                             :tecnologieElettriche ,
+                                                             :tecnologieInformaticheDeiSistemiDiControllo ,
+                                                             :tecnologieWeb ,
+                                                             <http://www.semanticweb.org/ontology#5GNetworks> ;
+                                      :offreOpportunità :opportunitàIngegnereSoftware ,
+                                                        :opportunitàSicurezzaInformatica ;
+                                      <http://www.co-ode.org/ontologies/ont.owl#CFUCorsoDiStudio> 180 ;
+                                      :codice "L3INF" ;
+                                      :descrizione "Corso di studi triennale in Ingegneria Informatica presso il Dipartimento di Ingegneria Informatica." ;
+                                      :durata 3 ;
+                                      :nome "Corso di Laurea Triennale in Ingegneria Informatica" ;
+                                      :sitoWeb "http://www.informatica.unisa.it/laurea-triennale-ingegneria-informatica" .
+
+
+###  http://www.semanticweb.org/ontology#logicaMatematica
+:logicaMatematica rdf:type owl:NamedIndividual ,
+                           :Insegnamento ;
+                  :CFU 7 ;
+                  :annoDiCorso 3 ;
+                  :descrizione "Studio della logica simbolica e dei sistemi formali." ;
+                  :nome "Logica Matematica" .
+
+
+###  http://www.semanticweb.org/ontology#matematica
+:matematica rdf:type owl:NamedIndividual ,
+                     :Dipartimento ;
+            :propone :laureaTriennaleInMatematica ;
+            :edificio "Edificio F2" ;
+            :nome "Dipartimento di Matematica" .
+
+
+###  http://www.semanticweb.org/ontology#matematicaDiscreta
+:matematicaDiscreta rdf:type owl:NamedIndividual ,
+                             :Insegnamento ;
+                    :CFU 9 ;
+                    :annoDiCorso 1 ;
+                    :codice "MAT102" ;
+                    :descrizione "Concetti fondamentali della matematica discreta." ;
+                    :nome "Matematica Discreta" .
+
+
+###  http://www.semanticweb.org/ontology#matematicheComplementariI
+:matematicheComplementariI rdf:type owl:NamedIndividual ,
+                                    :Insegnamento ;
+                           :CFU 6 ;
+                           :annoDiCorso 3 ;
+                           :descrizione "Estensioni e argomenti complementari in diverse aree della matematica." ;
+                           :nome "Matematiche Complementari I" .
+
+
+###  http://www.semanticweb.org/ontology#meccanicaRazionale
+:meccanicaRazionale rdf:type owl:NamedIndividual ,
+                             :Insegnamento ;
+                    :CFU 6 ;
+                    :annoDiCorso 3 ;
+                    :descrizione "Principi della meccanica classica e loro applicazioni matematiche." ;
+                    :nome "Meccanica Razionale" .
+
+
+###  http://www.semanticweb.org/ontology#metodiMatematiciPerLInformatica
+:metodiMatematiciPerLInformatica rdf:type owl:NamedIndividual ,
+                                          :Insegnamento ;
+                                 :CFU 9 ;
+                                 :annoDiCorso 2 ;
+                                 :codice "INF201" ;
+                                 :descrizione "Metodi matematici avanzati per l'informatica." ;
+                                 :nome "Metodi Matematici per l'Informatica" .
+
+
+###  http://www.semanticweb.org/ontology#metodiOttimizzazione
+:metodiOttimizzazione rdf:type owl:NamedIndividual ,
+                               :Insegnamento ;
+                      :nome "Metodi di Ottimizzazione" .
+
+
+###  http://www.semanticweb.org/ontology#metodiPerIlTrattamentoDellInformazione
+:metodiPerIlTrattamentoDellInformazione rdf:type owl:NamedIndividual ,
+                                                 :Insegnamento ;
+                                        :CFU 6 ;
+                                        :annoDiCorso 3 ;
+                                        :descrizione "Metodi e tecniche per il trattamento dell'informazione." ;
+                                        :nome "Metodi per il Trattamento dell'Informazione" .
+
+
+###  http://www.semanticweb.org/ontology#metricheQualitaSoftware
+:metricheQualitaSoftware rdf:type owl:NamedIndividual ,
+                                  :Insegnamento ;
+                         :nome "Metriche e Qualità del Software" .
+
+
+###  http://www.semanticweb.org/ontology#mobileProgramming
+:mobileProgramming rdf:type owl:NamedIndividual ,
+                            :Insegnamento ;
+                   :CFU 6 ;
+                   :annoDiCorso 3 ;
+                   :codice "INF/01" ;
+                   :descrizione "Programmazione per dispositivi mobili." ;
+                   :nome "Mobile Programming" .
+
+
+###  http://www.semanticweb.org/ontology#mobileProgrammingIng
+:mobileProgrammingIng rdf:type owl:NamedIndividual ,
+                               :Insegnamento ;
+                      :CFU 6 ;
+                      :annoDiCorso 3 ;
+                      :codice "INF311" ;
+                      :descrizione "Programmazione per dispositivi mobili." ;
+                      :nome "Mobile Programming" .
+
+
+###  http://www.semanticweb.org/ontology#naturalLanguageProcessing
+:naturalLanguageProcessing rdf:type owl:NamedIndividual ,
+                                    :Insegnamento ;
+                           :nome "Natural Language Processing" .
+
+
+###  http://www.semanticweb.org/ontology#networkManagementAndSecurity
+:networkManagementAndSecurity rdf:type owl:NamedIndividual ,
+                                       :Insegnamento ;
+                              :CFU 6 ;
+                              :annoDiCorso 3 ;
+                              :codice "ING-INF/05" ;
+                              :descrizione "Gestione e sicurezza delle reti." ;
+                              :nome "Network Management and Security" .
+
+
+###  http://www.semanticweb.org/ontology#opportunitàAnalistaDati
+:opportunitàAnalistaDati rdf:type owl:NamedIndividual ,
+                                  :OpportunitàDiCarriera ;
+                         :descrizione "Opportunità di carriera come analista di dati, specializzato nell'interpretazione di grandi volumi di dati per informare le decisioni aziendali." ;
+                         :nome "Opportunità di Analista Dati" ;
+                         :settore "Data Science" .
+
+
+###  http://www.semanticweb.org/ontology#opportunitàConsulenteIT
+:opportunitàConsulenteIT rdf:type owl:NamedIndividual ,
+                                  :OpportunitàDiCarriera ;
+                         :descrizione "Opportunità di carriera come consulente IT, supportando le aziende nell'implementazione di soluzioni tecnologiche efficaci." ;
+                         :nome "Opportunità di Consulente IT" ;
+                         :settore "Consulting" .
+
+
+###  http://www.semanticweb.org/ontology#opportunitàIngegnereSoftware
+:opportunitàIngegnereSoftware rdf:type owl:NamedIndividual ,
+                                       :OpportunitàDiCarriera ;
+                              :descrizione "Opportunità di carriera come ingegnere del software, responsabile della progettazione, sviluppo e manutenzione del software." ;
+                              :nome "Opportunità di Ingegnere Software" ;
+                              :settore "Informatica" .
+
+
+###  http://www.semanticweb.org/ontology#opportunitàRicercatoreMatematico
+:opportunitàRicercatoreMatematico rdf:type owl:NamedIndividual ,
+                                           :OpportunitàDiCarriera ;
+                                  :descrizione "Opportunità di carriera come ricercatore matematico, focalizzato su ricerca pura o applicata in ambito accademico o industriale." ;
+                                  :nome "Opportunità di Ricercatore Matematico" ;
+                                  :settore "Ricerca e Sviluppo" .
+
+
+###  http://www.semanticweb.org/ontology#opportunitàSicurezzaInformatica
+:opportunitàSicurezzaInformatica rdf:type owl:NamedIndividual ,
+                                          :OpportunitàDiCarriera ;
+                                 :descrizione "Opportunità di carriera come esperto di sicurezza informatica, incaricato di proteggere le infrastrutture IT e i dati aziendali." ;
+                                 :nome "Opportunità di Sicurezza Informatica" ;
+                                 :settore "Sicurezza Informatica" .
+
+
+###  http://www.semanticweb.org/ontology#opportunitàSviluppatoreWeb
+:opportunitàSviluppatoreWeb rdf:type owl:NamedIndividual ,
+                                     :OpportunitàDiCarriera ;
+                            :descrizione "Opportunità di carriera come sviluppatore web frontend o backend." ;
+                            :nome "Opportunità di Sviluppatore Web" ;
+                            :settore "Informatica" .
+
+
+###  http://www.semanticweb.org/ontology#penetrationTestingEthicalHacking
+:penetrationTestingEthicalHacking rdf:type owl:NamedIndividual ,
+                                           :Insegnamento ;
+                                  :nome "Penetration Testing and Ethical Hacking" .
+
+
+###  http://www.semanticweb.org/ontology#probabilita
+:probabilita rdf:type owl:NamedIndividual ,
+                      :Insegnamento ;
+             :CFU 6 ;
+             :annoDiCorso 3 ;
+             :descrizione "Teoria della probabilità e processi stocastici." ;
+             :nome "Probabilità" .
+
+
+###  http://www.semanticweb.org/ontology#progettazioneDiAlgoritmi
+:progettazioneDiAlgoritmi rdf:type owl:NamedIndividual ,
+                                   :Insegnamento ;
+                          :CFU 9 ;
+                          :annoDiCorso 2 ;
+                          :codice "INF208" ;
+                          :descrizione "Tecniche di progettazione di algoritmi." ;
+                          :nome "Progettazione di Algoritmi" .
+
+
+###  http://www.semanticweb.org/ontology#progettazioneImpiantiDiRete
+:progettazioneImpiantiDiRete rdf:type owl:NamedIndividual ,
+                                      :Insegnamento ;
+                             :CFU 6 ;
+                             :annoDiCorso 3 ;
+                             :codice "ING-INF/02" ;
+                             :descrizione "Progettazione impianti di rete cablati e wireless." ;
+                             :nome "Progettazione Impianti di Rete" .
+
+
+###  http://www.semanticweb.org/ontology#programmazioneAdOggetti
+:programmazioneAdOggetti rdf:type owl:NamedIndividual ,
+                                  :Insegnamento ;
+                         :CFU 9 ;
+                         :annoDiCorso 3 ;
+                         :codice "ING-INF/05" ;
+                         :descrizione "Programmazione ad oggetti." ;
+                         :nome "Programmazione ad Oggetti" .
+
+
+###  http://www.semanticweb.org/ontology#programmazioneAvanzata
+:programmazioneAvanzata rdf:type owl:NamedIndividual ,
+                                 :Insegnamento ;
+                        :CFU 6 ;
+                        :annoDiCorso 3 ;
+                        :codice "INF312" ;
+                        :descrizione "Tecniche avanzate di programmazione." ;
+                        :nome "Programmazione Avanzata" .
+
+
+###  http://www.semanticweb.org/ontology#programmazioneConcorrenteParallelaCloud
+:programmazioneConcorrenteParallelaCloud rdf:type owl:NamedIndividual ,
+                                                  :Insegnamento ;
+                                         :nome "Programmazione Concorrente, Parallela e su Cloud" .
+
+
+###  http://www.semanticweb.org/ontology#programmazioneDistribuita
+:programmazioneDistribuita rdf:type owl:NamedIndividual ,
+                                    :Insegnamento ;
+                           :CFU 9 ;
+                           :annoDiCorso 3 ;
+                           :codice "INF305" ;
+                           :descrizione "Principi e tecniche della programmazione distribuita." ;
+                           :nome "Programmazione Distribuita" .
+
+
+###  http://www.semanticweb.org/ontology#programmazioneI
+:programmazioneI rdf:type owl:NamedIndividual ,
+                          :Insegnamento ;
+                 :CFU 9 ;
+                 :annoDiCorso 1 ;
+                 :codice "INF103" ;
+                 :descrizione "Introduzione alla programmazione e alle strutture dati." ;
+                 :nome "Programmazione I" .
+
+
+###  http://www.semanticweb.org/ontology#programmazioneJavaAvanzata
+:programmazioneJavaAvanzata rdf:type owl:NamedIndividual ,
+                                     :Insegnamento ;
+                            :CFU 6 ;
+                            :annoDiCorso 3 ;
+                            :codice "ING-INF/05" ;
+                            :descrizione "Programmazione Java avanzata." ;
+                            :nome "Programmazione Java Avanzata" .
+
+
+###  http://www.semanticweb.org/ontology#programmazioneOO
+:programmazioneOO rdf:type owl:NamedIndividual ,
+                           :Insegnamento ;
+                  :CFU 9 ;
+                  :annoDiCorso 2 ;
+                  :codice "INF205" ;
+                  :descrizione "Programmazione orientata agli oggetti." ;
+                  :nome "Programmazione OO" .
+
+
+###  http://www.semanticweb.org/ontology#programmazioneSicura
+:programmazioneSicura rdf:type owl:NamedIndividual ,
+                               :Insegnamento ;
+                      :nome "Programmazione Sicura" .
+
+
+###  http://www.semanticweb.org/ontology#programmazioneStruttureDati
+:programmazioneStruttureDati rdf:type owl:NamedIndividual ,
+                                      :Insegnamento ;
+                             :CFU 9 ;
+                             :annoDiCorso 2 ;
+                             :codice "INF202" ;
+                             :descrizione "Programmazione avanzata e strutture dati complesse." ;
+                             :nome "Programmazione & Strutture Dati" .
+
+
+###  http://www.semanticweb.org/ontology#provaFinale
+:provaFinale rdf:type owl:NamedIndividual ,
+                      :Insegnamento ;
+             :CFU 3 ;
+             :annoDiCorso 3 ;
+             :codice "INF317" ;
+             :descrizione "Prova finale." ;
+             :nome "Prova Finale" .
+
+
+###  http://www.semanticweb.org/ontology#retiDiCalcolatori
+:retiDiCalcolatori rdf:type owl:NamedIndividual ,
+                            :Insegnamento ;
+                   :CFU 6 ;
+                   :annoDiCorso 2 ;
+                   :codice "INF/01" ;
+                   :descrizione "Struttura e gestione delle reti di calcolatori." ;
+                   :nome "Reti di Calcolatori" .
+
+
+###  http://www.semanticweb.org/ontology#retiDiCalcolatoriIng
+:retiDiCalcolatoriIng rdf:type owl:NamedIndividual ,
+                               :Insegnamento ;
+                      :CFU 9 ;
+                      :annoDiCorso 3 ;
+                      :codice "INF301" ;
+                      :descrizione "Struttura e gestione delle reti di calcolatori." ;
+                      :nome "Reti di Calcolatori" .
+
+
+###  http://www.semanticweb.org/ontology#ricercaOperativa
+:ricercaOperativa rdf:type owl:NamedIndividual ,
+                           :Insegnamento ;
+                  :CFU 6 ;
+                  :annoDiCorso 3 ;
+                  :codice "MAT303" ;
+                  :descrizione "Metodi e modelli di ricerca operativa." ;
+                  :nome "Ricerca Operativa" .
+
+
+###  http://www.semanticweb.org/ontology#ricercaOperativaMat
+:ricercaOperativaMat rdf:type owl:NamedIndividual ,
+                              :Insegnamento ;
+                     :CFU 7 ;
+                     :annoDiCorso 2 ;
+                     :codice "MAT303" ;
+                     :descrizione "Modelli matematici per la ricerca operativa e teoria delle decisioni." ;
+                     :nome "Ricerca Operativa" .
+
+
+###  http://www.semanticweb.org/ontology#semigruppiLiberiTeoriaDeiCodici
+:semigruppiLiberiTeoriaDeiCodici rdf:type owl:NamedIndividual ,
+                                          :Insegnamento ;
+                                 :CFU 6 ;
+                                 :annoDiCorso 3 ;
+                                 :descrizione "Studio dei semigruppi liberi e delle applicazioni nella teoria dei codici." ;
+                                 :nome "Semigruppi Liberi e Teoria dei Codici" .
+
+
+###  http://www.semanticweb.org/ontology#sicurezza
+:sicurezza rdf:type owl:NamedIndividual ,
+                    :Insegnamento ;
+           :CFU 6 ;
+           :annoDiCorso 3 ;
+           :codice "INF313" ;
+           :descrizione "Sicurezza informatica." ;
+           :nome "Sicurezza" .
+
+
+###  http://www.semanticweb.org/ontology#sicurezzaDeiDati
+:sicurezzaDeiDati rdf:type owl:NamedIndividual ,
+                           :Insegnamento ;
+                  :nome "Sicurezza dei Dati" .
+
+
+###  http://www.semanticweb.org/ontology#simulazione
+:simulazione rdf:type owl:NamedIndividual ,
+                      :Insegnamento ;
+             :CFU 6 ;
+             :annoDiCorso 3 ;
+             :codice "INF314" ;
+             :descrizione "Tecniche di simulazione." ;
+             :nome "Simulazione" .
+
+
+###  http://www.semanticweb.org/ontology#sistemiOperativi
+:sistemiOperativi rdf:type owl:NamedIndividual ,
+                           :Insegnamento ;
+                  :CFU 9 ;
+                  :annoDiCorso 2 ;
+                  :codice "ING-INF/05" ;
+                  :descrizione "Struttura e gestione dei sistemi operativi." ;
+                  :nome "Sistemi Operativi" .
+
+
+###  http://www.semanticweb.org/ontology#sistemiOperativiIng
+:sistemiOperativiIng rdf:type owl:NamedIndividual ,
+                              :Insegnamento ;
+                     :CFU 6 ;
+                     :annoDiCorso 2 ;
+                     :codice "ING-INF/05" ;
+                     :descrizione "Struttura e gestione dei sistemi operativi." ;
+                     :nome "Sistemi Operativi" .
+
+
+###  http://www.semanticweb.org/ontology#softwareDependability
+:softwareDependability rdf:type owl:NamedIndividual ,
+                                :Insegnamento ;
+                       :nome "Software Dependability" .
+
+
+###  http://www.semanticweb.org/ontology#softwareEngineeringAI
+:softwareEngineeringAI rdf:type owl:NamedIndividual ,
+                                :Insegnamento ;
+                       :nome "Software Engineering for Artificial Intelligence" .
+
+
+###  http://www.semanticweb.org/ontology#statisticaAnalisiDati
+:statisticaAnalisiDati rdf:type owl:NamedIndividual ,
+                                :Insegnamento ;
+                       :nome "Statistica e Analisi dei Dati" .
+
+
+###  http://www.semanticweb.org/ontology#statisticaApplicata
+:statisticaApplicata rdf:type owl:NamedIndividual ,
+                              :Insegnamento ;
+                     :CFU 6 ;
+                     :annoDiCorso 3 ;
+                     :codice "SECS-S/02" ;
+                     :descrizione "Statistica applicata." ;
+                     :nome "Statistica Applicata" .
+
+
+###  http://www.semanticweb.org/ontology#tecnicheAutomaticheCorrettezzaSoftware
+:tecnicheAutomaticheCorrettezzaSoftware rdf:type owl:NamedIndividual ,
+                                                 :Insegnamento ;
+                                        :nome "Tecniche Automatiche per la Correttezza del Software" .
+
+
+###  http://www.semanticweb.org/ontology#tecnologieElettriche
+:tecnologieElettriche rdf:type owl:NamedIndividual ,
+                               :Insegnamento ;
+                      :CFU 6 ;
+                      :annoDiCorso 3 ;
+                      :codice "ING-IND/31" ;
+                      :descrizione "Tecnologie elettriche per l'informatica industriale." ;
+                      :nome "Tecnologie Elettriche" .
+
+
+###  http://www.semanticweb.org/ontology#tecnologieInformaticheDeiSistemiDiControllo
+:tecnologieInformaticheDeiSistemiDiControllo rdf:type owl:NamedIndividual ,
+                                                      :Insegnamento ;
+                                             :CFU 6 ;
+                                             :annoDiCorso 3 ;
+                                             :codice "ING-INF/04" ;
+                                             :descrizione "Tecnologie informatiche dei sistemi di controllo." ;
+                                             :nome "Tecnologie Informatiche dei Sistemi di Controllo" .
+
+
+###  http://www.semanticweb.org/ontology#tecnologieSoftwarePerIlWeb
+:tecnologieSoftwarePerIlWeb rdf:type owl:NamedIndividual ,
+                                     :Insegnamento ;
+                            :CFU 6 ;
+                            :annoDiCorso 3 ;
+                            :codice "INF302" ;
+                            :descrizione "Tecnologie software per lo sviluppo web." ;
+                            :nome "Tecnologie Software per il Web" .
+
+
+###  http://www.semanticweb.org/ontology#tecnologieWeb
+:tecnologieWeb rdf:type owl:NamedIndividual ,
+                        :Insegnamento ;
+               :CFU 9 ;
+               :annoDiCorso 3 ;
+               :codice "ING-INF/05" ;
+               :descrizione "Tecnologie web." ;
+               :nome "Tecnologie Web" .
+
+
+###  http://www.semanticweb.org/ontology#teoriaDeiGrafi
+:teoriaDeiGrafi rdf:type owl:NamedIndividual ,
+                         :Insegnamento ;
+                :CFU 6 ;
+                :annoDiCorso 3 ;
+                :descrizione "Analisi dei grafi e algoritmi correlati, con applicazioni in varie discipline scientifiche." ;
+                :nome "Teoria dei Grafi" .
+
+
+###  http://www.semanticweb.org/ontology#teoriaDellaComputabilita
+:teoriaDellaComputabilita rdf:type owl:NamedIndividual ,
+                                   :Insegnamento ;
+                          :CFU 6 ;
+                          :annoDiCorso 3 ;
+                          :descrizione "Studio della teoria della computabilità e dei modelli di calcolo." ;
+                          :nome "Teoria della Computabilità" .
+
+
+###  http://www.semanticweb.org/ontology#teoriaDelleFunzioni
+:teoriaDelleFunzioni rdf:type owl:NamedIndividual ,
+                              :Insegnamento ;
+                     :CFU 6 ;
+                     :annoDiCorso 3 ;
+                     :descrizione "Approfondimenti sulla teoria delle funzioni reali e complesse." ;
+                     :nome "Teoria delle Funzioni" .
+
+
+###  http://www.semanticweb.org/ontology#teoriaDiGalois
+:teoriaDiGalois rdf:type owl:NamedIndividual ,
+                         :Insegnamento ;
+                :CFU 6 ;
+                :annoDiCorso 3 ;
+                :descrizione "Esplorazione della teoria di Galois, che collega il campo dell'algebra e della teoria dei numeri." ;
+                :nome "Teoria di Galois" .
+
+
+###  http://www.semanticweb.org/ontology#tirocinio
+:tirocinio rdf:type owl:NamedIndividual ,
+                    :Insegnamento ;
+           :CFU 11 ;
+           :annoDiCorso 3 ;
+           :codice "INF316" ;
+           :descrizione "Tirocini formativi e di orientamento." ;
+           :nome "Tirocinio" .
+
+
+###  http://www.semanticweb.org/ontology#topologia
+:topologia rdf:type owl:NamedIndividual ,
+                    :Insegnamento ;
+           :CFU 6 ;
+           :annoDiCorso 3 ;
+           :descrizione "Fondamenti di topologia e sue applicazioni nella matematica moderna." ;
+           :nome "Topologia" .
+
+
+###  http://www.semanticweb.org/ontology#universitaSalerno
+:universitaSalerno rdf:type owl:NamedIndividual ,
+                            :Università ;
+                   :comprende :informatica ;
+                   :ubicazione "Fisciano, Salerno, Italia" ;
+                   :nome "Università degli Studi di Salerno" .
+
+
+###  http://www.semanticweb.org/ontology#5GNetworks
+<http://www.semanticweb.org/ontology#5GNetworks> rdf:type owl:NamedIndividual ,
+                                                          :Insegnamento ;
+                                                 :CFU 9 ;
+                                                 :annoDiCorso 3 ;
+                                                 :codice "ING-INF/03" ;
+                                                 :descrizione "Reti 5G." ;
+                                                 :nome "5G Networks" .
+
+
+[ owl:minCardinality "1"^^xsd:nonNegativeInteger
+] .
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
